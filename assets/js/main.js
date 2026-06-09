@@ -102,51 +102,23 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      // Show loading state
-      const submitBtn = contactForm.querySelector('.form-submit');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
+      // Construct email body with form data
+      const emailBody = `Hello GRADR.TECH Team,\n\nI would like to inquire about your services.\n\n--- Project Details ---\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nCompany: ${company || 'Not provided'}\nIndustry: ${industry || 'Not provided'}\n\n--- Message ---\n${message}\n\n---\nPlease get back to me at your earliest convenience.\n\nThank you!`;
 
-      // Prepare form data
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('phone', phone);
-      formData.append('company', company);
-      formData.append('industry', industry);
-      formData.append('message', message);
+      // Create mailto link with pre-filled data
+      const mailtoLink = `mailto:websitesbrian585@gmail.com?subject=Project%20Inquiry%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(emailBody)}`;
 
-      // Send to Formspree
-      fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-        .then(response => {
-          if (response.ok) {
-            // Show success message
-            contactForm.style.display = 'none';
-            const successMsg = document.getElementById('successMessage');
-            if (successMsg) {
-              successMsg.classList.add('show');
-            }
-            // Reset form
-            contactForm.reset();
-          } else {
-            alert('There was an error sending your message. Please try again.');
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('There was an error sending your message. Please try again.');
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-        });
+      // Open Gmail with pre-filled email
+      window.location.href = mailtoLink;
+
+      // Show success message
+      contactForm.style.display = 'none';
+      const successMsg = document.getElementById('successMessage');
+      if (successMsg) {
+        successMsg.classList.add('show');
+      }
+      // Reset form
+      contactForm.reset();
     });
   }
 
