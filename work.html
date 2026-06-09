@@ -7,180 +7,588 @@
   <title>Our Work - GRADR.TECH Projects</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%2300C8F0' font-weight='bold'>G</text></svg>">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-
-  <!-- Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Main CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cyan: #00C8F0;
+      --cyan-light: #e0f7fc;
+      --dark: #0a1628;
+      --text-dark: #0d1f35;
+      --text-light: #718096;
+      --bg-white: #ffffff;
+      --bg-light: #f4f7fa;
+      --border: #e2e8f0;
+      --font: 'Inter', 'Space Grotesk', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      height: 72px;
+      border-bottom: 1px solid var(--border);
+      gap: 40px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: var(--text-dark);
+      white-space: nowrap;
+    }
+    .logo .cyan { color: var(--cyan); }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 4px;
+      margin: 0 auto;
+    }
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .nav-links li a:hover { background: var(--bg-light); }
+    .nav-links li a.active {
+      background: var(--cyan-light);
+      color: var(--text-dark);
+    }
+
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-dark);
+      border-radius: 2px;
+    }
+
+    /* ===== HERO ===== */
+    .work-hero {
+      padding: 80px 0 56px;
+      background: var(--bg-white);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .micro-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .work-hero h1 {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1.0;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+    .work-hero h1 .cyan { color: var(--cyan); }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--border);
+      margin: 20px 0 24px;
+    }
+
+    .work-hero p {
+      font-size: 1rem;
+      color: var(--text-light);
+      max-width: 520px;
+      line-height: 1.75;
+    }
+
+    /* ===== PROJECTS GRID ===== */
+    .projects-section {
+      padding: 16px 0 80px;
+      background: var(--bg-light);
+    }
+
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* --- Featured card (full width) --- */
+    .proj-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+    }
+
+    .proj-card img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .proj-card:hover img { transform: scale(1.03); }
+
+    .proj-card-full img { height: 480px; }
+    .proj-card-half img  { height: 360px; }
+
+    /* Dark gradient overlay */
+    .proj-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(5, 12, 26, 0.92) 0%,
+        rgba(5, 12, 26, 0.55) 45%,
+        rgba(5, 12, 26, 0.10) 100%
+      );
+    }
+
+    /* Content sits on top of overlay */
+    .proj-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 36px;
+    }
+
+    .proj-category {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .proj-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .proj-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 16px;
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .proj-tag {
+      padding: 4px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Arrow button bottom-right */
+    .proj-arrow {
+      position: absolute;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-size: 1rem;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .proj-card:hover .proj-arrow {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Two-column row */
+    .proj-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      background: var(--dark);
+      padding: 100px 48px;
+      text-align: center;
+    }
+
+    .cta-section .micro-label { color: rgba(255,255,255,0.4); }
+
+    .cta-section h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 40px;
+    }
+    .cta-section h2 .cyan { color: var(--cyan); }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--cyan);
+      color: var(--dark);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 16px 42px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-cta:hover { opacity: 0.85; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #fff;
+      padding: 64px 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .footer-col > p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 12px; }
+    .footer-col ul li a {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--cyan); }
+
+    .nav-sub-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .social-icons-footer {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .social-icon-footer {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-icon-footer:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    .connect-email {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      display: block;
+    }
+    .connect-email:hover { color: var(--cyan); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+      text-align: center;
+    }
+    .footer-bottom p {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .proj-row { grid-template-columns: 1fr; }
+      .proj-card-full img { height: 340px; }
+      .proj-card-half img { height: 280px; }
+      .footer-content { grid-template-columns: 1fr; }
+      .cta-section { padding: 72px 20px; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; gap: 12px; }
+      .container { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .work-hero { padding: 48px 0 36px; }
+      .proj-info { padding: 24px 20px; }
+      .proj-title { font-size: 1.25rem; }
+    }
+  </style>
 </head>
 
 <body>
+
   <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><span class="cyan">GRADR</span><span class="cyan">.</span>TECH</a>
+    <a href="index.html" class="logo"><span class="cyan">GRADR</span>.<span>TECH</span></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="services.html">Services</a></li>
-      <li><a href="work.html">Work</a></li>
+      <li><a href="work.html" class="active">Work</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <button class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
     </button>
-    <a href="contact.html" class="btn btn-primary" style="margin-left: auto;">Get Quotation</a>
+    <a href="contact.html" class="btn-primary">Get Quotation</a>
   </nav>
 
-  <!-- WORK HERO -->
-  <section class="about-hero section-reveal">
+  <!-- HERO -->
+  <section class="work-hero">
     <div class="container">
-      <span class="micro-label">Our Work</span>
-      <div class="hero-divider"></div>
-      <h1>Our <span class="cyan">Projects</span></h1>
+      <span class="micro-label">Selected Work</span>
+      <h1>Featured<br><span class="cyan">Projects</span></h1>
       <div class="divider"></div>
-      <p>Explore some of the innovative projects we've delivered. Each one represents our commitment to excellence and
-        client success.</p>
+      <p>A curated selection of products we've engineered — each one a testament to technical rigor and creative thinking.</p>
     </div>
   </section>
 
-  <!-- WORK GRID -->
-  <section class="recent-projects section-reveal">
+  <!-- PROJECTS -->
+  <section class="projects-section">
     <div class="container">
-      <div class="work-grid">
-        <div class="card work-card">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80" alt="FinTech Dashboard"
-            class="work-card-image">
-          <div class="work-card-content">
-            <div class="project-tag" style="margin-top: -0.5rem;">FinTech</div>
-            <h3>Payment Platform</h3>
-            <p class="work-card-desc">A secure, scalable payment processing platform handling millions of transactions.
-              Built with real-time analytics and fraud detection.</p>
-            <div class="work-tech-tags">
-              <span class="work-tech-tag">React</span>
-              <span class="work-tech-tag">Node.js</span>
-              <span class="work-tech-tag">PostgreSQL</span>
-              <span class="work-tech-tag">AWS</span>
+      <div class="projects-grid">
+
+        <!-- 1. Full-width: FinTech Dashboard -->
+        <a href="contact.html" class="proj-card proj-card-full">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80" alt="FinTech Dashboard">
+          <div class="proj-overlay"></div>
+          <div class="proj-info">
+            <span class="proj-category">Web App</span>
+            <div class="proj-title">FinTech Dashboard</div>
+            <p class="proj-desc">Real-time financial analytics platform with live data visualizations and role-based access.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">React</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">PostgreSQL</span>
             </div>
           </div>
+          <div class="proj-arrow"><i class="fas fa-arrow-up-right-from-square" style="font-size:0.8rem;"></i></div>
+        </a>
+
+        <!-- 2. Two-column row -->
+        <div class="proj-row">
+          <a href="contact.html" class="proj-card proj-card-half">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="Cloud Architecture">
+            <div class="proj-overlay"></div>
+            <div class="proj-info">
+              <span class="proj-category">DevOps</span>
+              <div class="proj-title">Cloud Architecture</div>
+              <p class="proj-desc">Enterprise-grade cloud infrastructure with automated scaling and CI/CD pipelines.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">AWS</span>
+                <span class="proj-tag">Terraform</span>
+                <span class="proj-tag">Docker</span>
+              </div>
+            </div>
+            <div class="proj-arrow"><i class="fas fa-arrow-up-right-from-square" style="font-size:0.8rem;"></i></div>
+          </a>
+
+          <a href="contact.html" class="proj-card proj-card-half">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80" alt="Mobile Banking App">
+            <div class="proj-overlay"></div>
+            <div class="proj-info">
+              <span class="proj-category">Mobile</span>
+              <div class="proj-title">Mobile Banking App</div>
+              <p class="proj-desc">Cross-platform mobile banking experience with biometric auth and real-time notifications.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">React Native</span>
+                <span class="proj-tag">TypeScript</span>
+              </div>
+            </div>
+            <div class="proj-arrow"><i class="fas fa-arrow-up-right-from-square" style="font-size:0.8rem;"></i></div>
+          </a>
         </div>
 
-        <div class="card work-card">
-          <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=700&q=80" alt="Mobile Banking App"
-            class="work-card-image">
-          <div class="work-card-content">
-            <div class="project-tag" style="margin-top: -0.5rem;">Mobile</div>
-            <h3>Fitness Tracking App</h3>
-            <p class="work-card-desc">A comprehensive fitness tracking application with AI-powered workout recommendations
-              and social features for iOS and Android.</p>
-            <div class="work-tech-tags">
-              <span class="work-tech-tag">React Native</span>
-              <span class="work-tech-tag">Python</span>
-              <span class="work-tech-tag">MongoDB</span>
-              <span class="work-tech-tag">Firebase</span>
+        <!-- 3. Two-column row -->
+        <div class="proj-row">
+          <a href="contact.html" class="proj-card proj-card-half">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="E-Commerce Platform">
+            <div class="proj-overlay"></div>
+            <div class="proj-info">
+              <span class="proj-category">Full-Stack</span>
+              <div class="proj-title">E-Commerce Platform</div>
+              <p class="proj-desc">High-conversion storefront with inventory management and payment integration.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">Next.js</span>
+                <span class="proj-tag">Stripe</span>
+                <span class="proj-tag">Redis</span>
+              </div>
             </div>
-          </div>
+            <div class="proj-arrow"><i class="fas fa-arrow-up-right-from-square" style="font-size:0.8rem;"></i></div>
+          </a>
+
+          <a href="contact.html" class="proj-card proj-card-half">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Data Pipeline">
+            <div class="proj-overlay"></div>
+            <div class="proj-info">
+              <span class="proj-category">Backend</span>
+              <div class="proj-title">Data Pipeline</div>
+              <p class="proj-desc">Scalable data ingestion and processing system handling millions of events per day.</p>
+              <div class="proj-tags">
+                <span class="proj-tag">Python</span>
+                <span class="proj-tag">Kafka</span>
+                <span class="proj-tag">Spark</span>
+              </div>
+            </div>
+            <div class="proj-arrow"><i class="fas fa-arrow-up-right-from-square" style="font-size:0.8rem;"></i></div>
+          </a>
         </div>
 
-        <div class="card work-card">
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=700&q=80" alt="Cloud Infrastructure"
-            class="work-card-image">
-          <div class="work-card-content">
-            <div class="project-tag" style="margin-top: -0.5rem;">Cloud</div>
-            <h3>Data Analytics Platform</h3>
-            <p class="work-card-desc">Enterprise-grade data analytics platform processing terabytes of data with
-              interactive dashboards and real-time reporting.</p>
-            <div class="work-tech-tags">
-              <span class="work-tech-tag">Next.js</span>
-              <span class="work-tech-tag">Python</span>
-              <span class="work-tech-tag">Kubernetes</span>
-              <span class="work-tech-tag">GCP</span>
+        <!-- 4. Full-width: SaaS Platform -->
+        <a href="contact.html" class="proj-card proj-card-full">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80" alt="SaaS Platform">
+          <div class="proj-overlay"></div>
+          <div class="proj-info">
+            <span class="proj-category">Product</span>
+            <div class="proj-title">SaaS Platform</div>
+            <p class="proj-desc">Multi-tenant SaaS product with billing, analytics, and white-label capabilities.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Next.js</span>
+              <span class="proj-tag">Prisma</span>
+              <span class="proj-tag">AWS</span>
             </div>
           </div>
-        </div>
+          <div class="proj-arrow"><i class="fas fa-arrow-up-right-from-square" style="font-size:0.8rem;"></i></div>
+        </a>
 
-        <div class="card work-card">
-          <img src="https://images.unsplash.com/photo-1516534775068-bb8fce2db5e0?w=700&q=80" alt="Learning Platform"
-            class="work-card-image">
-          <div class="work-card-content">
-            <div class="project-tag" style="margin-top: -0.5rem;">EdTech</div>
-            <h3>Learning Platform</h3>
-            <p class="work-card-desc">An innovative e-learning platform with live classes, progress tracking, and
-              personalized learning paths for thousands of students.</p>
-            <div class="work-tech-tags">
-              <span class="work-tech-tag">Vue.js</span>
-              <span class="work-tech-tag">Node.js</span>
-              <span class="work-tech-tag">PostgreSQL</span>
-              <span class="work-tech-tag">Docker</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card work-card">
-          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80" alt="E-Commerce Platform"
-            class="work-card-image">
-          <div class="work-card-content">
-            <div class="project-tag" style="margin-top: -0.5rem;">E-Commerce</div>
-            <h3>E-Commerce Platform</h3>
-            <p class="work-card-desc">Full-featured e-commerce solution with inventory management, payment integration,
-              and marketing automation capabilities.</p>
-            <div class="work-tech-tags">
-              <span class="work-tech-tag">Next.js</span>
-              <span class="work-tech-tag">Stripe</span>
-              <span class="work-tech-tag">MongoDB</span>
-              <span class="work-tech-tag">AWS</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card work-card">
-          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&q=80" alt="SaaS Application"
-            class="work-card-image">
-          <div class="work-card-content">
-            <div class="project-tag" style="margin-top: -0.5rem;">SaaS</div>
-            <h3>Project Management Tool</h3>
-            <p class="work-card-desc">Collaborative project management platform with real-time updates, team workflows,
-              and advanced reporting features.</p>
-            <div class="work-tech-tags">
-              <span class="work-tech-tag">React</span>
-              <span class="work-tech-tag">GraphQL</span>
-              <span class="work-tech-tag">PostgreSQL</span>
-              <span class="work-tech-tag">Azure</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA SECTION -->
-  <section class="cta-section section-reveal">
-    <div class="container">
-      <span class="micro-label">Ready to Collaborate?</span>
-      <h2>Let's Talk <span class="cyan">About Your Project</span></h2>
-      <p>Whether you need a new product built or existing systems improved, our team is ready to help.</p>
-      <a href="contact.html" class="btn btn-primary">Let's Talk →</a>
-    </div>
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="micro-label">Let's Build Together</span>
+    <h2>Ready to Start <span class="cyan">Your<br>Project?</span></h2>
+    <a href="contact.html" class="btn-cta">Get in Touch →</a>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-content">
+
       <div class="footer-col">
-        <h4>GRADR.<br>TECH</h4>
+        <h4><span style="color:var(--text-dark)">GRADR</span><span style="color:var(--cyan)">.</span><br>TECH</h4>
         <p>Web Development · Mobile Apps · Cloud Solutions</p>
       </div>
 
       <div class="footer-col">
-        <h4>NAVIGATION</h4>
+        <span class="nav-sub-label">Navigation</span>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html">Services</a></li>
@@ -189,10 +597,10 @@
       </div>
 
       <div class="footer-col">
-        <h4>CONNECT</h4>
+        <span class="nav-sub-label">Connect</span>
         <div class="social-icons-footer">
           <a href="https://linkedin.com/company/gradr-tech" class="social-icon-footer" title="LinkedIn">
-            <i class="fab fa-linkedin"></i>
+            <i class="fab fa-linkedin-in"></i>
           </a>
           <a href="https://twitter.com/gradrtech" class="social-icon-footer" title="Twitter">
             <i class="fab fa-twitter"></i>
@@ -204,8 +612,9 @@
             <i class="fas fa-envelope"></i>
           </a>
         </div>
-        <p><a href="mailto:gradrtech@gmail.com">gradrtech@gmail.com</a></p>
+        <a href="mailto:gradrtech@gmail.com" class="connect-email">gradrtech@gmail.com</a>
       </div>
+
     </div>
 
     <div class="footer-bottom">
@@ -213,8 +622,7 @@
     </div>
   </footer>
 
-  <!-- Main JS -->
   <script src="assets/js/main.js"></script>
-</body>
 
+</body>
 </html>

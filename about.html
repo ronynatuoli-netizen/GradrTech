@@ -7,180 +7,730 @@
   <title>About GRADR.TECH - Who We Are</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%2300C8F0' font-weight='bold'>G</text></svg>">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-
-  <!-- Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Main CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cyan: #00C8F0;
+      --cyan-light: #e0f7fc;
+      --dark: #0a1628;
+      --dark-mid: #0d1f35;
+      --text-dark: #0d1f35;
+      --text-mid: #4a5568;
+      --text-light: #718096;
+      --bg-white: #ffffff;
+      --bg-light: #f7f9fc;
+      --bg-lighter: #edf2f7;
+      --border: #e2e8f0;
+      --font: 'Inter', 'Space Grotesk', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      height: 72px;
+      border-bottom: 1px solid var(--border);
+      gap: 40px;
+    }
+
+    .logo {
+      font-family: var(--font);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: var(--text-dark);
+      white-space: nowrap;
+    }
+
+    .logo .cyan { color: var(--cyan); }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 4px;
+      margin: 0 auto;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .nav-links li a:hover { background: var(--bg-light); }
+
+    .nav-links li a.active {
+      background: var(--cyan-light);
+      color: var(--text-dark);
+    }
+
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-dark);
+      border-radius: 2px;
+    }
+
+    /* ===== ABOUT HERO ===== */
+    .about-hero {
+      padding: 80px 0 60px;
+      background: var(--bg-white);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .micro-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .about-hero h1 {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1.0;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+
+    .about-hero h1 .cyan { color: var(--cyan); }
+
+    .hero-divider {
+      width: 80px;
+      height: 3px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--border);
+      margin: 20px 0 24px;
+    }
+
+    .about-hero p {
+      font-size: 1rem;
+      color: var(--text-light);
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ===== OUR STORY (two-column) ===== */
+    .story-section {
+      padding: 80px 0;
+      background: var(--bg-white);
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .story-image-wrap {
+      position: relative;
+    }
+
+    .story-image-wrap img {
+      width: 100%;
+      border-radius: 20px;
+      display: block;
+      object-fit: cover;
+      max-height: 480px;
+    }
+
+    .story-stats-badge {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      padding: 20px 28px;
+      display: flex;
+      gap: 0;
+      white-space: nowrap;
+    }
+
+    .stat-badge-item {
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-badge-item:last-child { border-right: none; }
+
+    .stat-badge-item .num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--cyan);
+      display: block;
+    }
+
+    .stat-badge-item .lbl {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .story-text { padding-top: 0; }
+
+    .story-text h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+
+    .story-text h2 .cyan { color: var(--cyan); }
+
+    .story-text .divider { margin: 16px 0 24px; }
+
+    .story-text p {
+      font-size: 0.97rem;
+      color: var(--text-light);
+      line-height: 1.75;
+      margin-bottom: 18px;
+    }
+
+    .story-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      text-decoration: none;
+      border-bottom: 2px solid var(--cyan);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .story-link:hover { opacity: 0.7; }
+
+    /* ===== SKILLS SECTION ===== */
+    .skills-section {
+      padding: 80px 0 100px;
+      background: var(--bg-light);
+    }
+
+    .skills-section h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 48px;
+      color: var(--text-dark);
+    }
+
+    .skills-section h2 .cyan { color: var(--cyan); }
+
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* Left: tag pills */
+    .skills-sub-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      color: var(--text-dark);
+      cursor: default;
+    }
+
+    .skill-tag.active {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: #fff;
+    }
+
+    /* Right: progress bars */
+    .skills-bars { }
+
+    .skill-bar-item {
+      margin-bottom: 24px;
+    }
+
+    .skill-bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .skill-bar-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .skill-bar-pct {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .skill-bar-track {
+      height: 6px;
+      background: var(--bg-lighter);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--cyan);
+      border-radius: 10px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      background: var(--dark);
+      padding: 100px 48px;
+      text-align: center;
+    }
+
+    .cta-section .micro-label {
+      color: rgba(255,255,255,0.45);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .cta-section h2 .cyan { color: var(--cyan); }
+
+    .cta-section p {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--cyan);
+      color: var(--dark);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-cta:hover { opacity: 0.85; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #fff;
+      padding: 64px 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .footer-col h4 .dot { color: var(--cyan); }
+
+    .footer-col > p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--cyan); }
+
+    .footer-col .nav-sub-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .social-icons-footer {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .social-icon-footer {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-icon-footer:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .footer-col .connect-email {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    .footer-col .connect-email:hover { color: var(--cyan); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; gap: 16px; }
+      .container { padding: 0 24px; }
+      .story-layout { grid-template-columns: 1fr; gap: 60px; }
+      .story-image-wrap img { max-height: 340px; }
+      .story-stats-badge { bottom: -16px; }
+      .skills-layout { grid-template-columns: 1fr; gap: 40px; }
+      .footer-content { grid-template-columns: 1fr; }
+      .cta-section { padding: 80px 24px; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-hero { padding: 48px 0 40px; }
+      .story-section { padding: 48px 0; }
+      .skills-section { padding: 48px 0 64px; }
+      .stat-badge-item { padding: 0 14px; }
+    }
+  </style>
 </head>
 
 <body>
+
   <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><span class="cyan">GRADR</span><span class="cyan">.</span>TECH</a>
+    <a href="index.html" class="logo"><span class="cyan">GRADR</span>.<span>TECH</span></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html" class="active">About</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="work.html">Work</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <button class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
     </button>
-    <a href="contact.html" class="btn btn-primary" style="margin-left: auto;">Get Quotation</a>
+    <a href="contact.html" class="btn-primary">Get Quotation</a>
   </nav>
 
   <!-- ABOUT HERO -->
-  <section class="about-hero section-reveal">
+  <section class="about-hero">
     <div class="container">
       <span class="micro-label">Who We Are</span>
-      <div class="hero-divider"></div>
-      <h1>About<br>Gradr<br><span class="cyan">Tech</span></h1>
+      <h1>About<br><span class="cyan">Gradr Tech</span></h1>
       <div class="divider"></div>
-      <p>We're a team of passionate engineers and designers dedicated to building exceptional digital solutions that
-        transform businesses and empower innovation.</p>
+      <p>A software development company dedicated to building high-quality, scalable digital products engineered with precision.</p>
     </div>
   </section>
 
   <!-- OUR STORY -->
-  <section class="story-section section-reveal">
+  <section class="story-section">
     <div class="container">
-      <span class="micro-label">Our Story</span>
-      <h2>Built by Engineers, For <span class="cyan">Builders</span></h2>
+      <div class="story-layout">
 
-      <div class="story-content">
-        <p>GRADR.TECH was founded with a simple mission: to bridge the gap between ambitious ideas and reliable,
-          scalable technology. Our founders, with combined experience across startups and enterprise environments,
-          recognized the need for a development partner that truly understands the challenges of building in today's
-          complex digital landscape.</p>
-
-        <p>What started as a small team of three has grown into a diverse group of 12+ professionals across 3
-          continents. We've had the privilege of working with innovative companies in FinTech, HealthTech, EdTech, and
-          beyond. Each project has deepened our expertise and reinforced our commitment to excellence.</p>
-      </div>
-
-      <div class="checkpoints">
-        <div class="checkpoint">
-          <div class="checkpoint-check">✓</div>
-          <div class="checkpoint-text">Founded 2019</div>
-        </div>
-        <div class="checkpoint">
-          <div class="checkpoint-check">✓</div>
-          <div class="checkpoint-text">50+ Projects Delivered</div>
-        </div>
-        <div class="checkpoint">
-          <div class="checkpoint-check">✓</div>
-          <div class="checkpoint-text">100% Client Satisfaction</div>
-        </div>
-        <div class="checkpoint">
-          <div class="checkpoint-check">✓</div>
-          <div class="checkpoint-text">3 Continents Active</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TECHNICAL DEPTH -->
-  <section class="skills-section section-reveal">
-    <div class="container">
-      <span class="micro-label">Technical Depth</span>
-      <h2>Our Tech <span class="cyan">Stack</span></h2>
-
-      <div class="skills-grid">
-        <div class="skill-item">
-          <div class="skill-header">
-            <div class="skill-name">React / Next.js</div>
-            <div class="skill-percentage">96%</div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-percentage="96%" style="--skill-width: 0%"></div>
+        <!-- Left: image + floating stats badge -->
+        <div class="story-image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+            alt="Gradr Tech team working together"
+          >
+          <div class="story-stats-badge">
+            <div class="stat-badge-item">
+              <span class="num">5+</span>
+              <span class="lbl">Years</span>
+            </div>
+            <div class="stat-badge-item">
+              <span class="num">50+</span>
+              <span class="lbl">Projects</span>
+            </div>
+            <div class="stat-badge-item">
+              <span class="num">100%</span>
+              <span class="lbl">Satisfied</span>
+            </div>
           </div>
         </div>
 
-        <div class="skill-item">
-          <div class="skill-header">
-            <div class="skill-name">Node.js / Python</div>
-            <div class="skill-percentage">92%</div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-percentage="92%" style="--skill-width: 0%"></div>
-          </div>
+        <!-- Right: text -->
+        <div class="story-text">
+          <span class="micro-label">Our Story</span>
+          <h2>Engineering the<br><span class="cyan">Future of Software</span></h2>
+          <div class="divider"></div>
+          <p>Gradr Tech is a software development company dedicated to building high-quality, scalable digital products. We work at the intersection of engineering excellence and thoughtful design — delivering software that performs beautifully.</p>
+          <p>Our team of engineers, designers, and strategists partners with startups and enterprises alike to transform complex challenges into elegant, maintainable solutions. We ship fast, iterate smart, and never cut corners on quality.</p>
+          <p>From MVP to production-scale systems — we are your full-stack technology partner, committed to long-term success and innovation.</p>
+          <a href="contact.html" class="story-link">GET IN TOUCH →</a>
         </div>
 
-        <div class="skill-item">
-          <div class="skill-header">
-            <div class="skill-name">React Native / Flutter</div>
-            <div class="skill-percentage">88%</div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-percentage="88%" style="--skill-width: 0%"></div>
-          </div>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-header">
-            <div class="skill-name">AWS / GCP / Azure</div>
-            <div class="skill-percentage">90%</div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-percentage="90%" style="--skill-width: 0%"></div>
-          </div>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-header">
-            <div class="skill-name">PostgreSQL / MongoDB</div>
-            <div class="skill-percentage">85%</div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-percentage="85%" style="--skill-width: 0%"></div>
-          </div>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-header">
-            <div class="skill-name">Docker / Kubernetes</div>
-            <div class="skill-percentage">87%</div>
-          </div>
-          <div class="skill-bar">
-            <div class="skill-progress" data-percentage="87%" style="--skill-width: 0%"></div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA SECTION -->
-  <section class="cta-section section-reveal">
+  <!-- SKILLS & EXPERTISE -->
+  <section class="skills-section">
     <div class="container">
-      <span class="micro-label">Let's Build Together</span>
-      <h2>Ready to Start <span class="cyan">Your Project?</span></h2>
-      <p>Let's collaborate and create something extraordinary. Get in touch with our team today to discuss your ideas.
-      </p>
-      <a href="contact.html" class="btn btn-primary">Start a Project →</a>
+      <span class="micro-label">Our Stack</span>
+      <h2>Skills &amp; <span class="cyan">Expertise</span></h2>
+
+      <div class="skills-layout">
+
+        <!-- Left: tag pills -->
+        <div>
+          <div class="skills-sub-label">Core Competencies</div>
+          <div class="skills-tags">
+            <span class="skill-tag active">React / Next.js</span>
+            <span class="skill-tag">Node.js / Express</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag active">Python / Django</span>
+            <span class="skill-tag">AWS / Cloud</span>
+            <span class="skill-tag">PostgreSQL / NoSQL</span>
+            <span class="skill-tag active">React Native</span>
+            <span class="skill-tag">DevOps / CI/CD</span>
+            <span class="skill-tag">GraphQL / REST APIs</span>
+            <span class="skill-tag active">UI/UX Design</span>
+            <span class="skill-tag">Docker / Kubernetes</span>
+            <span class="skill-tag">System Architecture</span>
+          </div>
+        </div>
+
+        <!-- Right: progress bars -->
+        <div class="skills-bars">
+          <div class="skills-sub-label">Proficiency Levels</div>
+
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">React / Next.js</span>
+              <span class="skill-bar-pct">96%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" data-width="96"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Node.js / Express</span>
+              <span class="skill-bar-pct">93%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" data-width="93"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">TypeScript</span>
+              <span class="skill-bar-pct">95%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" data-width="95"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Python / Django</span>
+              <span class="skill-bar-pct">88%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" data-width="88"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">AWS / Cloud</span>
+              <span class="skill-bar-pct">90%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" data-width="90"></div>
+            </div>
+          </div>
+
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">DevOps / CI/CD</span>
+              <span class="skill-bar-pct">87%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" data-width="87"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="micro-label">Work With Us</span>
+    <h2>Let's Build Something <span class="cyan">Great<br>Together</span></h2>
+    <p>We're a team that takes ownership. Partner with us and get dedicated engineers who care about your success as much as you do.</p>
+    <a href="contact.html" class="btn-cta">Get in Touch →</a>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-content">
+
       <div class="footer-col">
-        <h4>GRADR.<br>TECH</h4>
+        <h4><span class="dot" style="color:#0d1f35">GRADR</span><span class="dot" style="color:var(--cyan)">.</span><br>TECH</h4>
         <p>Web Development · Mobile Apps · Cloud Solutions</p>
       </div>
 
       <div class="footer-col">
-        <h4>NAVIGATION</h4>
+        <span class="nav-sub-label">Navigation</span>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html">Services</a></li>
@@ -189,10 +739,10 @@
       </div>
 
       <div class="footer-col">
-        <h4>CONNECT</h4>
+        <span class="nav-sub-label">Connect</span>
         <div class="social-icons-footer">
           <a href="https://linkedin.com/company/gradr-tech" class="social-icon-footer" title="LinkedIn">
-            <i class="fab fa-linkedin"></i>
+            <i class="fab fa-linkedin-in"></i>
           </a>
           <a href="https://twitter.com/gradrtech" class="social-icon-footer" title="Twitter">
             <i class="fab fa-twitter"></i>
@@ -204,8 +754,9 @@
             <i class="fas fa-envelope"></i>
           </a>
         </div>
-        <p><a href="mailto:gradrtech@gmail.com">gradrtech@gmail.com</a></p>
+        <a href="mailto:gradrtech@gmail.com" class="connect-email">gradrtech@gmail.com</a>
       </div>
+
     </div>
 
     <div class="footer-bottom">
@@ -215,6 +766,23 @@
 
   <!-- Main JS -->
   <script src="assets/js/main.js"></script>
-</body>
 
+  <script>
+    // Animate skill bars on scroll into view
+    const fills = document.querySelectorAll('.skill-bar-fill');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          el.style.width = el.dataset.width + '%';
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    fills.forEach(f => observer.observe(f));
+  </script>
+
+</body>
 </html>

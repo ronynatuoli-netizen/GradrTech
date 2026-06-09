@@ -7,180 +7,654 @@
   <title>Services - GRADR.TECH</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%2300C8F0' font-weight='bold'>G</text></svg>">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-
-  <!-- Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Main CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cyan: #00C8F0;
+      --cyan-light: #e0f7fc;
+      --cyan-tag-bg: #dff4f9;
+      --dark: #0a1628;
+      --text-dark: #0d1f35;
+      --text-mid: #4a5568;
+      --text-light: #718096;
+      --bg-white: #ffffff;
+      --bg-light: #f4f7fa;
+      --border: #e2e8f0;
+      --font: 'Inter', 'Space Grotesk', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      height: 72px;
+      border-bottom: 1px solid var(--border);
+      gap: 40px;
+    }
+
+    .logo {
+      font-family: var(--font);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: var(--text-dark);
+      white-space: nowrap;
+    }
+
+    .logo .cyan { color: var(--cyan); }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 4px;
+      margin: 0 auto;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .nav-links li a:hover { background: var(--bg-light); }
+
+    .nav-links li a.active {
+      background: var(--cyan-light);
+      color: var(--text-dark);
+    }
+
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-dark);
+      border-radius: 2px;
+    }
+
+    /* ===== HERO ===== */
+    .services-hero {
+      padding: 80px 0 56px;
+      background: var(--bg-white);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .micro-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .services-hero h1 {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1.0;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+
+    .services-hero h1 .cyan { color: var(--cyan); }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--border);
+      margin: 20px 0 24px;
+    }
+
+    .services-hero p {
+      font-size: 1rem;
+      color: var(--text-light);
+      max-width: 540px;
+      line-height: 1.75;
+    }
+
+    /* ===== SERVICES LIST ===== */
+    .services-list {
+      padding: 20px 0 80px;
+      background: var(--bg-light);
+    }
+
+    .services-list .container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Each service card — horizontal layout */
+    .svc-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 44px;
+      display: grid;
+      grid-template-columns: 260px 1fr auto;
+      gap: 40px;
+      align-items: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .svc-card:hover {
+      box-shadow: 0 8px 32px rgba(0,200,240,0.10);
+      transform: translateY(-2px);
+    }
+
+    /* Left column */
+    .svc-left { }
+
+    .svc-icon-wrap {
+      width: 56px;
+      height: 56px;
+      background: var(--cyan-light);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--cyan);
+      font-size: 1.3rem;
+    }
+
+    .svc-category {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .svc-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    /* Middle column */
+    .svc-mid { }
+
+    .svc-divider {
+      width: 36px;
+      height: 2.5px;
+      background: var(--cyan);
+      margin-bottom: 18px;
+      border-radius: 2px;
+    }
+
+    .svc-desc {
+      font-size: 0.93rem;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+
+    /* Right column */
+    .svc-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 20px;
+      min-width: 220px;
+    }
+
+    .svc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .svc-tag {
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      color: var(--text-mid);
+      background: #fff;
+      white-space: nowrap;
+    }
+
+    .svc-inquire {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      text-decoration: none;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .svc-inquire:hover { opacity: 0.7; }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      background: var(--dark);
+      padding: 100px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section .micro-label {
+      color: rgba(255,255,255,0.4);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .cta-section h2 .cyan { color: var(--cyan); }
+
+    .cta-section p {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--cyan);
+      color: var(--dark);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 16px 42px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-cta:hover { opacity: 0.85; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #fff;
+      padding: 64px 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .footer-col > p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li { margin-bottom: 12px; }
+
+    .footer-col ul li a {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: var(--cyan); }
+
+    .nav-sub-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .social-icons-footer {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .social-icon-footer {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-icon-footer:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .connect-email {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      display: block;
+    }
+
+    .connect-email:hover { color: var(--cyan); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .svc-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .svc-right {
+        align-items: flex-start;
+        min-width: unset;
+      }
+      .svc-tags { justify-content: flex-start; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; gap: 12px; }
+      .container { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .services-hero { padding: 48px 0 36px; }
+      .services-list { padding: 16px 0 56px; }
+      .svc-card { padding: 28px 24px; }
+      .footer-content { grid-template-columns: 1fr; }
+      .cta-section { padding: 72px 20px; }
+    }
+  </style>
 </head>
 
 <body>
+
   <!-- NAVBAR -->
   <nav>
-    <a href="index.html" class="logo"><span class="cyan">GRADR</span><span class="cyan">.</span>TECH</a>
+    <a href="index.html" class="logo"><span class="cyan">GRADR</span>.<span>TECH</span></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
       <li><a href="work.html">Work</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <button class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
     </button>
-    <a href="contact.html" class="btn btn-primary" style="margin-left: auto;">Get Quotation</a>
+    <a href="contact.html" class="btn-primary">Get Quotation</a>
   </nav>
 
-  <!-- SERVICES HERO -->
-  <section class="about-hero section-reveal">
+  <!-- HERO -->
+  <section class="services-hero">
     <div class="container">
-      <span class="micro-label">Services</span>
-      <div class="hero-divider"></div>
-      <h1>Our <span class="cyan">Services</span></h1>
+      <span class="micro-label">What We Build</span>
+      <h1>Our<br><span class="cyan">Services</span></h1>
       <div class="divider"></div>
-      <p>Comprehensive software solutions tailored to your business needs. From concept to launch, we deliver
-        excellence.</p>
+      <p>Every project is a focused partnership — scoped precisely to your technical needs and business outcomes. We build software that lasts.</p>
     </div>
   </section>
 
-  <!-- SERVICES FULL -->
-  <section class="services-full section-reveal">
+  <!-- SERVICES LIST -->
+  <section class="services-list">
     <div class="container">
-      <div class="service-full-card">
-        <div class="service-full-icon">🌐</div>
-        <div class="service-full-content">
-          <h3>Web Development</h3>
-          <p>We create modern, responsive web applications using the latest technologies and best practices. Our solutions
-            range from static websites to complex SaaS platforms that handle millions of users.</p>
-          <div class="service-tags">
-            <span class="service-tag">React</span>
-            <span class="service-tag">Next.js</span>
-            <span class="service-tag">Vue.js</span>
-            <span class="service-tag">TypeScript</span>
-            <span class="service-tag">Responsive Design</span>
+
+      <!-- Web Development -->
+      <div class="svc-card">
+        <div class="svc-left">
+          <div class="svc-icon-wrap"><i class="fas fa-desktop"></i></div>
+          <span class="svc-category">Full-Stack Engineering</span>
+          <div class="svc-title">Web Development</div>
+        </div>
+        <div class="svc-mid">
+          <div class="svc-divider"></div>
+          <p class="svc-desc">We build fast, scalable web applications using modern frameworks like React, Next.js, and Node.js — from pixel-perfect frontends to robust backend APIs.</p>
+        </div>
+        <div class="svc-right">
+          <div class="svc-tags">
+            <span class="svc-tag">React</span>
+            <span class="svc-tag">Next.js</span>
+            <span class="svc-tag">Node.js</span>
+            <span class="svc-tag">TypeScript</span>
+            <span class="svc-tag">PostgreSQL</span>
           </div>
-          <a href="contact.html" class="service-inquire">Inquire →</a>
+          <a href="contact.html" class="svc-inquire">INQUIRE →</a>
         </div>
       </div>
 
-      <div class="service-full-card">
-        <div class="service-full-icon">📱</div>
-        <div class="service-full-content">
-          <h3>Mobile Apps</h3>
-          <p>Native and cross-platform mobile applications that deliver exceptional user experiences. We build apps for
-            iOS and Android that are fast, intuitive, and feature-rich.</p>
-          <div class="service-tags">
-            <span class="service-tag">React Native</span>
-            <span class="service-tag">Flutter</span>
-            <span class="service-tag">Native iOS</span>
-            <span class="service-tag">Native Android</span>
-            <span class="service-tag">App Store Optimization</span>
+      <!-- Mobile Apps -->
+      <div class="svc-card">
+        <div class="svc-left">
+          <div class="svc-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
+          <span class="svc-category">iOS &amp; Android</span>
+          <div class="svc-title">Mobile Apps</div>
+        </div>
+        <div class="svc-mid">
+          <div class="svc-divider"></div>
+          <p class="svc-desc">Native and cross-platform mobile applications built with React Native and Flutter — delivering seamless, performant experiences on every device.</p>
+        </div>
+        <div class="svc-right">
+          <div class="svc-tags">
+            <span class="svc-tag">React Native</span>
+            <span class="svc-tag">Flutter</span>
+            <span class="svc-tag">Swift</span>
+            <span class="svc-tag">Kotlin</span>
           </div>
-          <a href="contact.html" class="service-inquire">Inquire →</a>
+          <a href="contact.html" class="svc-inquire">INQUIRE →</a>
         </div>
       </div>
 
-      <div class="service-full-card">
-        <div class="service-full-icon">☁️</div>
-        <div class="service-full-content">
-          <h3>Cloud & DevOps</h3>
-          <p>Scalable cloud infrastructure, CI/CD pipelines, and DevOps solutions for reliable deployments and monitoring.
-            We help you leverage AWS, GCP, and Azure for maximum performance.</p>
-          <div class="service-tags">
-            <span class="service-tag">AWS</span>
-            <span class="service-tag">GCP</span>
-            <span class="service-tag">Azure</span>
-            <span class="service-tag">Docker</span>
-            <span class="service-tag">Kubernetes</span>
-            <span class="service-tag">CI/CD</span>
+      <!-- Cloud & DevOps -->
+      <div class="svc-card">
+        <div class="svc-left">
+          <div class="svc-icon-wrap"><i class="fas fa-cloud"></i></div>
+          <span class="svc-category">Infrastructure at Scale</span>
+          <div class="svc-title">Cloud &amp; DevOps</div>
+        </div>
+        <div class="svc-mid">
+          <div class="svc-divider"></div>
+          <p class="svc-desc">Cloud architecture, containerization, and CI/CD pipelines on AWS, GCP, and Azure. We ensure your system is reliable, scalable, and always on.</p>
+        </div>
+        <div class="svc-right">
+          <div class="svc-tags">
+            <span class="svc-tag">AWS</span>
+            <span class="svc-tag">GCP</span>
+            <span class="svc-tag">Azure</span>
+            <span class="svc-tag">Docker</span>
+            <span class="svc-tag">Kubernetes</span>
+            <span class="svc-tag">Terraform</span>
           </div>
-          <a href="contact.html" class="service-inquire">Inquire →</a>
+          <a href="contact.html" class="svc-inquire">INQUIRE →</a>
         </div>
       </div>
 
-      <div class="service-full-card">
-        <div class="service-full-icon">🔌</div>
-        <div class="service-full-content">
-          <h3>API Development</h3>
-          <p>Robust RESTful and GraphQL APIs that power your applications and enable seamless third-party integrations.
-            We design scalable APIs with security and performance in mind.</p>
-          <div class="service-tags">
-            <span class="service-tag">REST APIs</span>
-            <span class="service-tag">GraphQL</span>
-            <span class="service-tag">Microservices</span>
-            <span class="service-tag">API Security</span>
-            <span class="service-tag">Rate Limiting</span>
+      <!-- API Development -->
+      <div class="svc-card">
+        <div class="svc-left">
+          <div class="svc-icon-wrap"><i class="fas fa-code"></i></div>
+          <span class="svc-category">Integrations &amp; Microservices</span>
+          <div class="svc-title">API Development</div>
+        </div>
+        <div class="svc-mid">
+          <div class="svc-divider"></div>
+          <p class="svc-desc">RESTful and GraphQL APIs, third-party integrations, and microservices architecture — connecting your systems and powering data-driven products.</p>
+        </div>
+        <div class="svc-right">
+          <div class="svc-tags">
+            <span class="svc-tag">GraphQL</span>
+            <span class="svc-tag">REST</span>
+            <span class="svc-tag">gRPC</span>
+            <span class="svc-tag">Kafka</span>
+            <span class="svc-tag">Redis</span>
           </div>
-          <a href="contact.html" class="service-inquire">Inquire →</a>
+          <a href="contact.html" class="svc-inquire">INQUIRE →</a>
         </div>
       </div>
 
-      <div class="service-full-card">
-        <div class="service-full-icon">🔒</div>
-        <div class="service-full-content">
-          <h3>Security & QA</h3>
-          <p>Comprehensive security audits, penetration testing, and quality assurance to ensure your software is robust
-            and secure. We follow industry best practices and compliance standards.</p>
-          <div class="service-tags">
-            <span class="service-tag">Security Audits</span>
-            <span class="service-tag">Penetration Testing</span>
-            <span class="service-tag">QA Testing</span>
-            <span class="service-tag">GDPR Compliance</span>
-            <span class="service-tag">Code Review</span>
+      <!-- Security & QA -->
+      <div class="svc-card">
+        <div class="svc-left">
+          <div class="svc-icon-wrap"><i class="fas fa-shield-alt"></i></div>
+          <span class="svc-category">Reliability Engineering</span>
+          <div class="svc-title">Security &amp; QA</div>
+        </div>
+        <div class="svc-mid">
+          <div class="svc-divider"></div>
+          <p class="svc-desc">End-to-end testing, security audits, and performance optimization. We ship with confidence — zero-downtime deployments and rock-solid code quality.</p>
+        </div>
+        <div class="svc-right">
+          <div class="svc-tags">
+            <span class="svc-tag">Jest</span>
+            <span class="svc-tag">Cypress</span>
+            <span class="svc-tag">Penetration Testing</span>
+            <span class="svc-tag">OWASP</span>
           </div>
-          <a href="contact.html" class="service-inquire">Inquire →</a>
+          <a href="contact.html" class="svc-inquire">INQUIRE →</a>
         </div>
       </div>
 
-      <div class="service-full-card">
-        <div class="service-full-icon">💡</div>
-        <div class="service-full-content">
-          <h3>MVP & Consulting</h3>
-          <p>Transform your ideas into market-ready products. We help validate concepts and build minimum viable products
-            efficiently. Our consulting services guide you through the technical decisions.</p>
-          <div class="service-tags">
-            <span class="service-tag">MVP Development</span>
-            <span class="service-tag">Consulting</span>
-            <span class="service-tag">Tech Strategy</span>
-            <span class="service-tag">Product Management</span>
-            <span class="service-tag">Market Validation</span>
+      <!-- MVP & Consulting -->
+      <div class="svc-card">
+        <div class="svc-left">
+          <div class="svc-icon-wrap"><i class="fas fa-bolt"></i></div>
+          <span class="svc-category">Strategy &amp; Execution</span>
+          <div class="svc-title">MVP &amp; Consulting</div>
+        </div>
+        <div class="svc-mid">
+          <div class="svc-divider"></div>
+          <p class="svc-desc">From idea to launch in weeks. We partner with founders and enterprises to define scope, prioritize features, and build MVPs that attract users and investors.</p>
+        </div>
+        <div class="svc-right">
+          <div class="svc-tags">
+            <span class="svc-tag">Product Strategy</span>
+            <span class="svc-tag">Architecture</span>
+            <span class="svc-tag">Roadmapping</span>
+            <span class="svc-tag">Agile</span>
           </div>
-          <a href="contact.html" class="service-inquire">Inquire →</a>
+          <a href="contact.html" class="svc-inquire">INQUIRE →</a>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- CTA SECTION -->
-  <section class="cta-section section-reveal">
-    <div class="container">
-      <span class="micro-label">Let's Build Together</span>
-      <h2>Ready to Start <span class="cyan">Your Project?</span></h2>
-      <p>Let's collaborate and create something extraordinary. Get in touch with our team today to discuss your ideas.
-      </p>
-      <a href="contact.html" class="btn btn-primary">Inquire Now →</a>
-    </div>
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="micro-label">Get a Free Quote</span>
+    <h2>The Right Service <span class="cyan">For Your<br>Needs</span></h2>
+    <p>Not sure which service fits your project? Let's talk — we'll help you find the right solution and provide a clear, no-obligation quote.</p>
+    <a href="contact.html" class="btn-cta">Get in Touch →</a>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-content">
+
       <div class="footer-col">
-        <h4>GRADR.<br>TECH</h4>
+        <h4><span style="color:var(--text-dark)">GRADR</span><span style="color:var(--cyan)">.</span><br>TECH</h4>
         <p>Web Development · Mobile Apps · Cloud Solutions</p>
       </div>
 
       <div class="footer-col">
-        <h4>NAVIGATION</h4>
+        <span class="nav-sub-label">Navigation</span>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html">Services</a></li>
@@ -189,10 +663,10 @@
       </div>
 
       <div class="footer-col">
-        <h4>CONNECT</h4>
+        <span class="nav-sub-label">Connect</span>
         <div class="social-icons-footer">
           <a href="https://linkedin.com/company/gradr-tech" class="social-icon-footer" title="LinkedIn">
-            <i class="fab fa-linkedin"></i>
+            <i class="fab fa-linkedin-in"></i>
           </a>
           <a href="https://twitter.com/gradrtech" class="social-icon-footer" title="Twitter">
             <i class="fab fa-twitter"></i>
@@ -204,8 +678,9 @@
             <i class="fas fa-envelope"></i>
           </a>
         </div>
-        <p><a href="mailto:gradrtech@gmail.com">gradrtech@gmail.com</a></p>
+        <a href="mailto:gradrtech@gmail.com" class="connect-email">gradrtech@gmail.com</a>
       </div>
+
     </div>
 
     <div class="footer-bottom">
@@ -213,8 +688,7 @@
     </div>
   </footer>
 
-  <!-- Main JS -->
   <script src="assets/js/main.js"></script>
-</body>
 
+</body>
 </html>
