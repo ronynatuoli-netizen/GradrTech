@@ -2,49 +2,383 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>terms and conditions- Gradrtech</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — GradrTech</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%2300C8F0' font-weight='bold'>G</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --dark: #0A1628;
+      --cyan: #00C8F0;
+      --muted: #8A9BB0;
+      --white: #FFFFFF;
+      --bg: #F7F8FA;
+      --border: #E2E6EE;
+      --space: 'Space Grotesk', sans-serif;
+      --inter: 'Inter', sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: var(--inter);
+      background: var(--bg);
+      color: var(--dark);
       line-height: 1.6;
-      margin: 20px;
-      background-color: #f9f9f9;
-      color: #333;
     }
-    h1, h2 {
-      color: #222;
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 64px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
     }
+
+    .logo {
+      font-family: var(--space);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+    .logo .cyan { color: var(--cyan); }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--inter);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--dark); }
+    .back-link svg {
+      width: 14px; height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 140px 0 56px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
     .container {
       max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 6px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .micro-label {
+      font-family: var(--inter);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 {
+      font-family: var(--space);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 .cyan { color: var(--cyan); }
+
+    .hero .date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-top: 0.5rem;
+    }
+
+    .intro {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 640px;
+    }
+
+    /* BODY */
+    .body {
+      background: var(--white);
+      padding: 64px 0 96px;
+    }
+
+    .section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.25rem;
+    }
+
+    .num {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: rgba(0,200,240,0.1);
+      border: 1px solid rgba(0,200,240,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--space);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--cyan);
+      flex-shrink: 0;
+    }
+
+    .section h2 {
+      font-family: var(--space);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .section p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .section p:last-child { margin-bottom: 0; }
+
+    .list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-top: 0.5rem;
+    }
+    .list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .list li::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--cyan);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 10px;
+    }
+    .list li strong { color: var(--dark); font-weight: 600; }
+
+    .callout {
+      background: rgba(0,200,240,0.05);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .contact-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-row { display: flex; flex-direction: column; gap: 2px; }
+    .contact-row span {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .contact-row a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--cyan);
+      text-decoration: none;
+    }
+    .contact-row a:hover { opacity: 0.75; }
+
+    /* FOOTER */
+    .footer {
+      background: var(--dark);
+      padding: 32px 0;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .container { padding: 0 20px; }
+      .hero { padding: 100px 0 40px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Privacy Policy</h1>
-    <p>At Gradrtech, we respect your privacy and are committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website.</p>
 
-    <h2>Information We Collect</h2>
-    <ul>
-      <li>Personal details such as name, email address, or phone number when you register or contact us.</li>
-      <li>Usage data including IP address, browser type, and pages visited.</li>
-      <li>Cookies and similar technologies to improve user experience and analyze traffic.</li>
-    </ul>
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="logo">GRADR<span class="cyan">.</span>TECH</a>
+    <a href="javascript:history.back()" class="back-link">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      Go Back
+    </a>
+  </nav>
 
-    <h2>How We Use Your Information</h2>
-    <ul>
-      <li>To provide and improve our services.</li>
-      <li>To communicate with you regarding updates, offers, or support.</li>
-      <li>To ensure security and prevent fraudulent activity.</li>
-    </ul>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="micro-label">Legal</span>
+      <h1>Privacy <span class="cyan">Policy</span></h1>
+      <p class="date">Last Updated: June 13, 2026</p>
+      <p class="intro">At GradrTech, we are committed to protecting your privacy and ensuring you have a positive experience on our website. This Privacy Policy outlines how we collect, use, and safeguard your information when you visit gradrtech.com.</p>
+    </div>
+  </section>
 
-    <h2>Data Sharing</h2>
-    <p>We do not sell your personal information. We may share data with trusted third-party service providers who help us operate our website, as long as they agree to keep your information confidential.</p>
+  <!-- BODY -->
+  <section class="body">
+    <div class="container">
 
-    <h2>Cookies</h2>
-    <p>Gradr
+      <div class="section">
+        <div class="section-head">
+          <span class="num">1</span>
+          <h2>Information We Collect</h2>
+        </div>
+        <p>We collect information to provide better services to all our users. This may include:</p>
+        <ul class="list">
+          <li><strong>Information You Provide:</strong> Details you voluntarily share with us, such as your name, email address, or contact information when filling out forms, subscribing to newsletters, or contacting our support team.</li>
+          <li><strong>Automatically Collected Information:</strong> When you visit our website, we may automatically collect standard technical information, including your IP address, browser type, device information, and navigation data such as pages visited and time spent on the site, through cookies and similar technologies.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <span class="num">2</span>
+          <h2>How We Use Your Information</h2>
+        </div>
+        <p>We use the data we collect for the following purposes:</p>
+        <ul class="list">
+          <li><strong>Service Delivery:</strong> To operate, maintain, and improve our website and services.</li>
+          <li><strong>Communication:</strong> To respond to your inquiries, provide support, or send updates and promotional materials where you have opted in.</li>
+          <li><strong>Analytics:</strong> To understand how users interact with our site, allowing us to enhance user experience and site performance.</li>
+          <li><strong>Security:</strong> To detect, prevent, and address technical issues, fraud, or security threats.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <span class="num">3</span>
+          <h2>Cookies and Tracking</h2>
+        </div>
+        <p>We use cookies to enhance your experience. A cookie is a small text file placed on your device to help us recognize your browser. You can configure your browser to refuse cookies or to alert you when cookies are being sent.</p>
+        <div class="callout">Please note that some parts of our website may not function correctly if you disable cookies.</div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <span class="num">4</span>
+          <h2>Third-Party Sharing</h2>
+        </div>
+        <p>We do not sell, trade, or rent your personal information to third parties. We may share information only in the following limited circumstances:</p>
+        <ul class="list">
+          <li><strong>Service Providers:</strong> We may share data with trusted third-party vendors who assist us in operating our website or conducting our business, provided they agree to keep this information confidential.</li>
+          <li><strong>Legal Requirements:</strong> We may disclose your information if required to do so by law or in response to valid requests by public authorities such as a court or government agency.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <span class="num">5</span>
+          <h2>Security</h2>
+        </div>
+        <p>We take reasonable technical and organizational measures to protect your personal information from unauthorized access, loss, misuse, or alteration. While we strive to use commercially acceptable means to protect your data, please be aware that no method of transmission over the internet is 100% secure.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <span class="num">6</span>
+          <h2>Your Rights</h2>
+        </div>
+        <p>Depending on your location, you may have the right to:</p>
+        <ul class="list">
+          <li>Access the personal information we hold about you.</li>
+          <li>Request the correction of inaccurate or incomplete data.</li>
+          <li>Request the deletion of your personal information.</li>
+          <li>Withdraw consent for marketing communications at any time.</li>
+        </ul>
+        <div class="callout">To exercise these rights, please contact us at the email address provided below.</div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <span class="num">7</span>
+          <h2>Changes to This Policy</h2>
+        </div>
+        <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Last Updated" date. We encourage you to review this policy periodically to stay informed about how we are protecting your information.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <span class="num">8</span>
+          <h2>Contact Us</h2>
+        </div>
+        <p>If you have any questions or concerns about this Privacy Policy or our data practices, please reach out to us:</p>
+        <div class="contact-box">
+          <div class="contact-row">
+            <span>Email</span>
+            <a href="mailto:info@gradrtech.com">info@gradrtech.com</a>
+          </div>
+          <div class="contact-row">
+            <span>Website</span>
+            <a href="https://gradrtech.com">gradrtech.com</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 Gradr Tech Ltd. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
