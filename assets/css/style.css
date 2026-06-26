@@ -1223,15 +1223,19 @@ footer {
   to   { transform: translateX(-50%); }
 }
 
+/* FIXED WIDTH is critical: if a logo image is missing/broken, the card must
+   still hold its exact width, or the -50% loop math breaks and you get a
+   visible gap/jump once the strip restarts. Do not change to min-width only. */
 .partner-card {
   flex-shrink: 0;
+  flex-grow: 0;
+  width: 190px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 110px;
-  min-width: 190px;
-  padding: 0 36px;
   position: relative;
+  overflow: hidden;
 }
 
 /* thin vertical divider between each logo, like the reference image */
@@ -1247,13 +1251,18 @@ footer {
 }
 
 .partner-card img {
+  display: block;
   max-height: 42px;
-  max-width: 150px;
+  max-width: 140px;
   width: auto;
   height: auto;
   object-fit: contain;
   filter: grayscale(15%) opacity(0.92);
   transition: filter 0.25s ease, transform 0.25s ease;
+  /* if the image is still missing, hide the broken-icon + alt text rather
+     than letting it render and distort the card */
+  color: transparent;
+  font-size: 0;
 }
 
 .partner-card:hover img {
@@ -1263,8 +1272,8 @@ footer {
 
 @media (max-width: 768px) {
   .partners { padding: 44px 0 52px; }
-  .partner-card { height: 90px; min-width: 150px; padding: 0 24px; }
-  .partner-card img { max-height: 32px; max-width: 120px; }
+  .partner-card { width: 150px; height: 90px; }
+  .partner-card img { max-height: 32px; max-width: 110px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
