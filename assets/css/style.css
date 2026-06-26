@@ -1236,6 +1236,7 @@ footer {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  padding: 0 14px;
 }
 
 /* thin vertical divider between each logo, like the reference image */
@@ -1252,8 +1253,8 @@ footer {
 
 .partner-card img {
   display: block;
-  max-height: 42px;
-  max-width: 140px;
+  max-height: 70px;
+  max-width: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
