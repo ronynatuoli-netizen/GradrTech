@@ -30,7 +30,7 @@
   <link rel="canonical" href="https://gradrtech.co.uk/">
   <link rel="alternate" hreflang="en-GB" href="https://gradrtech.co.uk/">
 
-  <!-- OPEN GRAPH (WhatsApp, Facebook, LinkedIn previews) -->
+  <!-- OPEN GRAPH -->
   <meta property="og:title" content="Gradr Tech | Software Development, Web Apps & Mobile Apps UK">
   <meta property="og:description" content="We design and build custom web, mobile and cloud products that help ambitious businesses grow faster.">
   <meta property="og:url" content="https://gradrtech.co.uk/">
@@ -51,8 +51,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-
-  <!-- THEME COLOR (browser UI color on mobile) -->
   <meta name="theme-color" content="#0A1628">
 
   <!-- FONTS -->
@@ -60,7 +58,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- STRUCTURED DATA (Google rich results) -->
+  <!-- STRUCTURED DATA -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -86,6 +84,561 @@
   </script>
 
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    /* =============================================
+       GLOBE SECTION
+    ============================================= */
+    .globe-section {
+      position: relative;
+      background: #050d1a;
+      overflow: hidden;
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+    .globe-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,200,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .globe-section .container {
+      position: relative;
+      z-index: 2;
+    }
+    .globe-section .micro-label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .globe-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .globe-subtitle {
+      color: rgba(255,255,255,0.6);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .globe-wrapper {
+      position: relative;
+      width: 340px;
+      height: 340px;
+      margin: 0 auto 3rem;
+    }
+    .globe-glow {
+      position: absolute;
+      inset: -30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,200,255,0.18) 0%, transparent 70%);
+      animation: globePulse 3s ease-in-out infinite;
+    }
+    @keyframes globePulse {
+      0%,100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+    .globe-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      animation: globeSpin 20s linear infinite;
+      box-shadow:
+        0 0 0 1px rgba(0,200,255,0.2),
+        0 0 60px rgba(0,200,255,0.15),
+        inset 0 0 40px rgba(0,0,0,0.4);
+    }
+    @keyframes globeSpin {
+      from { filter: hue-rotate(0deg) brightness(1); }
+      50%  { filter: hue-rotate(10deg) brightness(1.1); }
+      to   { filter: hue-rotate(0deg) brightness(1); }
+    }
+    .globe-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(0,200,255,0.15);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: ringExpand 4s ease-out infinite;
+    }
+    .globe-ring:nth-child(2) { width: 380px; height: 380px; animation-delay: 0s; }
+    .globe-ring:nth-child(3) { width: 450px; height: 450px; animation-delay: 1.3s; }
+    .globe-ring:nth-child(4) { width: 520px; height: 520px; animation-delay: 2.6s; }
+    @keyframes ringExpand {
+      0%   { opacity: 0.5; }
+      100% { opacity: 0; }
+    }
+    .globe-connect-dots {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .connect-dot {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .connect-dot span.dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #00c8ff;
+      box-shadow: 0 0 8px #00c8ff;
+      animation: dotBlink 2s ease-in-out infinite;
+    }
+    .connect-dot:nth-child(2) span.dot { animation-delay: 0.5s; background: #7c3aed; box-shadow: 0 0 8px #7c3aed; }
+    .connect-dot:nth-child(3) span.dot { animation-delay: 1s; background: #10b981; box-shadow: 0 0 8px #10b981; }
+    .connect-dot:nth-child(4) span.dot { animation-delay: 1.5s; background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+    @keyframes dotBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* =============================================
+       CONNECTIVITY SECTION (shuffling cards)
+    ============================================= */
+    .connectivity-section {
+      background: #060e1c;
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .connectivity-section::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,200,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .connectivity-intro {
+      text-align: center;
+      max-width: 750px;
+      margin: 0 auto 3.5rem;
+    }
+    .connectivity-intro h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .connectivity-intro p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    /* Cards shuffle carousel */
+    .conn-cards-viewport {
+      position: relative;
+      height: 400px;
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      perspective: 1200px;
+    }
+    .conn-card {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1), opacity 0.6s ease, z-index 0s;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .conn-card .card-globe-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80');
+      transition: transform 0.6s ease;
+    }
+    .conn-card:hover .card-globe-bg { transform: scale(1.05); }
+    .conn-card .card-overlay {
+      position: absolute;
+      inset: 0;
+      opacity: 0.88;
+    }
+    .conn-card .card-content {
+      position: relative;
+      z-index: 2;
+      padding: 2.5rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .conn-card .card-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.75rem;
+    }
+    .conn-card .card-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .conn-card .card-body {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.65;
+      max-width: 500px;
+    }
+    .conn-card .card-cta {
+      margin-top: 1.5rem;
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .conn-card .card-cta:hover { background: rgba(255,255,255,0.25); }
+
+    /* Card colours */
+    .conn-card[data-color="blue"]   .card-overlay { background: linear-gradient(135deg, rgba(0,60,150,0.85) 0%, rgba(0,120,255,0.7) 100%); }
+    .conn-card[data-color="purple"] .card-overlay { background: linear-gradient(135deg, rgba(80,0,150,0.85) 0%, rgba(140,60,255,0.7) 100%); }
+    .conn-card[data-color="teal"]   .card-overlay { background: linear-gradient(135deg, rgba(0,100,100,0.85) 0%, rgba(0,200,180,0.7) 100%); }
+    .conn-card[data-color="orange"] .card-overlay { background: linear-gradient(135deg, rgba(150,60,0,0.85) 0%, rgba(255,140,0,0.7) 100%); }
+    .conn-card[data-color="green"]  .card-overlay { background: linear-gradient(135deg, rgba(0,80,40,0.85) 0%, rgba(0,200,80,0.7) 100%); }
+
+    /* Stack states */
+    .conn-card.state-active {
+      transform: translateX(0) scale(1) rotateY(0deg);
+      z-index: 5;
+      opacity: 1;
+    }
+    .conn-card.state-next1 {
+      transform: translateX(30px) scale(0.97) rotateY(-2deg);
+      z-index: 4;
+      opacity: 0.85;
+    }
+    .conn-card.state-next2 {
+      transform: translateX(55px) scale(0.94) rotateY(-4deg);
+      z-index: 3;
+      opacity: 0.6;
+    }
+    .conn-card.state-next3 {
+      transform: translateX(75px) scale(0.91) rotateY(-6deg);
+      z-index: 2;
+      opacity: 0.35;
+    }
+    .conn-card.state-hidden {
+      transform: translateX(-100px) scale(0.88);
+      z-index: 1;
+      opacity: 0;
+    }
+
+    /* Card nav dots */
+    .conn-card-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 3rem;
+    }
+    .conn-nav-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      padding: 0;
+    }
+    .conn-nav-dot.active {
+      background: #00c8ff;
+      box-shadow: 0 0 10px rgba(0,200,255,0.5);
+      width: 28px;
+      border-radius: 5px;
+    }
+
+    /* Telecom partners strip */
+    .telecom-partners {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .telecom-partners-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .telecom-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .telecom-logo-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .telecom-logo-item:hover {
+      background: rgba(0,200,255,0.1);
+      border-color: rgba(0,200,255,0.3);
+      color: #00c8ff;
+    }
+
+    /* =============================================
+       WEBEX / VOICE SECTION
+    ============================================= */
+    .webex-section {
+      background: #07101f;
+      padding: 110px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .webex-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 80px;
+    }
+    .webex-hero-text .micro-label { display: block; margin-bottom: 0.75rem; }
+    .webex-hero-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    .webex-hero-text p {
+      color: rgba(255,255,255,0.65);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    .webex-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-webex-primary {
+      background: #00c8ff;
+      color: #050d1a;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .btn-webex-primary:hover { background: #00aadd; transform: translateY(-2px); }
+    .btn-webex-ghost {
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    .btn-webex-ghost:hover { border-color: #00c8ff; color: #00c8ff; }
+
+    .webex-hero-images {
+      position: relative;
+      height: 420px;
+    }
+    .webex-img-main {
+      position: absolute;
+      top: 0; right: 0;
+      width: 88%;
+      height: 290px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .webex-img-secondary {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 65%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      border: 3px solid #07101f;
+    }
+    .webex-img-badge {
+      position: absolute;
+      top: 260px; right: 20px;
+      background: rgba(0,200,255,0.12);
+      border: 1px solid rgba(0,200,255,0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      padding: 0.8rem 1.2rem;
+      color: #fff;
+      font-size: 0.8rem;
+    }
+    .webex-img-badge strong { color: #00c8ff; font-size: 1.3rem; display: block; }
+
+    /* Core benefits */
+    .webex-benefits {
+      background: #050d1a;
+      padding: 80px 2rem;
+    }
+    .webex-benefits-inner { max-width: 1200px; margin: 0 auto; }
+    .webex-benefits-inner h3 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .webex-benefits-inner .sec-sub {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 3rem;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .benefit-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+    .benefit-card:hover {
+      background: rgba(0,200,255,0.06);
+      border-color: rgba(0,200,255,0.2);
+      transform: translateY(-4px);
+    }
+    .benefit-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+    .benefit-icon.blue   { background: rgba(0,100,255,0.15); }
+    .benefit-icon.purple { background: rgba(120,0,255,0.15); }
+    .benefit-icon.teal   { background: rgba(0,200,180,0.15); }
+    .benefit-icon.orange { background: rgba(255,140,0,0.15); }
+    .benefit-card h4 { color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .benefit-card p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.65; }
+
+    /* Advanced features */
+    .webex-advanced {
+      padding: 80px 2rem;
+      background: #07101f;
+    }
+    .webex-advanced-inner { max-width: 1200px; margin: 0 auto; }
+    .webex-advanced-inner h3 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .webex-advanced-inner .sec-sub {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 3rem;
+    }
+    .advanced-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    .advanced-features-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .adv-feature {
+      display: flex;
+      gap: 1rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .adv-feature:hover { border-color: rgba(0,200,255,0.25); background: rgba(0,200,255,0.04); }
+    .adv-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .adv-feature h5 { color: #fff; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .adv-feature p { color: rgba(255,255,255,0.55); font-size: 0.85rem; line-height: 1.6; }
+    .advanced-image-wrap { position: relative; }
+    .advanced-image-wrap img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .advanced-uptime-badge {
+      position: absolute;
+      bottom: -20px; left: -20px;
+      background: linear-gradient(135deg, #00c8ff, #0080ff);
+      border-radius: 16px;
+      padding: 1.2rem 1.8rem;
+      box-shadow: 0 10px 40px rgba(0,200,255,0.3);
+    }
+    .advanced-uptime-badge .num { font-size: 2rem; font-weight: 900; color: #fff; display: block; }
+    .advanced-uptime-badge .lbl { font-size: 0.75rem; color: rgba(255,255,255,0.8); font-weight: 600; letter-spacing: 0.05em; }
+
+    /* Webex CTA banner */
+    .webex-cta {
+      background: linear-gradient(135deg, #001a3a 0%, #002855 50%, #001a3a 100%);
+      border-top: 1px solid rgba(0,200,255,0.15);
+      padding: 70px 2rem;
+      text-align: center;
+    }
+    .webex-cta h3 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
+    .webex-cta p { color: rgba(255,255,255,0.6); margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto; }
+    .webex-cta-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 768px) {
+      .conn-cards-viewport { height: 480px; }
+      .conn-card .card-title { font-size: 1.3rem; }
+      .webex-hero { grid-template-columns: 1fr; gap: 2.5rem; }
+      .webex-hero-images { height: 280px; }
+      .webex-img-main { width: 100%; height: 200px; top: 0; right: 0; }
+      .webex-img-secondary { width: 60%; height: 140px; }
+      .webex-img-badge { top: 175px; }
+      .advanced-grid { grid-template-columns: 1fr; }
+      .advanced-image-wrap { order: -1; }
+      .advanced-image-wrap img { height: 260px; }
+      .advanced-uptime-badge { left: 10px; bottom: -10px; }
+      .globe-wrapper { width: 260px; height: 260px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -156,7 +709,133 @@
       <div class="stat"><div class="stat-num">24h</div><div class="stat-lbl">RESPONSE TIME</div></div>
     </div>
   </div>
-  <!-- PARTNERS -->
+
+  <!-- ==========================================
+       GLOBE SECTION — "Connecting the World"
+  =========================================== -->
+  <section class="globe-section section-reveal">
+    <div class="container">
+      <span class="micro-label">Global Reach</span>
+      <h2 class="globe-title">Connecting <span class="cyan">Businesses</span> to the World</h2>
+      <p class="globe-subtitle">From high-speed fibre broadband to enterprise leased lines and cloud communications — we deliver the infrastructure that keeps the modern world moving.</p>
+
+      <div class="globe-wrapper">
+        <div class="globe-glow"></div>
+        <div class="globe-ring"></div>
+        <div class="globe-ring"></div>
+        <div class="globe-ring"></div>
+        <img
+          class="globe-img"
+          src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=600&q=85"
+          alt="World globe representing global connectivity"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="globe-connect-dots">
+        <div class="connect-dot"><span class="dot"></span>United Kingdom</div>
+        <div class="connect-dot"><span class="dot"></span>Europe</div>
+        <div class="connect-dot"><span class="dot"></span>North America</div>
+        <div class="connect-dot"><span class="dot"></span>Global Cloud</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CONNECTIVITY SECTION — Shuffling Cards
+  =========================================== -->
+  <section class="connectivity-section section-reveal">
+    <div class="container">
+      <div class="connectivity-intro">
+        <span class="micro-label">Connectivity Solutions</span>
+        <h2>Reliable Connectivity. <span class="cyan">Built for Business.</span></h2>
+        <p>Whether you require high-speed Fibre Broadband or a highly resilient Dedicated Leased Line, we deliver solutions tailored to your business needs — keeping you seamlessly connected to the nation's most trusted networks.</p>
+      </div>
+
+      <!-- Shuffling Cards Stack -->
+      <div class="conn-cards-viewport" id="connCardsViewport">
+
+        <div class="conn-card state-active" data-color="blue">
+          <div class="card-globe-bg"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <div class="card-tag">🌐 Fibre Broadband</div>
+            <div class="card-title">High-Speed Fibre<br>Broadband</div>
+            <div class="card-body">Enterprise-grade fibre solutions that keep your business moving. From standard broadband to ultrafast FTTP — we match the right speed to your business demands.</div>
+            <a href="services.html" class="card-cta">Explore Broadband →</a>
+          </div>
+        </div>
+
+        <div class="conn-card state-next1" data-color="purple">
+          <div class="card-globe-bg"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <div class="card-tag">🔗 Dedicated Connectivity</div>
+            <div class="card-title">Dedicated Leased<br>Lines</div>
+            <div class="card-body">A private, uncontended connection with guaranteed symmetrical speeds. Mission-critical operations, cloud services, and VoIP — always running at full capacity.</div>
+            <a href="services.html" class="card-cta">Explore Leased Lines →</a>
+          </div>
+        </div>
+
+        <div class="conn-card state-next2" data-color="teal">
+          <div class="card-globe-bg"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <div class="card-tag">📞 Cloud Communications</div>
+            <div class="card-title">Digital Voice &<br>VoIP Systems</div>
+            <div class="card-body">Replace legacy phone infrastructure with crystal-clear, internet-based calling. Scale your team's communication without scaling your costs.</div>
+            <a href="#webex" class="card-cta">Explore Voice Solutions →</a>
+          </div>
+        </div>
+
+        <div class="conn-card state-next3" data-color="orange">
+          <div class="card-globe-bg"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <div class="card-tag">📱 Mobile Connectivity</div>
+            <div class="card-title">Mobile & Remote<br>Working Solutions</div>
+            <div class="card-body">Whether in the office, at home, or on the move — we keep your team seamlessly connected. Mobile plans, remote access, and hybrid work infrastructure done right.</div>
+            <a href="services.html" class="card-cta">Explore Mobile →</a>
+          </div>
+        </div>
+
+        <div class="conn-card state-hidden" data-color="green">
+          <div class="card-globe-bg"></div>
+          <div class="card-overlay"></div>
+          <div class="card-content">
+            <div class="card-tag">☁️ Cloud & Hosting</div>
+            <div class="card-title">Cloud Infrastructure<br>& Managed IT</div>
+            <div class="card-body">Scalable cloud architecture paired with managed connectivity. We handle the infrastructure so your team can focus on what matters — growing your business.</div>
+            <a href="services.html" class="card-cta">Explore Cloud →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Nav dots -->
+      <div class="conn-card-nav" id="connCardNav">
+        <button class="conn-nav-dot active" data-idx="0"></button>
+        <button class="conn-nav-dot" data-idx="1"></button>
+        <button class="conn-nav-dot" data-idx="2"></button>
+        <button class="conn-nav-dot" data-idx="3"></button>
+        <button class="conn-nav-dot" data-idx="4"></button>
+      </div>
+
+      <!-- Telecom partner logos -->
+      <div class="telecom-partners">
+        <div class="telecom-partners-label">Partnered with the UK's leading telecoms providers</div>
+        <div class="telecom-logos">
+          <span class="telecom-logo-item">BT</span>
+          <span class="telecom-logo-item">CityFibre</span>
+          <span class="telecom-logo-item">Gamma</span>
+          <span class="telecom-logo-item">TalkTalk</span>
+          <span class="telecom-logo-item">Virgin Media</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS MARQUEE -->
   <section class="partners section-reveal">
     <div class="container">
       <div class="sec-header-center">
@@ -167,7 +846,6 @@
 
     <div class="partners-marquee">
       <div class="partners-track">
-
         <a href="https://web.webex.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Webex">
           <img src="assets/images/partners/webex.png" alt="Webex logo">
         </a>
@@ -189,170 +867,242 @@
         <a href="https://fidelity-group.co.uk/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Fidelity Group">
           <img src="assets/images/partners/fidelity.png" alt="Fidelity Group logo">
         </a>
-
         <a href="https://www.virginmedia.com/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Virgin Media">
           <img src="assets/images/partners/virginmedia.png" alt="Virgin Media logo">
         </a>
-
-        <!-- duplicate set — required for the seamless infinite loop, do not remove -->
-        <a href="https://web.webex.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/webex.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://savannahsystems.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/savannah.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://gammagroup.co" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/gamma.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://www.cityfibre.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/cityfibre.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://ee.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/ee.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://www.vodafone.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/vodafone.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://fidelity-group.co.uk/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/fidelity.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://www.virginmedia.com/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/virginmedia.png" alt="" aria-hidden="true">
-        </a>
-
+        <!-- Duplicate set for seamless loop -->
+        <a href="https://web.webex.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/webex.png" alt="" aria-hidden="true"></a>
+        <a href="https://savannahsystems.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/savannah.png" alt="" aria-hidden="true"></a>
+        <a href="https://gammagroup.co" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/gamma.png" alt="" aria-hidden="true"></a>
+        <a href="https://www.cityfibre.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/cityfibre.png" alt="" aria-hidden="true"></a>
+        <a href="https://ee.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/ee.png" alt="" aria-hidden="true"></a>
+        <a href="https://www.vodafone.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/vodafone.png" alt="" aria-hidden="true"></a>
+        <a href="https://fidelity-group.co.uk/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/fidelity.png" alt="" aria-hidden="true"></a>
+        <a href="https://www.virginmedia.com/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/virginmedia.png" alt="" aria-hidden="true"></a>
       </div>
     </div>
   </section>
 
- <!-- SERVICES -->
-<section class="services section-reveal">
-  <div class="container">
-    <div class="sec-header">
-      <div>
-        <span class="micro-label">What We Build</span>
-        <h2>Services &amp; <span class="cyan">Specializations</span></h2>
+  <!-- SERVICES -->
+  <section class="services section-reveal">
+    <div class="container">
+      <div class="sec-header">
+        <div>
+          <span class="micro-label">What We Build</span>
+          <h2>Services &amp; <span class="cyan">Specializations</span></h2>
+        </div>
+        <a href="services.html" class="sec-link">See All Services →</a>
       </div>
-      <a href="services.html" class="sec-link">See All Services →</a>
+      <div class="services-grid">
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <p class="svc-sub">FULL-STACK ENGINEERING</p>
+          <h3>Web Development</h3>
+          <div class="svc-divider"></div>
+          <p>We build fast, scalable web applications using modern frameworks like React, Next.js, and Node.js — from pixel-perfect frontends to robust backend APIs.</p>
+          <a href="services.html" class="svc-link">enquire →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+          <p class="svc-sub">IOS &amp; ANDROID</p>
+          <h3>Mobile Apps</h3>
+          <div class="svc-divider"></div>
+          <p>Native and cross-platform mobile applications built with React Native and Flutter — delivering seamless, performant experiences on every device.</p>
+          <a href="services.html" class="svc-link">enquire →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/><circle cx="12" cy="12" r="10"/></svg></div>
+          <p class="svc-sub">CONNECTIVITY SOLUTIONS</p>
+          <h3>Business Broadband</h3>
+          <div class="svc-divider"></div>
+          <p>We deliver high-speed, reliable broadband connectivity built for businesses that can't afford downtime — from dedicated leased lines to scalable fibre packages tailored to your bandwidth needs.</p>
+          <a href="services.html" class="svc-link">enquire →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><line x1="2" y1="12" x2="22" y2="12"/><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><line x1="6" y1="6" x2="6" y2="10"/><line x1="12" y1="4" x2="12" y2="10"/><line x1="18" y1="6" x2="18" y2="10"/></svg></div>
+          <p class="svc-sub">DEDICATED CONNECTIVITY</p>
+          <h3>Leased Line</h3>
+          <div class="svc-divider"></div>
+          <p>We provide dedicated leased line connections that give your business guaranteed, symmetrical speeds and a private, uncontended link — ensuring consistent performance for cloud services, VoIP, and mission-critical operations around the clock.</p>
+          <a href="services.html" class="svc-link">enquire →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.5 2.5c2.5.5 4.5 2.5 5 5"/><path d="M14.5 6.5c1 .5 2 1.5 2.5 2.5"/></svg></div>
+          <p class="svc-sub">CLOUD COMMUNICATION</p>
+          <h3>VoIP Solutions</h3>
+          <div class="svc-divider"></div>
+          <p>We set up and manage fully hosted VoIP systems that replace traditional phone lines with crystal-clear, internet-based calling — cutting costs, enabling remote teams, and giving your business the flexibility to scale communication as you grow.</p>
+          <a href="services.html" class="svc-link">enquire →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+          <p class="svc-sub">INFRASTRUCTURE AT SCALE</p>
+          <h3>Cloud &amp; DevOps</h3>
+          <div class="svc-divider"></div>
+          <p>Cloud architecture, containerization, and CI/CD pipelines on AWS, GCP, and Azure. We ensure your system is reliable, scalable, and always on.</p>
+          <a href="services.html" class="svc-link">enquire →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <p class="svc-sub">INTEGRATIONS &amp; MICROSERVICES</p>
+          <h3>API Development</h3>
+          <div class="svc-divider"></div>
+          <p>RESTful and GraphQL APIs, third-party integrations, and microservices architecture — connecting your systems and powering data-driven products.</p>
+          <a href="services.html" class="svc-link">enquire →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <p class="svc-sub">RELIABILITY ENGINEERING</p>
+          <h3>Security &amp; QA</h3>
+          <div class="svc-divider"></div>
+          <p>End-to-end testing, security audits, and performance optimization. Zero-downtime deployments and rock-solid code quality.</p>
+          <a href="services.html" class="svc-link">enquire →</a>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <p class="svc-sub">STRATEGY &amp; EXECUTION</p>
+          <h3>MVP &amp; Consulting</h3>
+          <div class="svc-divider"></div>
+          <p>From idea to launch in weeks. We partner with founders and enterprises to define scope, prioritize features, and build MVPs that attract users and investors.</p>
+          <a href="services.html" class="svc-link">enquire →</a>
+        </div>
+      </div>
     </div>
-    <div class="services-grid">
+  </section>
 
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+  <!-- ==========================================
+       WEBEX / DIGITAL VOICE SECTION
+  =========================================== -->
+  <section class="webex-section section-reveal" id="webex">
+
+    <!-- Hero intro with images -->
+    <div class="webex-hero">
+      <div class="webex-hero-text">
+        <span class="micro-label">Digital Voice for Webex</span>
+        <h2>Future-Proof Business Communications. <span class="cyan">Built for the Modern Workplace.</span></h2>
+        <p>As hybrid work becomes the gold standard, legacy phone systems simply cannot keep up. Digital Voice for Webex is an all-in-one unified communications platform designed to enhance operational efficiency, maximise productivity, and streamline collaboration.</p>
+        <p>Whether your team is in the office, at home, or on the move — we deliver enterprise-grade voice quality and seamless connectivity.</p>
+        <div class="webex-btns">
+          <a href="contact.html" class="btn-webex-primary">Get a Digital Voice Quote</a>
+          <a href="contact.html" class="btn-webex-ghost">Schedule a Live Demo</a>
         </div>
-        <p class="svc-sub">FULL-STACK ENGINEERING</p>
-        <h3>Web Development</h3>
-        <div class="svc-divider"></div>
-        <p>We build fast, scalable web applications using modern frameworks like React, Next.js, and Node.js — from pixel-perfect frontends to robust backend APIs.</p>
-        <a href="services.html" class="svc-link">enquire →</a>
       </div>
 
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      <div class="webex-hero-images">
+        <!-- Team at table image -->
+        <img
+          class="webex-img-main"
+          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80"
+          alt="Business team collaborating around a conference table"
+          loading="lazy"
+        >
+        <!-- Phone/office image -->
+        <img
+          class="webex-img-secondary"
+          src="https://images.unsplash.com/photo-1565008576549-57569a49371d?w=500&q=80"
+          alt="Modern office IP phone on a desk"
+          loading="lazy"
+        >
+        <div class="webex-img-badge">
+          <strong>99.999%</strong>
+          <span style="font-size:0.75rem;color:rgba(255,255,255,0.8)">Guaranteed Uptime</span>
         </div>
-        <p class="svc-sub">IOS &amp; ANDROID</p>
-        <h3>Mobile Apps</h3>
-        <div class="svc-divider"></div>
-        <p>Native and cross-platform mobile applications built with React Native and Flutter — delivering seamless, performant experiences on every device.</p>
-        <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/>
-            <circle cx="12" cy="12" r="10"/>
-          </svg>
-        </div>
-        <p class="svc-sub">CONNECTIVITY SOLUTIONS</p>
-        <h3>Business Broadband</h3>
-        <div class="svc-divider"></div>
-        <p>We deliver high-speed, reliable broadband connectivity built for businesses that can't afford downtime — from dedicated leased lines to scalable fibre packages tailored to your bandwidth needs.</p>
-        <a href="services.html" class="svc-link">enquire →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24">
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <circle cx="6" cy="12" r="2"/>
-            <circle cx="12" cy="12" r="2"/>
-            <circle cx="18" cy="12" r="2"/>
-            <line x1="6" y1="6" x2="6" y2="10"/>
-            <line x1="12" y1="4" x2="12" y2="10"/>
-            <line x1="18" y1="6" x2="18" y2="10"/>
-          </svg>
-        </div>
-        <p class="svc-sub">DEDICATED CONNECTIVITY</p>
-        <h3>Leased Line</h3>
-        <div class="svc-divider"></div>
-        <p>We provide dedicated leased line connections that give your business guaranteed, symmetrical speeds and a private, uncontended link — ensuring consistent performance for cloud services, VoIP, and mission-critical operations around the clock.</p>
-        <a href="services.html" class="svc-link">enquire →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-            <path d="M14.5 2.5c2.5.5 4.5 2.5 5 5"/>
-            <path d="M14.5 6.5c1 .5 2 1.5 2.5 2.5"/>
-          </svg>
-        </div>
-        <p class="svc-sub">CLOUD COMMUNICATION</p>
-        <h3>VoIP Solutions</h3>
-        <div class="svc-divider"></div>
-        <p>We set up and manage fully hosted VoIP systems that replace traditional phone lines with crystal-clear, internet-based calling — cutting costs, enabling remote teams, and giving your business the flexibility to scale communication as you grow.</p>
-        <a href="services.html" class="svc-link">enquire →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-        </div>
-        <p class="svc-sub">INFRASTRUCTURE AT SCALE</p>
-        <h3>Cloud &amp; DevOps</h3>
-        <div class="svc-divider"></div>
-        <p>Cloud architecture, containerization, and CI/CD pipelines on AWS, GCP, and Azure. We ensure your system is reliable, scalable, and always on.</p>
-        <a href="services.html" class="svc-link">enquire →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <p class="svc-sub">INTEGRATIONS &amp; MICROSERVICES</p>
-        <h3>API Development</h3>
-        <div class="svc-divider"></div>
-        <p>RESTful and GraphQL APIs, third-party integrations, and microservices architecture — connecting your systems and powering data-driven products.</p>
-        <a href="services.html" class="svc-link">enquire →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <p class="svc-sub">RELIABILITY ENGINEERING</p>
-        <h3>Security &amp; QA</h3>
-        <div class="svc-divider"></div>
-        <p>End-to-end testing, security audits, and performance optimization. Zero-downtime deployments and rock-solid code quality.</p>
-        <a href="services.html" class="svc-link">enquire →</a>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </div>
-        <p class="svc-sub">STRATEGY &amp; EXECUTION</p>
-        <h3>MVP &amp; Consulting</h3>
-        <div class="svc-divider"></div>
-        <p>From idea to launch in weeks. We partner with founders and enterprises to define scope, prioritize features, and build MVPs that attract users and investors.</p>
-        <a href="services.html" class="svc-link">enquire →</a>
-      </div>
-
     </div>
-  </div>
-</section>
+
+    <!-- Core benefits -->
+    <div class="webex-benefits">
+      <div class="webex-benefits-inner">
+        <h3>Core <span class="cyan">Benefits</span></h3>
+        <p class="sec-sub">Everything you need to run business communications without compromise</p>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon blue">⚡</div>
+            <h4>Go Live in Minutes, Not Days</h4>
+            <p>Deploy your new phone system instantly without complex on-site engineer visits. Following simple setup, your business can be fully operational immediately with flexible activation scheduling.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon purple">📈</div>
+            <h4>Scalability Tailored to Your Growth</h4>
+            <p>Whether onboarding new talent or expanding into new markets, add user licences or upgrade features instantly via your intuitive online portal. Manage real-time changes exactly when your business demands them.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon teal">🛡️</div>
+            <h4>Uncompromising Reliability</h4>
+            <p>Our Webex-powered solution is hosted on a geographically redundant, cloud-based platform, guaranteeing 99.999% uptime and continuous availability for mission-critical operations.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon orange">🔢</div>
+            <h4>Hassle-Free Number Porting</h4>
+            <p>Retain your existing business identity without disruption. Our dedicated support team manages the entire number transfer process for you, ensuring zero downtime during migration.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advanced features with image -->
+    <div class="webex-advanced">
+      <div class="webex-advanced-inner">
+        <h3>Advanced <span class="cyan">Features</span></h3>
+        <p class="sec-sub">The AI & collaboration edge your competitors don't have yet</p>
+        <div class="advanced-grid">
+          <div class="advanced-features-list">
+            <div class="adv-feature">
+              <div class="adv-icon">🎙️</div>
+              <div>
+                <h5>Superior Audio with AI Noise Cancellation</h5>
+                <p>Eliminate distracting background noise — from keyboard typing to traffic — with advanced AI-powered audio enhancement. Crystal-clear, studio-quality HD voice that makes remote conversations feel natural.</p>
+              </div>
+            </div>
+            <div class="adv-feature">
+              <div class="adv-icon">🤝</div>
+              <div>
+                <h5>Unified Collaboration Suite</h5>
+                <p>Go beyond standard calling. Calling, messaging, video meetings, webinars, interactive whiteboarding, and polling — all in a single, cohesive application.</p>
+              </div>
+            </div>
+            <div class="adv-feature">
+              <div class="adv-icon">📊</div>
+              <div>
+                <h5>Comprehensive Voice Analytics & Security</h5>
+                <p>Enterprise-grade end-to-end encryption, proactive fraud detection, and in-depth analytics reporting on user experience and call performance.</p>
+              </div>
+            </div>
+            <div class="adv-feature">
+              <div class="adv-icon">🔌</div>
+              <div>
+                <h5>Seamless Application Integration</h5>
+                <p>Connect your voice infrastructure directly to your CRM, helpdesk software, and core business applications to optimise workflows and boost team efficiency.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="advanced-image-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=700&q=80"
+              alt="Professional team in a modern office using communications technology"
+              loading="lazy"
+            >
+            <div class="advanced-uptime-badge">
+              <span class="num">99.999%</span>
+              <span class="lbl">PLATFORM UPTIME SLA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Webex CTA -->
+    <div class="webex-cta">
+      <h3>Transform Your Business Communications <span class="cyan">Today</span></h3>
+      <p>Join thousands of forward-thinking UK businesses upgrading from legacy networks to digital clarity. Speak with our UK-based specialists.</p>
+      <div class="webex-cta-btns">
+        <a href="contact.html" class="btn-webex-primary">Get a Digital Voice Quote</a>
+        <a href="contact.html" class="btn-webex-ghost">Schedule a Live Webex Demo</a>
+      </div>
+    </div>
+
+  </section>
 
   <!-- HOW WE WORK -->
   <section class="process section-reveal">
@@ -360,51 +1110,38 @@
       <span class="micro-label">Our Process</span>
       <h2>How We <span class="cyan">Work</span></h2>
       <div class="process-grid">
-
         <div class="proc-card">
           <div class="proc-top">
-            <div class="proc-icon">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            </div>
+            <div class="proc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
             <span class="proc-num">01</span>
           </div>
           <h3>Discover</h3>
           <p>We deep-dive into your goals, users, and technical landscape to define the right scope and strategy.</p>
         </div>
-
         <div class="proc-card">
           <div class="proc-top">
-            <div class="proc-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-            </div>
+            <div class="proc-icon"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
             <span class="proc-num">02</span>
           </div>
           <h3>Design</h3>
           <p>We craft architecture and UX blueprints that balance elegance with engineering practicality.</p>
         </div>
-
         <div class="proc-card">
           <div class="proc-top">
-            <div class="proc-icon">
-              <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            </div>
+            <div class="proc-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
             <span class="proc-num">03</span>
           </div>
           <h3>Build</h3>
           <p>Sprint-based development with continuous delivery, code reviews, and transparent progress updates.</p>
         </div>
-
         <div class="proc-card">
           <div class="proc-top">
-            <div class="proc-icon">
-              <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-            </div>
+            <div class="proc-icon"><svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
             <span class="proc-num">04</span>
           </div>
           <h3>Launch</h3>
           <p>Zero-downtime deployments, monitoring setup, and post-launch support to ensure your product thrives.</p>
         </div>
-
       </div>
     </div>
   </section>
@@ -422,24 +1159,15 @@
       <div class="projects-grid">
         <div class="proj-card">
           <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80" alt="FinTech Dashboard">
-          <div class="proj-overlay">
-            <span class="proj-cat">WEB APP</span>
-            <h3>FinTech Dashboard</h3>
-          </div>
+          <div class="proj-overlay"><span class="proj-cat">WEB APP</span><h3>FinTech Dashboard</h3></div>
         </div>
         <div class="proj-card">
           <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=700&q=80" alt="Mobile Banking">
-          <div class="proj-overlay">
-            <span class="proj-cat">MOBILE</span>
-            <h3>Mobile Banking App</h3>
-          </div>
+          <div class="proj-overlay"><span class="proj-cat">MOBILE</span><h3>Mobile Banking App</h3></div>
         </div>
         <div class="proj-card">
           <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=700&q=80" alt="Cloud Architecture">
-          <div class="proj-overlay">
-            <span class="proj-cat">DEVOPS</span>
-            <h3>Cloud Architecture</h3>
-          </div>
+          <div class="proj-overlay"><span class="proj-cat">DEVOPS</span><h3>Cloud Architecture</h3></div>
         </div>
       </div>
     </div>
@@ -471,43 +1199,30 @@
       <span class="micro-label">Client Stories</span>
       <h2>What Clients <span class="cyan">Say</span></h2>
       <div class="testi-grid">
-
         <div class="testi-card">
           <div class="testi-quote">"</div>
           <p>"Gradr Tech delivered our trading dashboard ahead of schedule. The code quality was exceptional — clean, well-documented, and built to scale."</p>
           <div class="testi-author">
             <div class="testi-avatar">S</div>
-            <div>
-              <div class="testi-name">Sarah K.</div>
-              <div class="testi-role">CEO, FinBridge</div>
-            </div>
+            <div><div class="testi-name">Sarah K.</div><div class="testi-role">CEO, FinBridge</div></div>
           </div>
         </div>
-
         <div class="testi-card">
           <div class="testi-quote">"</div>
           <p>"The mobile app they built for us handled 10x our projected launch traffic without a hiccup. Their DevOps setup is world-class."</p>
           <div class="testi-author">
             <div class="testi-avatar">M</div>
-            <div>
-              <div class="testi-name">Marcus L.</div>
-              <div class="testi-role">CTO, Nomad Health</div>
-            </div>
+            <div><div class="testi-name">Marcus L.</div><div class="testi-role">CTO, Nomad Health</div></div>
           </div>
         </div>
-
         <div class="testi-card">
           <div class="testi-quote">"</div>
           <p>"From MVP to Series A, Gradr has been our technical co-pilot. They don't just write code — they think deeply about the product."</p>
           <div class="testi-author">
             <div class="testi-avatar">P</div>
-            <div>
-              <div class="testi-name">Priya M.</div>
-              <div class="testi-role">Founder, EdLeap</div>
-            </div>
+            <div><div class="testi-name">Priya M.</div><div class="testi-role">Founder, EdLeap</div></div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -546,12 +1261,11 @@
       <div class="footer-nav">
         <div class="footer-nav-label">NAVIGATION</div>
         <ul>
-  <li><a href="index.html">Home</a></li>
-  <li><a href="services.html">Services</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="contact.html">Contact</a></li>
-</ul>
-
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
       </div>
       <div class="footer-contact">
         <div class="footer-nav-label">CONNECT</div>
@@ -564,12 +1278,8 @@
         <a href="mailto:info@gradrtech.com" style="color:var(--muted);text-decoration:none;font-size:0.9rem;">info@gradrtech.com</a>
       </div>
     </div>
-   <div class="privacy-policy">
-  <p> 
-    <a href="privacy.html">Terms and Conditions</a>. 
-  </p>
-</div>
-
+    <div class="privacy-policy">
+      <p><a href="privacy.html">Terms and Conditions</a>.</p>
     </div>
     <div class="footer-bottom">
       <p>@ 2026 GRADR TECH LTD. ALL RIGHTS RESERVED.</p>
@@ -577,5 +1287,64 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+
+  <!-- Card shuffle logic -->
+  <script>
+    (function() {
+      const states = ['state-active','state-next1','state-next2','state-next3','state-hidden'];
+      const cards  = Array.from(document.querySelectorAll('.conn-card'));
+      const dots   = Array.from(document.querySelectorAll('.conn-nav-dot'));
+      let current  = 0;
+      let timer;
+
+      function setStates(activeIdx) {
+        cards.forEach((card, i) => {
+          card.className = 'conn-card';
+          const offset = (i - activeIdx + cards.length) % cards.length;
+          if (offset < states.length) {
+            card.classList.add(states[offset]);
+            card.setAttribute('data-color', card.getAttribute('data-color'));
+          } else {
+            card.classList.add('state-hidden');
+          }
+        });
+        dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+        current = activeIdx;
+      }
+
+      function advance() {
+        setStates((current + 1) % cards.length);
+      }
+
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(advance, 3800);
+      }
+
+      // Click card to advance
+      cards.forEach((card) => {
+        card.addEventListener('click', () => {
+          const idx = cards.indexOf(card);
+          if (idx !== current) {
+            setStates(idx);
+            startTimer();
+          }
+        });
+      });
+
+      // Dot nav
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          setStates(parseInt(dot.dataset.idx));
+          startTimer();
+        });
+      });
+
+      setStates(0);
+      startTimer();
+    })();
+  </script>
 </body>
 </html>
+
+      
