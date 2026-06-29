@@ -23,8 +23,6 @@
   <meta name="format-detection" content="telephone=no">
   <link rel="canonical" href="https://gradrtech.co.uk/">
   <link rel="alternate" hreflang="en-GB" href="https://gradrtech.co.uk/">
-
-  <!-- OPEN GRAPH (WhatsApp, Facebook, LinkedIn previews) -->
   <meta property="og:title" content="Gradr Tech | Software Development, Web Apps & Mobile Apps UK">
   <meta property="og:description" content="We design and build custom web, mobile and cloud products that help ambitious businesses grow faster.">
   <meta property="og:url" content="https://gradrtech.co.uk/">
@@ -45,8 +43,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- STRUCTURED DATA (Google rich results) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -62,6 +58,348 @@
   }
   </script>
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    :root{
+      --cyan:#00D4FF;--cyan-dim:rgba(0,212,255,0.12);--cyan-glow:rgba(0,212,255,0.35);
+      --bg:#0A1628;--bg2:#0D1E35;--card:#111F38;--border:rgba(0,212,255,0.12);
+      --muted:rgba(255,255,255,0.48);--text:#E8EDF5;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+    /* NAVBAR */
+    #navbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(10,22,40,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+    .logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;text-decoration:none;color:#fff;letter-spacing:.06em;}
+    .logo .cyan{color:var(--cyan);}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;letter-spacing:.04em;transition:color .2s;}
+    .nav-links a:hover,.nav-links a.active{color:#fff;}
+    .btn-nav{background:var(--cyan);color:#0A1628;font-weight:700;font-size:.82rem;letter-spacing:.05em;padding:.6rem 1.4rem;border-radius:3px;text-decoration:none;transition:opacity .2s;}
+    .btn-nav:hover{opacity:.85;}
+    .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:0;}
+    .hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;}
+    @media(max-width:900px){.nav-links,.btn-nav{display:none;}.hamburger{display:flex;}}
+
+    /* HERO */
+    .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:110px 0 60px;background:radial-gradient(ellipse 70% 60% at 65% 50%,rgba(0,212,255,.06) 0%,transparent 70%),var(--bg);overflow:hidden;}
+    .hero .container{max-width:1280px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;z-index:2;}
+    .hero-left .micro-label{display:inline-block;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border);padding:.3rem .8rem;border-radius:2px;margin-bottom:1.4rem;background:var(--cyan-dim);}
+    .hero-left h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,5.5vw,5rem);font-weight:700;line-height:1.0;color:#fff;margin-bottom:1rem;}
+    .hero-left h1 .cyan{color:var(--cyan);}
+    .hero-divider{width:3rem;height:2px;background:var(--cyan);margin:1rem 0;}
+    .hero-subtitle{font-size:.85rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:.8rem;}
+    .hero-body{font-size:1.02rem;color:rgba(255,255,255,.68);line-height:1.78;max-width:480px;margin-bottom:2rem;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .btn-primary{display:inline-block;background:var(--cyan);color:#0A1628;font-weight:700;font-size:.88rem;letter-spacing:.05em;padding:.85rem 2rem;border-radius:3px;text-decoration:none;transition:opacity .2s;}
+    .btn-primary:hover{opacity:.85;}
+    .btn-ghost{display:inline-block;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.88rem;letter-spacing:.05em;padding:.85rem 2rem;border-radius:3px;text-decoration:none;transition:border-color .2s,color .2s;}
+    .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+    /* GLOBE */
+    .hero-right{position:relative;display:flex;justify-content:center;align-items:center;}
+    .globe-wrap{position:relative;width:500px;height:500px;max-width:100%;}
+    #globeCanvas{width:100%;height:100%;display:block;}
+
+    /* GradrTech logo centred on globe */
+    .globe-logo-overlay{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:38%;
+      max-width:170px;
+      min-width:120px;
+      padding:.85rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:rgba(10,22,40,.14);
+      backdrop-filter:blur(12px);
+      box-shadow:0 0 28px rgba(0,212,255,.16);
+      pointer-events:none;
+      z-index:5;
+    }
+    .globe-logo-img{
+      width:100%;
+      height:auto;
+      aspect-ratio:1/1;
+      max-width:160px;
+      border-radius:50%;
+      object-fit:contain;
+      filter:drop-shadow(0 0 16px rgba(0,212,255,.8)) drop-shadow(0 0 4px rgba(0,212,255,1));
+      opacity:.95;
+    }
+    .globe-logo-text{
+      font-family:'Space Grotesk',sans-serif;
+      font-size:.65rem;
+      font-weight:700;
+      letter-spacing:.18em;
+      color:var(--cyan);
+      text-transform:uppercase;
+      margin-top:.35rem;
+      text-align:center;
+      text-shadow:0 0 10px rgba(0,212,255,.9);
+    }
+
+    /* Float cards */
+    .float-card{position:absolute;background:rgba(5,12,24,0.88);border:1px solid rgba(0,212,255,0.16);backdrop-filter:blur(12px);border-radius:12px;padding:.65rem .95rem;z-index:6;min-width:150px;max-width:180px;}
+    .float-top{top:10%;right:-4%;left:auto;width:165px;}
+    .float-bottom{bottom:12%;left:-4%;right:auto;width:165px;}
+    .float-number{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:700;color:var(--cyan);}
+    .float-label{font-size:.64rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-top:.15rem;}
+    .float-tag{font-size:.62rem;letter-spacing:.12em;color:var(--cyan);text-transform:uppercase;}
+    .float-title{font-size:.85rem;font-weight:700;color:#fff;margin-top:.1rem;}
+    .float-dot{display:inline-block;width:7px;height:7px;background:#00e676;border-radius:50%;margin-right:.4rem;animation:pulse 2s ease-in-out infinite;vertical-align:middle;}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+    .scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:var(--muted);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;z-index:3;}
+    .scroll-hint svg{width:18px;height:18px;animation:scrollB 1.8s ease-in-out infinite;}
+    @keyframes scrollB{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+    /* STATS */
+    .stats-bar{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.8rem 0;}
+    .stats-inner{max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;gap:2rem;justify-content:space-between;flex-wrap:wrap;}
+    .stat{text-align:center;flex:1;min-width:90px;}
+    .stat-num{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:var(--cyan);}
+    .stat-lbl{font-size:.65rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:.2rem;}
+
+    /* SHARED */
+    .container{max-width:1280px;margin:0 auto;padding:0 2rem;}
+    .micro-label{display:inline-block;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);border:1px solid var(--border);padding:.3rem .8rem;border-radius:2px;margin-bottom:1rem;background:var(--cyan-dim);}
+    .sec-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;}
+    .sec-header h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:#fff;}
+    .sec-header h2 .cyan{color:var(--cyan);}
+    .sec-header-center{text-align:center;margin-bottom:2.5rem;}
+    .sec-header-center h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:#fff;}
+    .sec-header-center h2 .cyan{color:var(--cyan);}
+    .sec-link{color:var(--cyan);font-size:.88rem;text-decoration:none;}
+    .sec-link:hover{text-decoration:underline;}
+    .section-reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+    .section-reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* PARTNERS */
+    .partners{padding:4rem 0;background:var(--bg);}
+    .partners-marquee{overflow:hidden;position:relative;}
+    .partners-marquee::before,.partners-marquee::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;}
+    .partners-marquee::before{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
+    .partners-marquee::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent);}
+    .partners-track{display:flex;align-items:center;gap:1.25rem;animation:marquee 32s linear infinite;width:max-content;padding:0.5rem 0;}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .partner-card{display:flex;align-items:center;justify-content:center;text-decoration:none;padding:1rem 1.25rem;background:rgba(13,30,53,0.95);border:1px solid rgba(0,212,255,0.18);border-radius:14px;min-width:220px;height:110px;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;}
+    .partner-card img{display:block;height:auto;max-height:56px;max-width:160px;width:auto;object-fit:contain;filter:none;opacity:1;}
+    .partner-card:hover{transform:translateY(-4px);border-color:var(--cyan);box-shadow:0 12px 30px rgba(0,0,0,0.25);}
+
+    /* CONNECTIVITY */
+    .connectivity{padding:6rem 0;background:var(--bg2);position:relative;overflow:hidden;}
+    .connectivity::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);}
+    .conn-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .conn-text h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:1.4rem;}
+    .conn-text h2 .cyan{color:var(--cyan);}
+    .conn-text p{color:rgba(255,255,255,.68);font-size:1rem;line-height:1.8;margin-bottom:2rem;}
+    .telecom-partners{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:2rem;}
+    .tp-pill{border:1px solid var(--border);background:var(--card);border-radius:4px;padding:.4rem 1rem;font-size:.8rem;font-weight:700;color:var(--cyan);letter-spacing:.04em;}
+    .conn-features{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
+    .cf-item{display:flex;align-items:center;gap:.55rem;font-size:.86rem;color:rgba(255,255,255,.72);}
+    .cf-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0;}
+    .conn-visual{position:relative;}
+    .conn-badge{position:absolute;top:-1rem;right:-1rem;background:var(--cyan);color:#0A1628;font-size:.68rem;font-weight:800;letter-spacing:.08em;padding:.55rem .9rem;border-radius:4px;text-transform:uppercase;box-shadow:0 4px 24px var(--cyan-glow);z-index:2;}
+    .conn-img-main{border-radius:8px;overflow:hidden;border:1px solid var(--border);aspect-ratio:16/9;margin-bottom:1rem;}
+    .conn-img-main img{width:100%;height:100%;object-fit:cover;display:block;}
+    .conn-img-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .conn-img-small{border-radius:8px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;}
+    .conn-img-small img{width:100%;height:100%;object-fit:cover;display:block;}
+
+    /* DIGITAL VOICE HERO */
+    .voip-hero{padding:7rem 0 4rem;background:var(--bg);position:relative;overflow:hidden;}
+    .voip-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);}
+    .voip-hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .voip-hero-text h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1.2rem;}
+    .voip-hero-text h2 .cyan{color:var(--cyan);}
+    .voip-hero-text p{color:rgba(255,255,255,.68);font-size:1rem;line-height:1.8;margin-bottom:2rem;}
+    .voip-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
+    .voip-stats-row{display:flex;gap:2.5rem;border-top:1px solid var(--border);padding-top:1.5rem;}
+    .vs-item .vs-num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--cyan);}
+    .vs-item .vs-lbl{font-size:.7rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+
+    /* LAPTOP visual instead of phone */
+    .voip-visual{position:relative;display:flex;justify-content:center;align-items:center;}
+    .laptop-wrap{position:relative;width:100%;max-width:480px;}
+    .laptop-img{width:100%;border-radius:12px;border:1px solid var(--border);box-shadow:0 0 60px rgba(0,212,255,.15),0 20px 60px rgba(0,0,0,.5);display:block;}
+    .laptop-glow{position:absolute;inset:-20px;background:radial-gradient(ellipse at 50% 50%,rgba(0,212,255,.1) 0%,transparent 70%);border-radius:20px;z-index:-1;}
+    .voip-badge{position:absolute;top:-1rem;right:2rem;background:var(--cyan);color:#0A1628;font-size:.68rem;font-weight:800;letter-spacing:.08em;padding:.55rem .9rem;border-radius:4px;text-transform:uppercase;box-shadow:0 4px 20px var(--cyan-glow);}
+    .voip-badge-2{position:absolute;bottom:-1rem;left:2rem;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.6rem 1rem;}
+    .voip-badge-2 .vb2-label{font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+    .voip-badge-2 .vb2-val{font-size:.95rem;font-weight:700;color:#fff;}
+    .vb2-dot{display:inline-block;width:8px;height:8px;background:#00e676;border-radius:50%;margin-right:.4rem;animation:pulse 2s ease-in-out infinite;vertical-align:middle;}
+
+    /* BENEFITS */
+    .voip-benefits{padding:5rem 0;background:var(--bg2);}
+    .voip-benefits::before{content:'';display:block;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin-bottom:5rem;}
+    .section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:700;color:#fff;margin-bottom:.5rem;}
+    .section-title .cyan{color:var(--cyan);}
+    .section-sub{color:var(--muted);font-size:.95rem;margin-bottom:3rem;}
+    .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:4rem;}
+    .ben-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem 1.8rem;transition:border-color .25s,transform .25s;}
+    .ben-card:hover{border-color:var(--cyan);transform:translateY(-4px);}
+    .ben-icon{width:42px;height:42px;background:var(--cyan-dim);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;color:var(--cyan);}
+    .ben-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;}
+    .ben-card h4{font-family:'Space Grotesk',sans-serif;font-size:1.02rem;font-weight:600;color:#fff;margin-bottom:.55rem;}
+    .ben-card p{font-size:.86rem;color:rgba(255,255,255,.6);line-height:1.7;}
+    .adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .adv-img-wrap{border-radius:10px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;position:relative;}
+    .adv-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+    .adv-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,255,.06) 0%,transparent 60%);}
+    .adv-features-list{display:flex;flex-direction:column;gap:1.6rem;}
+    .adf-item{display:flex;gap:1rem;align-items:flex-start;}
+    .adf-icon{width:38px;height:38px;background:var(--cyan-dim);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--cyan);flex-shrink:0;}
+    .adf-icon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;}
+    .adf-text h4{font-size:1rem;font-weight:600;color:#fff;margin-bottom:.3rem;}
+    .adf-text p{font-size:.86rem;color:rgba(255,255,255,.6);line-height:1.65;}
+
+    /* HARDWARE */
+    .voip-hardware{padding:5rem 0;background:var(--bg);position:relative;}
+    .voip-hardware::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);}
+    .hw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .hw-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem 1.8rem;transition:border-color .25s;}
+    .hw-card:hover{border-color:var(--cyan);}
+    .hw-num{font-family:'Space Grotesk',sans-serif;color:var(--cyan);border:1px solid var(--border);background:var(--cyan-dim);display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:6px;font-size:.9rem;font-weight:700;margin-bottom:1.2rem;}
+    .hw-card h4{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;color:#fff;margin-bottom:.6rem;}
+    .hw-card p{font-size:.86rem;color:rgba(255,255,255,.6);line-height:1.65;}
+
+    /* VOIP CTA */
+    .voip-cta{padding:6rem 0;background:var(--bg2);position:relative;overflow:hidden;text-align:center;}
+    .voip-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.06) 0%,transparent 70%);}
+    .voip-cta h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:700;color:#fff;margin-bottom:1rem;}
+    .voip-cta h2 .cyan{color:var(--cyan);}
+    .voip-cta p{color:rgba(255,255,255,.6);font-size:1rem;max-width:540px;margin:0 auto 2.5rem;line-height:1.75;}
+    .voip-cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;}
+    .cta-contact{color:var(--muted);font-size:.88rem;}
+    .cta-contact a{color:var(--cyan);text-decoration:none;}
+    .cta-contact a:hover{text-decoration:underline;}
+
+    /* SERVICES */
+    .services{padding:6rem 0;background:var(--bg2);}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .svc-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem 1.8rem;transition:border-color .25s,transform .25s;}
+    .svc-card:hover{border-color:var(--cyan);transform:translateY(-3px);}
+    .svc-icon{width:42px;height:42px;background:var(--cyan-dim);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;color:var(--cyan);}
+    .svc-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;}
+    .svc-sub{font-size:.65rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:.5rem;}
+    .svc-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:.6rem;}
+    .svc-divider{width:2rem;height:2px;background:var(--cyan);margin:.75rem 0;}
+    .svc-card p{font-size:.86rem;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:1.2rem;}
+    .svc-link{color:var(--cyan);font-size:.82rem;text-decoration:none;}
+    .svc-link:hover{text-decoration:underline;}
+
+    /* PROCESS */
+    .process{padding:6rem 0;background:var(--bg);}
+    .process h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:#fff;margin-bottom:3rem;}
+    .process h2 .cyan{color:var(--cyan);}
+    .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+    .proc-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem 1.6rem;transition:border-color .25s;}
+    .proc-card:hover{border-color:var(--cyan);}
+    .proc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+    .proc-icon{color:var(--cyan);}
+    .proc-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;}
+    .proc-num{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:rgba(0,212,255,.12);}
+    .proc-card h3{font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:.5rem;}
+    .proc-card p{font-size:.84rem;color:rgba(255,255,255,.55);line-height:1.65;}
+
+    /* PROJECTS */
+    .projects{padding:6rem 0;background:var(--bg2);}
+    .projects h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:#fff;}
+    .projects h2 .cyan{color:var(--cyan);}
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .proj-card{border-radius:8px;overflow:hidden;position:relative;aspect-ratio:4/3;border:1px solid var(--border);}
+    .proj-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+    .proj-card:hover img{transform:scale(1.05);}
+    .proj-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(10,22,40,.95) 0%,transparent 100%);padding:2rem 1.5rem 1.5rem;}
+    .proj-cat{font-size:.65rem;letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;}
+    .proj-overlay h3{font-size:1.1rem;font-weight:600;color:#fff;margin-top:.3rem;}
+
+    /* ABOUT */
+    .about-strip{padding:6rem 0;background:var(--bg);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .about-left h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:1.2rem;}
+    .about-left h2 .cyan{color:var(--cyan);}
+    .about-left p{color:rgba(255,255,255,.65);font-size:.98rem;line-height:1.8;margin-bottom:2rem;}
+    .about-stats{display:flex;gap:2rem;margin-bottom:2rem;}
+    .astat-num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--cyan);}
+    .astat-lbl{font-size:.72rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+    .about-link{color:var(--cyan);font-size:.88rem;text-decoration:none;}
+    .about-link:hover{text-decoration:underline;}
+    .about-right img{width:100%;border-radius:8px;border:1px solid var(--border);object-fit:cover;aspect-ratio:4/3;display:block;}
+
+    /* TESTIMONIALS */
+    .testimonials{padding:6rem 0;background:var(--bg2);}
+    .testimonials h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:#fff;margin-bottom:3rem;}
+    .testimonials h2 .cyan{color:var(--cyan);}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .testi-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem;}
+    .testi-quote{font-size:3rem;color:var(--cyan);line-height:1;margin-bottom:1rem;font-family:Georgia,serif;}
+    .testi-card p{font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:1.5rem;}
+    .testi-author{display:flex;align-items:center;gap:.75rem;}
+    .testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--cyan-dim);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--cyan);font-size:.9rem;}
+    .testi-name{font-weight:600;color:#fff;font-size:.88rem;}
+    .testi-role{font-size:.75rem;color:var(--muted);}
+
+    /* FINAL CTA */
+    .cta{padding:7rem 0;background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 100%);text-align:center;position:relative;overflow:hidden;}
+    .cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.05) 0%,transparent 70%);}
+    .cta-inner{position:relative;z-index:1;}
+    .cta h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:#fff;margin-bottom:1rem;}
+    .cta h2 .cyan{color:var(--cyan);}
+    .cta p{color:rgba(255,255,255,.6);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;line-height:1.75;}
+
+    /* FOOTER */
+    footer{background:#060E1A;border-top:1px solid var(--border);padding:4rem 0 0;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;padding-bottom:3rem;}
+    .footer-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;color:#fff;letter-spacing:.06em;margin-bottom:.75rem;}
+    .footer-logo .cyan{color:var(--cyan);}
+    .footer-brand p{color:var(--muted);font-size:.88rem;line-height:1.65;margin-bottom:1.5rem;}
+    .footer-socials{display:flex;gap:.75rem;}
+    .fsoc{width:36px;height:36px;background:var(--card);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:color .2s,border-color .2s;text-decoration:none;}
+    .fsoc svg{width:16px;height:16px;}
+    .fsoc:hover{color:var(--cyan);border-color:var(--cyan);}
+    .footer-nav-label{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
+    .footer-nav ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+    .footer-nav ul a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.88rem;transition:color .2s;}
+    .footer-nav ul a:hover{color:var(--cyan);}
+    .footer-bottom{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;}
+    .footer-bottom p{font-size:.78rem;color:var(--muted);letter-spacing:.05em;}
+    .privacy-policy{padding:0 2rem 1rem;}
+    .privacy-policy a{color:var(--muted);font-size:.8rem;text-decoration:none;}
+    .privacy-policy a:hover{color:var(--cyan);}
+
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .hero .container,.conn-grid,.voip-hero-inner,.adv-grid,.about-grid{grid-template-columns:1fr;gap:2.5rem;}
+      .globe-wrap{width:380px;height:380px;margin:0 auto;}
+      .globe-logo-overlay{width:150px;max-width:150px;min-width:125px;}
+      .float-top{top:8%;right:-4%;left:auto;}
+      .float-bottom{bottom:10%;left:-4%;right:auto;}
+      .benefits-grid,.hw-grid{grid-template-columns:1fr 1fr;}
+      .services-grid,.testi-grid,.projects-grid{grid-template-columns:1fr 1fr;}
+      .process-grid{grid-template-columns:1fr 1fr;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:600px){
+      .benefits-grid,.hw-grid,.services-grid,.testi-grid,.projects-grid,.process-grid{grid-template-columns:1fr;}
+      .conn-features{grid-template-columns:1fr;}
+      .voip-btns,.voip-cta-btns,.hero-btns{flex-direction:column;}
+      .stats-inner{justify-content:center;}
+      .voip-badge,.voip-badge-2{display:none;}
+      .conn-img-row{grid-template-columns:1fr;}
+      .about-stats{flex-wrap:wrap;gap:1rem;}
+      .globe-logo-overlay{width:44%;max-width:140px;min-width:120px;padding:.75rem;}
+      .globe-logo-img{max-width:96px;}
+      .float-card{min-width:130px;width:140px;padding:.55rem .85rem;}
+      .float-top{top:6%;right:-6%;}
+      .float-bottom{bottom:8%;left:-6%;}
+    }
+  </style>
 </head>
 <body>
 
@@ -133,86 +471,249 @@
   </div>
 </section>
 
-  <!-- STATS BAR -->
-  <div class="stats-bar">
-    <div class="stats-inner">
-      <div class="stat"><div class="stat-num">50+</div><div class="stat-lbl">PROJECTS DELIVERED</div></div>
-      <div class="stat"><div class="stat-num">5+</div><div class="stat-lbl">YEARS EXPERIENCE</div></div>
-      <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">CLIENT SATISFACTION</div></div>
-      <div class="stat"><div class="stat-num">12</div><div class="stat-lbl">TEAM MEMBERS</div></div>
-      <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">CONTINENTS SERVED</div></div>
-      <div class="stat"><div class="stat-num">24h</div><div class="stat-lbl">RESPONSE TIME</div></div>
+<!-- ══════════════ STATS BAR ══════════════ -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">50+</div><div class="stat-lbl">Projects Delivered</div></div>
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-lbl">Years Experience</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Client Satisfaction</div></div>
+    <div class="stat"><div class="stat-num">12</div><div class="stat-lbl">Team Members</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Continents Served</div></div>
+    <div class="stat"><div class="stat-num">24h</div><div class="stat-lbl">Response Time</div></div>
+  </div>
+</div>
+
+<!-- ══════════════ PARTNERS — before connectivity ══════════════ -->
+<section class="partners section-reveal">
+  <div class="container">
+    <div class="sec-header-center">
+      <span class="micro-label">Trusted Collaborations</span>
+      <h2>Our <span class="cyan">Partners</span></h2>
     </div>
   </div>
-  <!-- PARTNERS -->
-  <section class="partners section-reveal">
-    <div class="container">
-      <div class="sec-header-center">
-        <span class="micro-label">Trusted Collaborations</span>
-        <h2>Our <span class="cyan">Partners</span></h2>
+  <div class="partners-marquee">
+    <div class="partners-track">
+      <!-- original partners -->
+      <a href="https://web.webex.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Webex"><img src="assets/images/partners/webex.png" alt="Webex"></a>
+      <a href="https://savannahsystems.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Savannah Systems"><img src="assets/images/partners/savannah.png" alt="Savannah Systems"></a>
+      <a href="https://gammagroup.co" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Gamma"><img src="assets/images/partners/gamma.png" alt="Gamma"></a>
+      <a href="https://www.cityfibre.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="CityFibre"><img src="assets/images/partners/cityfibre.png" alt="CityFibre"></a>
+      <a href="https://ee.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="EE"><img src="assets/images/partners/ee.png" alt="EE"></a>
+      <a href="https://www.vodafone.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Vodafone"><img src="assets/images/partners/vodafone.png" alt="Vodafone"></a>
+      <a href="https://fidelity-group.co.uk/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Fidelity Group"><img src="assets/images/partners/fidelity.png" alt="Fidelity Group"></a>
+      <a href="https://www.virginmedia.com/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Virgin Media"><img src="assets/images/partners/virginmedia.png" alt="Virgin Media"></a>
+      <!-- NEW: Sky + BT Wholesale — client requested -->
+      <a href="https://www.sky.com/shop/business" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Sky Business"><img src="assets/images/partners/sky.png" alt="Sky Business"></a>
+      <a href="https://www.btwholesale.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="BT Wholesale"><img src="assets/images/partners/btwholesale.png" alt="BT Wholesale"></a>
+      <!-- duplicates for seamless loop -->
+      <a href="https://web.webex.com" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/webex.png" alt="" aria-hidden="true"></a>
+      <a href="https://savannahsystems.uk" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/savannah.png" alt="" aria-hidden="true"></a>
+      <a href="https://gammagroup.co" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/gamma.png" alt="" aria-hidden="true"></a>
+      <a href="https://www.cityfibre.com" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/cityfibre.png" alt="" aria-hidden="true"></a>
+      <a href="https://ee.co.uk" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/ee.png" alt="" aria-hidden="true"></a>
+      <a href="https://www.vodafone.co.uk" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/vodafone.png" alt="" aria-hidden="true"></a>
+      <a href="https://fidelity-group.co.uk/" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/fidelity.png" alt="" aria-hidden="true"></a>
+      <a href="https://www.virginmedia.com/" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/virginmedia.png" alt="" aria-hidden="true"></a>
+      <a href="https://www.sky.com/shop/business" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/sky.png" alt="" aria-hidden="true"></a>
+      <a href="https://www.btwholesale.com" target="_blank" rel="noopener" class="partner-card" aria-hidden="true" tabindex="-1"><img src="assets/images/partners/btwholesale.png" alt="" aria-hidden="true"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONNECTIVITY SOLUTIONS ══════════════ -->
+<section class="connectivity section-reveal">
+  <div class="container">
+    <div class="conn-grid">
+      <div class="conn-text">
+        <span class="micro-label">Connectivity Solutions</span>
+        <h2>Reliable Business <span class="cyan">Broadband &<br>Leased Lines</span></h2>
+        <p>Whether you require high-speed Fibre Broadband or a highly resilient Dedicated Leased Line, we deliver solutions tailored to your business needs. By partnering with the UK's leading telecommunications providers, we ensure you receive the most reliable, cost-effective, and high-performance connectivity available. Whether working from the office, at home, or on the move, we keep your business seamlessly connected.</p>
+        <div class="telecom-partners">
+          <span class="tp-pill">BT</span>
+          <span class="tp-pill">CityFibre</span>
+          <span class="tp-pill">Gamma</span>
+          <span class="tp-pill">TalkTalk</span>
+          <span class="tp-pill">Virgin Media</span>
+          <span class="tp-pill">Sky</span>
+          <span class="tp-pill">BT Wholesale</span>
+        </div>
+        <div class="conn-features">
+          <div class="cf-item"><div class="cf-dot"></div>High-Speed Fibre Broadband</div>
+          <div class="cf-item"><div class="cf-dot"></div>Dedicated Leased Lines</div>
+          <div class="cf-item"><div class="cf-dot"></div>Symmetrical Upload &amp; Download</div>
+          <div class="cf-item"><div class="cf-dot"></div>99.999% SLA Uptime</div>
+          <div class="cf-item"><div class="cf-dot"></div>Uncontended Private Connection</div>
+          <div class="cf-item"><div class="cf-dot"></div>Scalable Bandwidth on Demand</div>
+          <div class="cf-item"><div class="cf-dot"></div>VoIP &amp; Cloud Ready</div>
+          <div class="cf-item"><div class="cf-dot"></div>24/7 UK-Based Support</div>
+        </div>
+      </div>
+      <div class="conn-visual">
+        <div class="conn-badge">UK's Leading Networks</div>
+        <div class="conn-img-main">
+          <!-- Real: fibre optic cables / server room -->
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=85&auto=format&fit=crop"
+               alt="High-speed fibre optic network infrastructure">
+        </div>
+        <div class="conn-img-row">
+          <div class="conn-img-small">
+            <!-- Real: person working from home on laptop -->
+            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&q=85&auto=format&fit=crop"
+                 alt="Professional working remotely from home with reliable broadband">
+          </div>
+          <div class="conn-img-small">
+            <!-- Real: office team at conference table -->
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=85&auto=format&fit=crop"
+                 alt="Business team collaborating around a conference table">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DIGITAL VOICE / WEBEX HERO ══════════════ -->
+<section class="voip-hero section-reveal">
+  <div class="container">
+    <div class="voip-hero-inner">
+      <div class="voip-hero-text">
+        <span class="micro-label">Cloud Communication — Powered by Webex</span>
+        <h2>Future-Proof Business Communications.<br><span class="cyan">Built for the Modern Workplace.</span></h2>
+        <p>As hybrid work becomes the gold standard, legacy phone systems simply cannot keep up. Digital Voice for Webex is an all-in-one unified communications platform designed to enhance operational efficiency, maximise productivity, and streamline collaboration. Whether your team is in the office, at home, or on the move, we deliver enterprise-grade voice quality and seamless connectivity.</p>
+        <div class="voip-btns">
+          <a href="contact.html" class="btn btn-primary">Get a Digital Voice Quote</a>
+          <a href="contact.html" class="btn btn-ghost">Schedule a Live Webex Demo</a>
+        </div>
+        <div class="voip-stats-row">
+          <div class="vs-item"><div class="vs-num">99.999%</div><div class="vs-lbl">Uptime SLA</div></div>
+          <div class="vs-item"><div class="vs-num">0</div><div class="vs-lbl">Downtime Migration</div></div>
+          <div class="vs-item"><div class="vs-num">1000s</div><div class="vs-lbl">UK Businesses</div></div>
+        </div>
+      </div>
+
+      <!-- LAPTOP image (client requested change from phone) -->
+      <div class="voip-visual">
+        <div class="laptop-wrap">
+          <div class="laptop-glow"></div>
+          <!-- Real: laptop with video call / webex collaboration -->
+          <img src="assets/images/partners/web.png"
+               alt="Business professional on a Webex video call on laptop"
+               class="laptop-img">
+        </div>
+        <div class="voip-badge">Go Live in Minutes</div>
+        <div class="voip-badge-2">
+          <div class="vb2-label">System Status</div>
+          <div class="vb2-val"><span class="vb2-dot"></span>Fully Operational</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CORE BENEFITS ══════════════ -->
+<section class="voip-benefits section-reveal">
+  <div class="container">
+    <span class="micro-label">Core Benefits</span>
+    <h3 class="section-title">Why Businesses Choose <span class="cyan">Digital Voice</span></h3>
+    <p class="section-sub">Three compelling reasons thousands of UK businesses are making the switch.</p>
+    <div class="benefits-grid">
+      <div class="ben-card">
+        <div class="ben-icon"><svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h4>Go Live in Minutes, Not Days</h4>
+        <p>Deploy your new phone system instantly without the need for complex on-site engineer visits. Following a simple setup, your business can be fully operational immediately, with the flexibility to schedule your activation date around your business timeline.</p>
+      </div>
+      <div class="ben-card">
+        <div class="ben-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <h4>Scalability Tailored to Your Growth</h4>
+        <p>Whether onboarding new talent or expanding into new markets, add user licences or upgrade features instantly via your intuitive online portal. Manage real-time changes exactly when your business demands them.</p>
+      </div>
+      <div class="ben-card">
+        <div class="ben-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Uncompromising Reliability &amp; 99.999% Uptime</h4>
+        <p>Keep your business running seamlessly. Our Webex-powered solution is hosted on a geographically redundant, cloud-based platform, guaranteeing 99.999% uptime and continuous availability for mission-critical operations.</p>
       </div>
     </div>
 
-    <div class="partners-marquee">
-      <div class="partners-track">
-
-        <a href="https://web.webex.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Webex">
-          <img src="assets/images/partners/webex.png" alt="Webex logo">
-        </a>
-        <a href="https://savannahsystems.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Savannah Systems">
-          <img src="assets/images/partners/savannah.png" alt="Savannah Systems logo">
-        </a>
-        <a href="https://gammagroup.co" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Gamma">
-          <img src="assets/images/partners/gamma.png" alt="Gamma logo">
-        </a>
-        <a href="https://www.cityfibre.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="CityFibre">
-          <img src="assets/images/partners/cityfibre.png" alt="CityFibre logo">
-        </a>
-        <a href="https://ee.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="EE">
-          <img src="assets/images/partners/ee.png" alt="EE logo">
-        </a>
-        <a href="https://www.vodafone.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Vodafone">
-          <img src="assets/images/partners/vodafone.png" alt="Vodafone logo">
-        </a>
-        <a href="https://fidelity-group.co.uk/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Fidelity Group">
-          <img src="assets/images/partners/fidelity.png" alt="Fidelity Group logo">
-        </a>
-
-        <a href="https://www.virginmedia.com/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-label="Virgin Media">
-          <img src="assets/images/partners/virginmedia.png" alt="Virgin Media logo">
-        </a>
-
-        <!-- duplicate set — required for the seamless infinite loop, do not remove -->
-        <a href="https://web.webex.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/webex.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://savannahsystems.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/savannah.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://gammagroup.co" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/gamma.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://www.cityfibre.com" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/cityfibre.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://ee.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/ee.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://www.vodafone.co.uk" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/vodafone.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://fidelity-group.co.uk/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/fidelity.png" alt="" aria-hidden="true">
-        </a>
-        <a href="https://www.virginmedia.com/" target="_blank" rel="noopener noreferrer" class="partner-card" aria-hidden="true" tabindex="-1">
-          <img src="assets/images/partners/virginmedia.png" alt="" aria-hidden="true">
-        </a>
-
+    <!-- Team image + AI features -->
+    <div class="adv-grid">
+      <div class="adv-img-wrap">
+        <!-- Real: team sitting around table in meeting -->
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=85&auto=format&fit=crop"
+             alt="Business team sitting around a conference table using Webex collaboration tools">
+        <div class="adv-img-overlay"></div>
+      </div>
+      <div>
+        <span class="micro-label">AI &amp; Collaboration Edge</span>
+        <h3 class="section-title" style="margin-bottom:1.5rem;">Advanced <span class="cyan">Features</span></h3>
+        <div class="adv-features-list">
+          <div class="adf-item">
+            <div class="adf-icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+            <div class="adf-text">
+              <h4>Superior Audio with AI Noise Cancellation</h4>
+              <p>Eliminate distracting background noise—from keyboard typing to traffic—with advanced AI-powered audio enhancement. Experience crystal-clear, studio-quality HD voice that reduces listener fatigue and makes remote conversations feel natural.</p>
+            </div>
+          </div>
+          <div class="adf-item">
+            <div class="adf-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <div class="adf-text">
+              <h4>Unified Collaboration Suite</h4>
+              <p>Go beyond standard calling. Give your team access to a fully integrated suite that brings calling, messaging, video meetings, webinars, interactive whiteboarding, and polling into a single, cohesive application.</p>
+            </div>
+          </div>
+          <div class="adf-item">
+            <div class="adf-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+            <div class="adf-text">
+              <h4>Comprehensive Voice Analytics &amp; Security</h4>
+              <p>Protect your data with enterprise-grade end-to-end encryption and proactive fraud detection. Gain valuable operational insights with in-depth analytics reporting on user experience and call performance.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
- <!-- SERVICES -->
+<!-- ══════════════ HARDWARE & INTEGRATION ══════════════ -->
+<section class="voip-hardware section-reveal">
+  <div class="container">
+    <span class="micro-label">Hardware &amp; Integration Ecosystem</span>
+    <h3 class="section-title" style="margin-bottom:.5rem;">Everything Your Business <span class="cyan">Needs</span></h3>
+    <p class="section-sub" style="margin-bottom:2.5rem;">A complete ecosystem built around your workflow and hardware.</p>
+    <div class="hw-grid">
+      <div class="hw-card">
+        <div class="hw-num">01</div>
+        <h4>Seamless Application Integration</h4>
+        <p>Connect your voice infrastructure directly to your existing CRM, helpdesk software, and core business applications to optimise workflows and boost team efficiency.</p>
+      </div>
+      <div class="hw-card">
+        <div class="hw-num">02</div>
+        <h4>Webex Hardware Optimisation</h4>
+        <p>Unlock the full potential of your system across all hardware. From plug-and-play desktop IP phones and advanced business headsets to full boardroom video solutions, we support your unique hardware needs.</p>
+      </div>
+      <div class="hw-card">
+        <div class="hw-num">03</div>
+        <h4>Hassle-Free Number Porting</h4>
+        <p>Retain your existing business identity without disruption. Our dedicated support team manages the entire number transfer process for you, ensuring zero downtime during migration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DIGITAL VOICE CTA ══════════════ -->
+<section class="voip-cta section-reveal">
+  <div class="container" style="position:relative;z-index:1;">
+    <span class="micro-label">Transform Your Communications</span>
+    <h2>Transform Your Business<br>Communications <span class="cyan">Today</span></h2>
+    <p>Join thousands of forward-thinking UK businesses upgrading from legacy networks to digital clarity.</p>
+    <div class="voip-cta-btns">
+      <a href="contact.html" class="btn btn-primary">Get a Digital Voice Quote</a>
+      <a href="contact.html" class="btn btn-ghost">Schedule a Live Webex Demo</a>
+    </div>
+    <p class="cta-contact">For immediate assistance, speak with our UK-based specialists — <a href="tel:+447943517102">+44 7943 517102</a></p>
+  </div>
+</section>
+
+<!-- ══════════════ SERVICES ══════════════ -->
 <section class="services section-reveal">
   <div class="container">
     <div class="sec-header">
@@ -223,215 +724,128 @@
       <a href="services.html" class="sec-link">See All Services →</a>
     </div>
     <div class="services-grid">
-
       <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <p class="svc-sub">FULL-STACK ENGINEERING</p>
-        <h3>Web Development</h3>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <p class="svc-sub">FULL-STACK ENGINEERING</p><h3>Web Development</h3>
         <div class="svc-divider"></div>
         <p>We build fast, scalable web applications using modern frameworks like React, Next.js, and Node.js — from pixel-perfect frontends to robust backend APIs.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
       <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-        </div>
-        <p class="svc-sub">IOS &amp; ANDROID</p>
-        <h3>Mobile Apps</h3>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <p class="svc-sub">IOS &amp; ANDROID</p><h3>Mobile Apps</h3>
         <div class="svc-divider"></div>
         <p>Native and cross-platform mobile applications built with React Native and Flutter — delivering seamless, performant experiences on every device.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
       <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/>
-            <circle cx="12" cy="12" r="10"/>
-          </svg>
-        </div>
-        <p class="svc-sub">CONNECTIVITY SOLUTIONS</p>
-        <h3>Business Broadband</h3>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/><circle cx="12" cy="12" r="10"/></svg></div>
+        <p class="svc-sub">CONNECTIVITY SOLUTIONS</p><h3>Business Broadband</h3>
         <div class="svc-divider"></div>
-        <p>We deliver high-speed, reliable broadband connectivity built for businesses that can't afford downtime — from dedicated leased lines to scalable fibre packages tailored to your bandwidth needs.</p>
+        <p>High-speed, reliable broadband connectivity built for businesses that can't afford downtime — from dedicated leased lines to scalable fibre packages.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
       <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24">
-            <line x1="2" y1="12" x2="22" y2="12"/>
-            <circle cx="6" cy="12" r="2"/>
-            <circle cx="12" cy="12" r="2"/>
-            <circle cx="18" cy="12" r="2"/>
-            <line x1="6" y1="6" x2="6" y2="10"/>
-            <line x1="12" y1="4" x2="12" y2="10"/>
-            <line x1="18" y1="6" x2="18" y2="10"/>
-          </svg>
-        </div>
-        <p class="svc-sub">DEDICATED CONNECTIVITY</p>
-        <h3>Leased Line</h3>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><line x1="2" y1="12" x2="22" y2="12"/><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><line x1="6" y1="6" x2="6" y2="10"/><line x1="12" y1="4" x2="12" y2="10"/><line x1="18" y1="6" x2="18" y2="10"/></svg></div>
+        <p class="svc-sub">DEDICATED CONNECTIVITY</p><h3>Leased Line</h3>
         <div class="svc-divider"></div>
-        <p>We provide dedicated leased line connections that give your business guaranteed, symmetrical speeds and a private, uncontended link — ensuring consistent performance for cloud services, VoIP, and mission-critical operations around the clock.</p>
+        <p>Guaranteed, symmetrical speeds and a private, uncontended link — ensuring consistent performance for cloud services, VoIP, and mission-critical operations.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
       <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-            <path d="M14.5 2.5c2.5.5 4.5 2.5 5 5"/>
-            <path d="M14.5 6.5c1 .5 2 1.5 2.5 2.5"/>
-          </svg>
-        </div>
-        <p class="svc-sub">CLOUD COMMUNICATION</p>
-        <h3>VoIP Solutions</h3>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.5 2.5c2.5.5 4.5 2.5 5 5"/><path d="M14.5 6.5c1 .5 2 1.5 2.5 2.5"/></svg></div>
+        <p class="svc-sub">CLOUD COMMUNICATION</p><h3>VoIP Solutions</h3>
         <div class="svc-divider"></div>
-        <p>We set up and manage fully hosted VoIP systems that replace traditional phone lines with crystal-clear, internet-based calling — cutting costs, enabling remote teams, and giving your business the flexibility to scale communication as you grow.</p>
+        <p>Fully hosted VoIP systems that replace traditional phone lines with crystal-clear, internet-based calling — cutting costs and enabling remote teams to scale.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
       <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-        </div>
-        <p class="svc-sub">INFRASTRUCTURE AT SCALE</p>
-        <h3>Cloud &amp; DevOps</h3>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+        <p class="svc-sub">INFRASTRUCTURE AT SCALE</p><h3>Cloud &amp; DevOps</h3>
         <div class="svc-divider"></div>
         <p>Cloud architecture, containerization, and CI/CD pipelines on AWS, GCP, and Azure. We ensure your system is reliable, scalable, and always on.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
       <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <p class="svc-sub">INTEGRATIONS &amp; MICROSERVICES</p>
-        <h3>API Development</h3>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <p class="svc-sub">INTEGRATIONS &amp; MICROSERVICES</p><h3>API Development</h3>
         <div class="svc-divider"></div>
         <p>RESTful and GraphQL APIs, third-party integrations, and microservices architecture — connecting your systems and powering data-driven products.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
       <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <p class="svc-sub">RELIABILITY ENGINEERING</p>
-        <h3>Security &amp; QA</h3>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <p class="svc-sub">RELIABILITY ENGINEERING</p><h3>Security &amp; QA</h3>
         <div class="svc-divider"></div>
         <p>End-to-end testing, security audits, and performance optimization. Zero-downtime deployments and rock-solid code quality.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
       <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </div>
-        <p class="svc-sub">STRATEGY &amp; EXECUTION</p>
-        <h3>MVP &amp; Consulting</h3>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <p class="svc-sub">STRATEGY &amp; EXECUTION</p><h3>MVP &amp; Consulting</h3>
         <div class="svc-divider"></div>
         <p>From idea to launch in weeks. We partner with founders and enterprises to define scope, prioritize features, and build MVPs that attract users and investors.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-
     </div>
   </div>
 </section>
 
-  <!-- HOW WE WORK -->
-  <section class="process section-reveal">
-    <div class="container">
-      <span class="micro-label">Our Process</span>
-      <h2>How We <span class="cyan">Work</span></h2>
-      <div class="process-grid">
-
-        <div class="proc-card">
-          <div class="proc-top">
-            <div class="proc-icon">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            </div>
-            <span class="proc-num">01</span>
-          </div>
-          <h3>Discover</h3>
-          <p>We deep-dive into your goals, users, and technical landscape to define the right scope and strategy.</p>
-        </div>
-
-        <div class="proc-card">
-          <div class="proc-top">
-            <div class="proc-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-            </div>
-            <span class="proc-num">02</span>
-          </div>
-          <h3>Design</h3>
-          <p>We craft architecture and UX blueprints that balance elegance with engineering practicality.</p>
-        </div>
-
-        <div class="proc-card">
-          <div class="proc-top">
-            <div class="proc-icon">
-              <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            </div>
-            <span class="proc-num">03</span>
-          </div>
-          <h3>Build</h3>
-          <p>Sprint-based development with continuous delivery, code reviews, and transparent progress updates.</p>
-        </div>
-
-        <div class="proc-card">
-          <div class="proc-top">
-            <div class="proc-icon">
-              <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
-            </div>
-            <span class="proc-num">04</span>
-          </div>
-          <h3>Launch</h3>
-          <p>Zero-downtime deployments, monitoring setup, and post-launch support to ensure your product thrives.</p>
-        </div>
-
+<!-- ══════════════ HOW WE WORK ══════════════ -->
+<section class="process section-reveal">
+  <div class="container">
+    <span class="micro-label">Our Process</span>
+    <h2>How We <span class="cyan">Work</span></h2>
+    <div class="process-grid">
+      <div class="proc-card">
+        <div class="proc-top"><div class="proc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div><span class="proc-num">01</span></div>
+        <h3>Discover</h3><p>We deep-dive into your goals, users, and technical landscape to define the right scope and strategy.</p>
+      </div>
+      <div class="proc-card">
+        <div class="proc-top"><div class="proc-icon"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg></div><span class="proc-num">02</span></div>
+        <h3>Design</h3><p>We craft architecture and UX blueprints that balance elegance with engineering practicality.</p>
+      </div>
+      <div class="proc-card">
+        <div class="proc-top"><div class="proc-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><span class="proc-num">03</span></div>
+        <h3>Build</h3><p>Sprint-based development with continuous delivery, code reviews, and transparent progress updates.</p>
+      </div>
+      <div class="proc-card">
+        <div class="proc-top"><div class="proc-icon"><svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg></div><span class="proc-num">04</span></div>
+        <h3>Launch</h3><p>Zero-downtime deployments, monitoring setup, and post-launch support to ensure your product thrives.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- RECENT PROJECTS -->
-  <section class="projects section-reveal">
-    <div class="container">
-      <div class="sec-header">
-        <div>
-          <span class="micro-label">Selected Work</span>
-          <h2>Recent <span class="cyan">Projects</span></h2>
-        </div>
-        <a href="work.html" class="sec-link">View All Work →</a>
+<!-- ══════════════ RECENT PROJECTS ══════════════ -->
+<section class="projects section-reveal">
+  <div class="container">
+    <div class="sec-header">
+      <div>
+        <span class="micro-label">Selected Work</span>
+        <h2>Recent <span class="cyan">Projects</span></h2>
       </div>
-      <div class="projects-grid">
-        <div class="proj-card">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80" alt="FinTech Dashboard">
-          <div class="proj-overlay">
-            <span class="proj-cat">WEB APP</span>
-            <h3>FinTech Dashboard</h3>
-          </div>
-        </div>
-        <div class="proj-card">
-          <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=700&q=80" alt="Mobile Banking">
-          <div class="proj-overlay">
-            <span class="proj-cat">MOBILE</span>
-            <h3>Mobile Banking App</h3>
-          </div>
-        </div>
-        <div class="proj-card">
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=700&q=80" alt="Cloud Architecture">
-          <div class="proj-overlay">
-            <span class="proj-cat">DEVOPS</span>
-            <h3>Cloud Architecture</h3>
-          </div>
-        </div>
+      <a href="work.html" class="sec-link">View All Work →</a>
+    </div>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <!-- Real: financial dashboard / data analytics -->
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=85&auto=format&fit=crop" alt="FinTech analytics dashboard project">
+        <div class="proj-overlay"><span class="proj-cat">WEB APP</span><h3>FinTech Dashboard</h3></div>
+      </div>
+      <div class="proj-card">
+        <!-- Real: mobile banking / app on phone -->
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=700&q=85&auto=format&fit=crop" alt="Mobile banking application">
+        <div class="proj-overlay"><span class="proj-cat">MOBILE</span><h3>Mobile Banking App</h3></div>
+      </div>
+      <div class="proj-card">
+        <!-- Real: server room / cloud infrastructure -->
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=700&q=85&auto=format&fit=crop" alt="Cloud architecture and DevOps infrastructure">
+        <div class="proj-overlay"><span class="proj-cat">DEVOPS</span><h3>Cloud Architecture</h3></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 <!-- ══════════════ ABOUT STRIP ══════════════ -->
 <section class="about-strip section-reveal">
@@ -455,52 +869,30 @@
   </div>
 </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="testimonials section-reveal">
-    <div class="container">
-      <span class="micro-label">Client Stories</span>
-      <h2>What Clients <span class="cyan">Say</span></h2>
-      <div class="testi-grid">
-
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <p>"Gradr Tech delivered our trading dashboard ahead of schedule. The code quality was exceptional — clean, well-documented, and built to scale."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">S</div>
-            <div>
-              <div class="testi-name">Sarah K.</div>
-              <div class="testi-role">CEO, FinBridge</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <p>"The mobile app they built for us handled 10x our projected launch traffic without a hiccup. Their DevOps setup is world-class."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">M</div>
-            <div>
-              <div class="testi-name">Marcus L.</div>
-              <div class="testi-role">CTO, Nomad Health</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testi-card">
-          <div class="testi-quote">"</div>
-          <p>"From MVP to Series A, Gradr has been our technical co-pilot. They don't just write code — they think deeply about the product."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">P</div>
-            <div>
-              <div class="testi-name">Priya M.</div>
-              <div class="testi-role">Founder, EdLeap</div>
-            </div>
-          </div>
-        </div>
-
+<!-- ══════════════ TESTIMONIALS ══════════════ -->
+<section class="testimonials section-reveal">
+  <div class="container">
+    <span class="micro-label">Client Stories</span>
+    <h2>What Clients <span class="cyan">Say</span></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p>Gradr Tech delivered our trading dashboard ahead of schedule. The code quality was exceptional — clean, well-documented, and built to scale.</p>
+        <div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Sarah K.</div><div class="testi-role">CEO, FinBridge</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p>The mobile app they built handled 10x our projected launch traffic without a hiccup. Their DevOps setup is world-class.</p>
+        <div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Marcus L.</div><div class="testi-role">CTO, Nomad Health</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p>From MVP to Series A, Gradr has been our technical co-pilot. They don't just write code — they think deeply about the product.</p>
+        <div class="testi-author"><div class="testi-avatar">P</div><div><div class="testi-name">Priya M.</div><div class="testi-role">Founder, EdLeap</div></div></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 <!-- ══════════════ FINAL CTA ══════════════ -->
 <section class="cta section-reveal">
@@ -512,60 +904,289 @@
   </div>
 </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo"><span class="cyan">GRADR </span><span>TECH</span></div>
-        <p>Web Development · Mobile Apps · Cloud Solutions</p>
-        <div class="footer-socials">
-          <a href="https://www.linkedin.com/company/gradr-tech-ltd" class="fsoc" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="https://www.instagram.com/gradrtech/" class="fsoc" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-          </a>
-          <a href="https://github.com/gradrtech" class="fsoc" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.002 12.002 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          </a>
-          <a href="mailto:info@gradrtech.com" class="fsoc" aria-label="Email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="footer-nav">
-        <div class="footer-nav-label">NAVIGATION</div>
-        <ul>
-  <li><a href="index.html">Home</a></li>
-  <li><a href="services.html">Services</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="contact.html">Contact</a></li>
-</ul>
-
-      </div>
-      <div class="footer-contact">
-        <div class="footer-nav-label">CONNECT</div>
-        <div class="footer-socials" style="margin-bottom:1rem">
-          <a href="https://www.linkedin.com/company/gradr-tech-ltd" class="fsoc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-          <a href="https://www.instagram.com/gradrtech/" class="fsoc"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
-          <a href="https://github.com/gradrtech" class="fsoc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.002 12.002 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
-          <a href="mailto:info@gradrtech.com" class="fsoc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
-        </div>
-        <a href="mailto:info@gradrtech.com" style="color:var(--muted);text-decoration:none;font-size:0.9rem;">info@gradrtech.com</a>
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><span class="cyan">GRADR </span><span>TECH</span></div>
+      <p>Web Development · Mobile Apps · Cloud Solutions · Business Connectivity</p>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/company/gradr-tech-ltd" class="fsoc" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://www.instagram.com/gradrtech/" class="fsoc" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+        <a href="https://github.com/gradrtech" class="fsoc" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.002 12.002 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
+        <a href="mailto:info@gradrtech.com" class="fsoc" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
       </div>
     </div>
-   <div class="privacy-policy">
-  <p> 
-    <a href="privacy.html">Terms and Conditions</a>. 
-  </p>
-</div>
-
+    <div class="footer-nav">
+      <div class="footer-nav-label">NAVIGATION</div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </div>
-    <div class="footer-bottom">
-      <p>@ 2026 GRADR TECH LTD. ALL RIGHTS RESERVED.</p>
+    <div class="footer-contact">
+      <div class="footer-nav-label">CONNECT</div>
+      <div class="footer-socials" style="margin-bottom:1rem">
+        <a href="https://www.linkedin.com/company/gradr-tech-ltd" class="fsoc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://www.instagram.com/gradrtech/" class="fsoc"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+        <a href="https://github.com/gradrtech" class="fsoc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.002 12.002 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
+        <a href="mailto:info@gradrtech.com" class="fsoc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+      </div>
+      <a href="mailto:info@gradrtech.com" style="color:var(--muted);text-decoration:none;font-size:.9rem;">info@gradrtech.com</a>
     </div>
-  </footer>
+  </div>
+  <div class="privacy-policy" style="max-width:1280px;margin:0 auto;">
+    <p><a href="privacy.html">Terms and Conditions</a></p>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 GRADR TECH LTD. ALL RIGHTS RESERVED.</p>
+  </div>
+</footer>
 
-  <script src="assets/js/main.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+/* ════════════════════════════════════════════════
+   REALISTIC WORLD GLOBE with continent polygons
+   Orthographic projection — continents visible
+════════════════════════════════════════════════ */
+(function(){
+  const canvas = document.getElementById('globeCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const continentsImg = new Image();
+  let continentsReady = false;
+  continentsImg.src = 'assets/images/partners/continents.png';
+  continentsImg.onload = () => { continentsReady = true; };
+
+  function setSize(){
+    const s = Math.min(canvas.parentElement.clientWidth, 500);
+    canvas.width = s; canvas.height = s;
+  }
+  setSize();
+  window.addEventListener('resize', setSize);
+
+  /* Continent outlines [lon, lat] — simplified Natural Earth */
+  const landPolys = [
+    /* North America */
+    [[-168,72],[-140,70],[-125,55],[-95,50],[-85,45],[-75,45],[-65,44],[-60,47],[-55,47],[-58,52],[-65,58],[-75,62],[-85,68],[-95,72],[-110,74],[-130,70],[-140,72],[-155,60],[-165,65],[-168,72]],
+    /* South America */
+    [[-80,12],[-70,12],[-60,5],[-50,0],[-40,-5],[-35,-10],[-38,-15],[-40,-20],[-45,-25],[-48,-28],[-50,-30],[-55,-34],[-58,-38],[-65,-42],[-68,-48],[-68,-55],[-62,-55],[-58,-52],[-55,-48],[-50,-40],[-48,-28],[-45,-22],[-40,-15],[-38,-8],[-44,-3],[-50,0],[-60,5],[-70,10],[-80,12]],
+    /* Europe */
+    [[-10,36],[0,36],[10,38],[20,38],[28,40],[30,46],[25,52],[20,58],[15,58],[10,58],[5,52],[0,46],[-5,44],[-8,40],[-10,36]],
+    /* Scandinavia */
+    [[5,57],[8,58],[15,58],[20,60],[28,68],[20,72],[10,72],[5,65],[5,57]],
+    /* Africa */
+    [[-5,36],[10,38],[20,38],[32,32],[38,22],[42,12],[45,2],[42,-5],[36,-18],[32,-28],[25,-35],[18,-35],[12,-28],[8,-20],[0,-10],[-5,-5],[-5,5],[0,10],[5,18],[0,28],[-5,36]],
+    /* Asia main */
+    [[25,40],[35,36],[40,38],[50,30],[60,22],[68,22],[75,28],[80,25],[85,28],[92,22],[100,14],[105,12],[108,5],[105,-5],[110,-8],[115,-5],[112,0],[108,5],[100,12],[95,20],[90,28],[80,30],[75,35],[65,42],[55,45],[50,50],[42,58],[35,60],[30,65],[25,68],[30,72],[45,72],[65,68],[80,62],[100,60],[110,55],[120,50],[130,45],[140,40],[145,42],[140,48],[130,55],[122,58],[110,62],[100,65],[90,68],[80,70],[60,68],[50,62],[42,60],[35,55],[30,50],[25,45],[25,40]],
+    /* Japan */
+    [[130,31],[132,33],[135,35],[141,40],[141,44],[140,44],[135,35],[130,33],[130,31]],
+    /* UK */
+    [[-5,50],[0,51],[2,52],[1,58],[-2,58],[-5,57],[-3,52],[-5,50]],
+    /* Australia */
+    [[115,-22],[120,-18],[128,-15],[135,-12],[138,-15],[142,-18],[148,-22],[150,-25],[152,-28],[150,-32],[148,-38],[145,-38],[140,-38],[135,-35],[130,-32],[125,-32],[118,-28],[115,-22]],
+    /* New Zealand */
+    [[170,-45],[172,-44],[174,-41],[176,-38],[174,-38],[172,-41],[170,-45]],
+    /* Greenland */
+    [[-45,62],[-35,65],[-20,70],[-18,76],[-25,82],[-40,83],[-55,80],[-60,76],[-55,70],[-50,66],[-45,62]],
+    /* Iceland */
+    [[-25,63],[-18,63],[-13,65],[-15,66],[-22,66],[-25,65],[-25,63]],
+    /* Madagascar */
+    [[44,-13],[48,-13],[50,-16],[50,-20],[48,-24],[44,-24],[44,-20],[44,-16],[44,-13]],
+    /* Sri Lanka */
+    [[80,10],[82,8],[82,6],[80,6],[80,8],[80,10]],
+  ];
+
+  const cities = [
+    {lat:51.5, lon:-0.1},   // London
+    {lat:40.7, lon:-74},    // New York
+    {lat:35.7, lon:139.7},  // Tokyo
+    {lat:-33.9,lon:151.2},  // Sydney
+    {lat:25.2, lon:55.3},   // Dubai
+    {lat:1.3,  lon:103.8},  // Singapore
+    {lat:6.5,  lon:3.4},    // Lagos
+    {lat:-23.5,lon:-46.6},  // São Paulo
+    {lat:43.7, lon:-79.4},  // Toronto
+    {lat:19.1, lon:72.9},   // Mumbai
+    {lat:-1.3, lon:36.8},   // Nairobi
+    {lat:50.1, lon:8.7},    // Frankfurt
+  ];
+
+  const connections = [[0,1],[0,4],[0,11],[1,8],[1,7],[2,5],[2,9],[3,5],[4,9],[5,10],[6,10],[0,6],[1,9],[7,0],[11,4],[3,2]];
+
+  let rot = 0, raf;
+
+  function project(lat, lon, cx, cy, R, rotDeg){
+    const phi = lat * Math.PI / 180;
+    const lam = (lon + rotDeg) * Math.PI / 180;
+    return {
+      x: cx + R * Math.cos(phi) * Math.sin(lam),
+      y: cy - R * Math.sin(phi),
+      z: Math.cos(phi) * Math.cos(lam)
+    };
+  }
+
+  function draw(){
+    const W = canvas.width, H = canvas.height;
+    const cx = W/2, cy = H/2, R = W * 0.41;
+    ctx.clearRect(0,0,W,H);
+
+    /* atmosphere */
+    const atm = ctx.createRadialGradient(cx,cy,R*0.75,cx,cy,R*1.28);
+    atm.addColorStop(0,'rgba(0,180,255,0.09)');
+    atm.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=atm; ctx.beginPath(); ctx.arc(cx,cy,R*1.28,0,Math.PI*2); ctx.fill();
+
+    /* ocean */
+    const ocean = ctx.createRadialGradient(cx-R*0.2,cy-R*0.2,R*0.05,cx,cy,R);
+    ocean.addColorStop(0,'#0e2f50'); ocean.addColorStop(0.6,'#091e36'); ocean.addColorStop(1,'#060e1a');
+    ctx.fillStyle=ocean; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
+
+    /* clip to sphere */
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.clip();
+
+    /* lat grid */
+    ctx.strokeStyle='rgba(0,180,220,0.07)'; ctx.lineWidth=0.7;
+    for(let la=-75;la<=75;la+=15){
+      const phi=la*Math.PI/180;
+      const yr=cy-R*Math.sin(phi);
+      const xr=R*Math.cos(phi);
+      ctx.beginPath(); ctx.ellipse(cx,yr,xr,xr*0.15,0,0,Math.PI*2); ctx.stroke();
+    }
+    /* lon grid */
+    for(let lo=0;lo<360;lo+=20){
+      const lam=(lo+rot)*Math.PI/180;
+      ctx.beginPath();
+      for(let la=-90;la<=90;la+=5){
+        const phi=la*Math.PI/180;
+        const px=cx+R*Math.cos(phi)*Math.sin(lam);
+        const py=cy-R*Math.sin(phi);
+        const zz=Math.cos(phi)*Math.cos(lam);
+        if(la===-90||zz<0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+      }
+      ctx.strokeStyle='rgba(0,180,220,0.06)'; ctx.lineWidth=0.6; ctx.stroke();
+    }
+
+    if(continentsReady){
+      const imgScale = H / continentsImg.height;
+      const imgWidth = continentsImg.width * imgScale;
+      const imgHeight = H;
+      const shift = ((rot % 360) / 360) * imgWidth;
+      const x = -shift;
+      ctx.globalAlpha = 0.42;
+      ctx.drawImage(continentsImg, x, 0, imgWidth, imgHeight);
+      if(x + imgWidth < W) ctx.drawImage(continentsImg, x + imgWidth, 0, imgWidth, imgHeight);
+      ctx.globalAlpha = 1;
+    } else {
+      /* land polygons */
+      landPolys.forEach(poly=>{
+        ctx.beginPath();
+        let started=false;
+        poly.forEach(([lon,lat])=>{
+          const p=project(lat,lon,cx,cy,R,rot);
+          if(!started){ ctx.moveTo(p.x,p.y); started=true; }
+          else if(p.z>-0.1) ctx.lineTo(p.x,p.y);
+          else ctx.moveTo(p.x,p.y);
+        });
+        ctx.closePath();
+        const lg=ctx.createLinearGradient(cx-R,cy-R,cx+R,cy+R);
+        lg.addColorStop(0,'rgba(20,120,80,0.55)');
+        lg.addColorStop(1,'rgba(10,80,55,0.55)');
+        ctx.fillStyle=lg; ctx.fill();
+        ctx.strokeStyle='rgba(0,220,120,0.35)'; ctx.lineWidth=0.8; ctx.stroke();
+      });
+    }
+
+    ctx.restore();
+
+    /* globe rim */
+    ctx.strokeStyle='rgba(0,212,255,0.32)'; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.stroke();
+
+    /* city positions */
+    const cpos = cities.map(c=>project(c.lat,c.lon,cx,cy,R,rot));
+
+    /* connection arcs */
+    ctx.setLineDash([3,5]);
+    connections.forEach(([a,b])=>{
+      const pa=cpos[a],pb=cpos[b];
+      const avgZ=(pa.z+pb.z)/2;
+      if(avgZ<-0.05) return;
+      const alpha=Math.max(0,Math.min(1,(avgZ+0.15)*1.4))*0.6;
+      ctx.strokeStyle=`rgba(0,212,255,${alpha})`;
+      ctx.lineWidth=0.85;
+      const mx=(pa.x+pb.x)/2,my=(pa.y+pb.y)/2;
+      const d=Math.hypot(pb.x-pa.x,pb.y-pa.y);
+      ctx.beginPath(); ctx.moveTo(pa.x,pa.y);
+      ctx.quadraticCurveTo(mx,my-d*0.2,pb.x,pb.y);
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+
+    /* animated data pulses */
+    const t=Date.now()/1000;
+    connections.forEach(([a,b],i)=>{
+      const pa=cpos[a],pb=cpos[b];
+      if((pa.z+pb.z)/2<-0.05) return;
+      const prog=((t*0.38+i*0.17)%1);
+      const mx=(pa.x+pb.x)/2,my=(pa.y+pb.y)/2;
+      const d=Math.hypot(pb.x-pa.x,pb.y-pa.y);
+      const tt=prog;
+      const px=(1-tt)*(1-tt)*pa.x+2*(1-tt)*tt*mx+tt*tt*pb.x;
+      const py=(1-tt)*(1-tt)*pa.y+2*(1-tt)*tt*(my-d*0.2)+tt*tt*pb.y;
+      const alp=Math.max(0,Math.min(1,((pa.z+pb.z)/2+0.2)*1.8));
+      const g2=ctx.createRadialGradient(px,py,0,px,py,5);
+      g2.addColorStop(0,`rgba(0,212,255,${alp})`);
+      g2.addColorStop(1,'rgba(0,212,255,0)');
+      ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(px,py,5,0,Math.PI*2); ctx.fill();
+    });
+
+    /* city dots */
+    cpos.forEach(p=>{
+      if(p.z<0) return;
+      const alp=Math.min(1,(p.z+0.05)*1.5);
+      ctx.strokeStyle=`rgba(0,212,255,${alp*0.5})`; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,6,0,Math.PI*2); ctx.stroke();
+      ctx.fillStyle=`rgba(0,212,255,${alp})`;
+      ctx.beginPath(); ctx.arc(p.x,p.y,2.8,0,Math.PI*2); ctx.fill();
+    });
+
+    rot += 0.08;
+    raf=requestAnimationFrame(draw);
+  }
+
+  draw();
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden) cancelAnimationFrame(raf); else draw(); });
+})();
+
+/* ════ SCROLL REVEAL ════ */
+(function(){
+  const els = document.querySelectorAll('.section-reveal');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+  },{threshold:0.08});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* ════ HAMBURGER ════ */
+(function(){
+  const btn=document.getElementById('hamburger');
+  const nav=document.getElementById('navLinks');
+  if(!btn||!nav) return;
+  btn.addEventListener('click',()=>{
+    const open=nav.style.display==='flex';
+    Object.assign(nav.style,{
+      display:open?'none':'flex',flexDirection:'column',
+      position:'absolute',top:'64px',left:0,right:0,
+      background:'rgba(10,22,40,0.98)',padding:'1.5rem 2rem',
+      borderBottom:'1px solid rgba(0,212,255,0.12)',zIndex:199
+    });
+  });
+})();
+</script>
 </body>
 </html>
