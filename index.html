@@ -198,7 +198,9 @@
     .conn-text h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:1.4rem;}
     .conn-text h2 .cyan{color:var(--cyan);}
     .conn-text p{color:rgba(255,255,255,.68);font-size:1rem;line-height:1.8;margin-bottom:2rem;}
-    .telecom-partners{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:2rem;}
+    .telecom-partners{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:2rem;justify-content:center;}
+    .telecom-partners-float{position:absolute;top:-24px;right:2rem;display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;z-index:2;width:auto;}
+    .broadband-card{position:relative;}
     .tp-pill{border:1px solid var(--border);background:var(--card);border-radius:4px;padding:.4rem 1rem;font-size:.8rem;font-weight:700;color:var(--cyan);letter-spacing:.04em;}
     .conn-features{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;}
     .cf-item{display:flex;align-items:center;gap:.55rem;font-size:.86rem;color:rgba(255,255,255,.72);}
@@ -210,6 +212,9 @@
     .conn-img-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
     .conn-img-small{border-radius:8px;overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;}
     .conn-img-small img{width:100%;height:100%;object-fit:cover;display:block;}
+    .connectivity-partners{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(0,212,255,0.12);}
+    .conn-partner{display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(0,212,255,0.35);border-radius:3px;padding:.5rem .4rem;font-size:.7rem;font-weight:600;color:var(--cyan);text-align:center;line-height:1.2;transition:all .25s;}
+    .conn-partner:hover{border-color:var(--cyan);background:rgba(0,212,255,0.08);}
 
     /* DIGITAL VOICE HERO */
     .voip-hero{padding:7rem 0 4rem;background:var(--bg);position:relative;overflow:hidden;}
@@ -284,6 +289,7 @@
     .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
     .svc-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:2rem 1.8rem;transition:border-color .25s,transform .25s;}
     .svc-card:hover{border-color:var(--cyan);transform:translateY(-3px);}
+    .broadband-card{position:relative;}
     .svc-icon{width:42px;height:42px;background:var(--cyan-dim);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;color:var(--cyan);}
     .svc-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;}
     .svc-sub{font-size:.65rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:.5rem;}
@@ -292,6 +298,45 @@
     .svc-card p{font-size:.86rem;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:1.2rem;}
     .svc-link{color:var(--cyan);font-size:.82rem;text-decoration:none;}
     .svc-link:hover{text-decoration:underline;}
+
+    /* BROADBAND PARTNERS AT BOTTOM */
+    .broadband-partners-bottom{
+      display:grid;
+      grid-template-columns:repeat(6,1fr);
+      gap:0.5rem;
+      margin-top:1.25rem;
+      padding-top:1.25rem;
+      border-top:1px solid rgba(0,212,255,0.1);
+    }
+    .bp-partner{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+      border:1px solid rgba(0,212,255,0.35);
+      border-radius:3px;
+      padding:0.45rem 0.35rem;
+      font-size:0.68rem;
+      font-weight:600;
+      color:var(--cyan);
+      text-align:center;
+      line-height:1.2;
+      transition:all .25s;
+    }
+    .bp-partner:hover{
+      border-color:var(--cyan);
+      background:rgba(0,212,255,0.08);
+    }
+    @media(max-width:600px){
+      .broadband-partners-bottom{
+        grid-template-columns:repeat(3,1fr);
+        gap:0.4rem;
+      }
+      .bp-partner{
+        font-size:0.65rem;
+        padding:0.4rem 0.3rem;
+      }
+    }
 
     /* PROCESS */
     .process{padding:6rem 0;background:var(--bg);}
@@ -528,15 +573,6 @@
         <span class="micro-label">Connectivity Solutions</span>
         <h2>Reliable Business <span class="cyan">Broadband &<br>Leased Lines</span></h2>
         <p>Whether you require high-speed Fibre Broadband or a highly resilient Dedicated Leased Line, we deliver solutions tailored to your business needs. By partnering with the UK's leading telecommunications providers, we ensure you receive the most reliable, cost-effective, and high-performance connectivity available. Whether working from the office, at home, or on the move, we keep your business seamlessly connected.</p>
-        <div class="telecom-partners">
-          <span class="tp-pill">BT</span>
-          <span class="tp-pill">CityFibre</span>
-          <span class="tp-pill">Gamma</span>
-          <span class="tp-pill">TalkTalk</span>
-          <span class="tp-pill">Virgin Media</span>
-          <span class="tp-pill">Sky</span>
-          <span class="tp-pill">BT Wholesale</span>
-        </div>
         <div class="conn-features">
           <div class="cf-item"><div class="cf-dot"></div>High-Speed Fibre Broadband</div>
           <div class="cf-item"><div class="cf-dot"></div>Dedicated Leased Lines</div>
@@ -546,6 +582,14 @@
           <div class="cf-item"><div class="cf-dot"></div>Scalable Bandwidth on Demand</div>
           <div class="cf-item"><div class="cf-dot"></div>VoIP &amp; Cloud Ready</div>
           <div class="cf-item"><div class="cf-dot"></div>24/7 UK-Based Support</div>
+        </div>
+        <div class="connectivity-partners">
+          <div class="conn-partner">CityFibre</div>
+          <div class="conn-partner">Gamma</div>
+          <div class="conn-partner">TalkTalk</div>
+          <div class="conn-partner">Virgin Media</div>
+          <div class="conn-partner">Sky</div>
+          <div class="conn-partner">BT Wholesale</div>
         </div>
       </div>
       <div class="conn-visual">
@@ -709,7 +753,7 @@
       <a href="contact.html" class="btn btn-primary">Get a Digital Voice Quote</a>
       <a href="contact.html" class="btn btn-ghost">Schedule a Live Webex Demo</a>
     </div>
-    <p class="cta-contact">For immediate assistance, speak with our UK-based specialists — <a href="mailto">info@gradrtech.com</a></p>
+    <p class="cta-contact">For immediate assistance, speak with our UK-based specialists — <a href="mailto:info@gradrtech.com">info@gradrtech.com</a></p>
   </div>
 </section>
 
@@ -738,12 +782,20 @@
         <p>Native and cross-platform mobile applications built with React Native and Flutter — delivering seamless, performant experiences on every device.</p>
         <a href="services.html" class="svc-link">enquire →</a>
       </div>
-      <div class="svc-card">
+      <div class="svc-card broadband-card">
         <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/><circle cx="12" cy="12" r="10"/></svg></div>
         <p class="svc-sub">CONNECTIVITY SOLUTIONS</p><h3>Business Broadband</h3>
         <div class="svc-divider"></div>
         <p>High-speed, reliable broadband connectivity built for businesses that can't afford downtime — from dedicated leased lines to scalable fibre packages.</p>
         <a href="services.html" class="svc-link">enquire →</a>
+        <div class="broadband-partners-bottom">
+          <div class="bp-partner">CityFibre</div>
+          <div class="bp-partner">Gamma</div>
+          <div class="bp-partner">TalkTalk</div>
+          <div class="bp-partner">Virgin Media</div>
+          <div class="bp-partner">Sky</div>
+          <div class="bp-partner">BT Wholesale</div>
+        </div>
       </div>
       <div class="svc-card">
         <div class="svc-icon"><svg viewBox="0 0 24 24"><line x1="2" y1="12" x2="22" y2="12"/><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><line x1="6" y1="6" x2="6" y2="10"/><line x1="12" y1="4" x2="12" y2="10"/><line x1="18" y1="6" x2="18" y2="10"/></svg></div>
