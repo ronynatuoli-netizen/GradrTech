@@ -83,10 +83,6 @@
     .about-hero p{font-size:1.02rem;color:rgba(255,255,255,.68);max-width:540px;line-height:1.8;}
 
     /* OUR STORY */
-    @keyframes globeRotate {
-      0% { transform: rotateY(0deg) rotateX(15deg); }
-      100% { transform: rotateY(360deg) rotateX(15deg); }
-    }
     .story-section{padding:70px 0 90px;background:var(--bg);}
     .story-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
     .story-image-wrap{position:relative;perspective:2000px;display:flex;align-items:center;justify-content:center;}
@@ -98,21 +94,8 @@
       position:relative;
       overflow:hidden;
     }
-    .story-globe{
-      position:absolute;width:580px;height:580px;
-      border-radius:50%;
-      background:url('assets/images/partners/continents.png') center/cover;
-      animation:globeRotate 50s linear infinite;
-      box-shadow:
-        inset -80px -80px 150px rgba(0,0,0,0.7),
-        inset 50px 50px 120px rgba(0,212,255,0.4),
-        inset -30px -30px 80px rgba(0,0,0,0.5),
-        0 60px 150px rgba(0,0,0,0.6),
-        0 0 180px rgba(0,212,255,0.4),
-        0 0 280px rgba(0,212,255,0.2);
-      filter:drop-shadow(0 0 80px rgba(0,212,255,0.6));
-      transform-style:preserve-3d;
-    }
+    #globeCanvasAbout{width:100%;height:100%;display:block;}
+    .globe-wrap{position:relative;width:480px;height:480px;max-width:100%;}
     .story-art-center{
       position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
       display:flex;flex-direction:column;align-items:center;gap:.5rem;
@@ -190,6 +173,7 @@
       .container{padding:0 24px;}
       .story-layout{grid-template-columns:1fr;gap:60px;}
       .story-image-wrap .story-art{max-height:340px;}
+      .globe-wrap{width:320px;height:320px;}
       .story-stats-badge{bottom:-16px;}
       .skills-layout{grid-template-columns:1fr;gap:40px;}
       .footer-content{grid-template-columns:1fr;}
@@ -242,14 +226,16 @@
     <div class="container">
       <div class="story-layout">
 
-        <!-- Left: CSS tech pattern art + floating stats badge (no external image dependency) -->
+        <!-- Left: Interactive globe canvas + floating stats badge -->
         <div class="story-image-wrap">
           <div class="story-art">
-            <div class="story-globe"></div>
-            <div class="story-art-center">
-              <img src="https://media.base44.com/images/public/6a1fc1671f4ad82421ccf56e/29bd2e54d_generated_image.png"
-                   alt="Gradr Tech" class="story-art-logo">
-              <span class="story-art-text">Gradr Tech</span>
+            <div class="globe-wrap">
+              <canvas id="globeCanvasAbout"></canvas>
+              <div class="story-art-center">
+                <img src="https://media.base44.com/images/public/6a1fc1671f4ad82421ccf56e/29bd2e54d_generated_image.png"
+                     alt="Gradr Tech" class="story-art-logo">
+                <span class="story-art-text">Gradr Tech</span>
+              </div>
             </div>
           </div>
           <div class="story-stats-badge">
@@ -435,6 +421,189 @@
   </footer>
 
   <script src="assets/js/main.js"></script>
+
+  <script>
+    /* ════════════════════════════════════════════════
+       REALISTIC WORLD GLOBE with continent polygons
+       Orthographic projection — continents visible
+    ════════════════════════════════════════════════ */
+    (function(){
+      const canvas = document.getElementById('globeCanvasAbout');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const continentsImg = new Image();
+      let continentsReady = false;
+      continentsImg.src = 'assets/images/partners/continents.png';
+      continentsImg.onload = () => { continentsReady = true; };
+
+      function setSize(){
+        const s = Math.min(canvas.parentElement.clientWidth, 480);
+        canvas.width = s; canvas.height = s;
+      }
+      setSize();
+      window.addEventListener('resize', setSize);
+
+      const landPolys = [
+        [[-168,72],[-140,70],[-125,55],[-95,50],[-85,45],[-75,45],[-65,44],[-60,47],[-55,47],[-58,52],[-65,58],[-75,62],[-85,68],[-95,72],[-110,74],[-130,70],[-140,72],[-155,60],[-165,65],[-168,72]],
+        [[-80,12],[-70,12],[-60,5],[-50,0],[-40,-5],[-35,-10],[-38,-15],[-40,-20],[-45,-25],[-48,-28],[-50,-30],[-55,-34],[-58,-38],[-65,-42],[-68,-48],[-68,-55],[-62,-55],[-58,-52],[-55,-48],[-50,-40],[-48,-28],[-45,-22],[-40,-15],[-38,-8],[-44,-3],[-50,0],[-60,5],[-70,10],[-80,12]],
+        [[-10,36],[0,36],[10,38],[20,38],[28,40],[30,46],[25,52],[20,58],[15,58],[10,58],[5,52],[0,46],[-5,44],[-8,40],[-10,36]],
+        [[5,57],[8,58],[15,58],[20,60],[28,68],[20,72],[10,72],[5,65],[5,57]],
+        [[-5,36],[10,38],[20,38],[32,32],[38,22],[42,12],[45,2],[42,-5],[36,-18],[32,-28],[25,-35],[18,-35],[12,-28],[8,-20],[0,-10],[-5,-5],[-5,5],[0,10],[5,18],[0,28],[-5,36]],
+        [[25,40],[35,36],[40,38],[50,30],[60,22],[68,22],[75,28],[80,25],[85,28],[92,22],[100,14],[105,12],[108,5],[105,-5],[110,-8],[115,-5],[112,0],[108,5],[100,12],[95,20],[90,28],[80,30],[75,35],[65,42],[55,45],[50,50],[42,58],[35,60],[30,65],[25,68],[30,72],[45,72],[65,68],[80,62],[100,60],[110,55],[120,50],[130,45],[140,40],[145,42],[140,48],[130,55],[122,58],[110,62],[100,65],[90,68],[80,70],[60,68],[50,62],[42,60],[35,55],[30,50],[25,45],[25,40]],
+        [[130,31],[132,33],[135,35],[141,40],[141,44],[140,44],[135,35],[130,33],[130,31]],
+        [[-5,50],[0,51],[2,52],[1,58],[-2,58],[-5,57],[-3,52],[-5,50]],
+        [[115,-22],[120,-18],[128,-15],[135,-12],[138,-15],[142,-18],[148,-22],[150,-25],[152,-28],[150,-32],[148,-38],[145,-38],[140,-38],[135,-35],[130,-32],[125,-32],[118,-28],[115,-22]],
+        [[170,-45],[172,-44],[174,-41],[176,-38],[174,-38],[172,-41],[170,-45]],
+        [[-45,62],[-35,65],[-20,70],[-18,76],[-25,82],[-40,83],[-55,80],[-60,76],[-55,70],[-50,66],[-45,62]],
+        [[-25,63],[-18,63],[-13,65],[-15,66],[-22,66],[-25,65],[-25,63]],
+        [[44,-13],[48,-13],[50,-16],[50,-20],[48,-24],[44,-24],[44,-20],[44,-16],[44,-13]],
+        [[80,10],[82,8],[82,6],[80,6],[80,8],[80,10]],
+      ];
+
+      const cities = [
+        {lat:51.5, lon:-0.1}, {lat:40.7, lon:-74}, {lat:35.7, lon:139.7}, {lat:-33.9,lon:151.2},
+        {lat:25.2, lon:55.3}, {lat:1.3,  lon:103.8}, {lat:6.5,  lon:3.4}, {lat:-23.5,lon:-46.6},
+        {lat:43.7, lon:-79.4}, {lat:19.1, lon:72.9}, {lat:-1.3, lon:36.8}, {lat:50.1, lon:8.7},
+      ];
+
+      const connections = [[0,1],[0,4],[0,11],[1,8],[1,7],[2,5],[2,9],[3,5],[4,9],[5,10],[6,10],[0,6],[1,9],[7,0],[11,4],[3,2]];
+
+      let rot = 0, raf;
+
+      function project(lat, lon, cx, cy, R, rotDeg){
+        const phi = lat * Math.PI / 180;
+        const lam = (lon + rotDeg) * Math.PI / 180;
+        return {
+          x: cx + R * Math.cos(phi) * Math.sin(lam),
+          y: cy - R * Math.sin(phi),
+          z: Math.cos(phi) * Math.cos(lam)
+        };
+      }
+
+      function draw(){
+        const W = canvas.width, H = canvas.height;
+        const cx = W/2, cy = H/2, R = W * 0.41;
+        ctx.clearRect(0,0,W,H);
+
+        const atm = ctx.createRadialGradient(cx,cy,R*0.75,cx,cy,R*1.28);
+        atm.addColorStop(0,'rgba(0,180,255,0.09)');
+        atm.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle=atm; ctx.beginPath(); ctx.arc(cx,cy,R*1.28,0,Math.PI*2); ctx.fill();
+
+        const ocean = ctx.createRadialGradient(cx-R*0.2,cy-R*0.2,R*0.05,cx,cy,R);
+        ocean.addColorStop(0,'#0e2f50'); ocean.addColorStop(0.6,'#091e36'); ocean.addColorStop(1,'#060e1a');
+        ctx.fillStyle=ocean; ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fill();
+
+        ctx.save();
+        ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.clip();
+
+        ctx.strokeStyle='rgba(0,180,220,0.07)'; ctx.lineWidth=0.7;
+        for(let la=-75;la<=75;la+=15){
+          const phi=la*Math.PI/180;
+          const yr=cy-R*Math.sin(phi);
+          const xr=R*Math.cos(phi);
+          ctx.beginPath(); ctx.ellipse(cx,yr,xr,xr*0.15,0,0,Math.PI*2); ctx.stroke();
+        }
+        for(let lo=0;lo<360;lo+=20){
+          const lam=(lo+rot)*Math.PI/180;
+          ctx.beginPath();
+          for(let la=-90;la<=90;la+=5){
+            const phi=la*Math.PI/180;
+            const px=cx+R*Math.cos(phi)*Math.sin(lam);
+            const py=cy-R*Math.sin(phi);
+            const zz=Math.cos(phi)*Math.cos(lam);
+            if(la===-90||zz<0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+          }
+          ctx.strokeStyle='rgba(0,180,220,0.06)'; ctx.lineWidth=0.6; ctx.stroke();
+        }
+
+        if(continentsReady){
+          const imgScale = H / continentsImg.height;
+          const imgWidth = continentsImg.width * imgScale;
+          const imgHeight = H;
+          const shift = ((rot % 360) / 360) * imgWidth;
+          const x = -shift;
+          ctx.globalAlpha = 0.42;
+          ctx.drawImage(continentsImg, x, 0, imgWidth, imgHeight);
+          if(x + imgWidth < W) ctx.drawImage(continentsImg, x + imgWidth, 0, imgWidth, imgHeight);
+          ctx.globalAlpha = 1;
+        } else {
+          landPolys.forEach(poly=>{
+            ctx.beginPath();
+            let started=false;
+            poly.forEach(([lon,lat])=>{
+              const p=project(lat,lon,cx,cy,R,rot);
+              if(!started){ ctx.moveTo(p.x,p.y); started=true; }
+              else if(p.z>-0.1) ctx.lineTo(p.x,p.y);
+              else ctx.moveTo(p.x,p.y);
+            });
+            ctx.closePath();
+            const lg=ctx.createLinearGradient(cx-R,cy-R,cx+R,cy+R);
+            lg.addColorStop(0,'rgba(20,120,80,0.55)');
+            lg.addColorStop(1,'rgba(10,80,55,0.55)');
+            ctx.fillStyle=lg; ctx.fill();
+            ctx.strokeStyle='rgba(0,220,120,0.35)'; ctx.lineWidth=0.8; ctx.stroke();
+          });
+        }
+
+        ctx.restore();
+
+        ctx.strokeStyle='rgba(0,212,255,0.32)'; ctx.lineWidth=1.5;
+        ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.stroke();
+
+        const cpos = cities.map(c=>project(c.lat,c.lon,cx,cy,R,rot));
+
+        ctx.setLineDash([3,5]);
+        connections.forEach(([a,b])=>{
+          const pa=cpos[a],pb=cpos[b];
+          const avgZ=(pa.z+pb.z)/2;
+          if(avgZ<-0.05) return;
+          const alpha=Math.max(0,Math.min(1,(avgZ+0.15)*1.4))*0.6;
+          ctx.strokeStyle=`rgba(0,212,255,${alpha})`;
+          ctx.lineWidth=0.85;
+          const mx=(pa.x+pb.x)/2,my=(pa.y+pb.y)/2;
+          const d=Math.hypot(pb.x-pa.x,pb.y-pa.y);
+          ctx.beginPath(); ctx.moveTo(pa.x,pa.y);
+          ctx.quadraticCurveTo(mx,my-d*0.2,pb.x,pb.y);
+          ctx.stroke();
+        });
+        ctx.setLineDash([]);
+
+        const t=Date.now()/1000;
+        connections.forEach(([a,b],i)=>{
+          const pa=cpos[a],pb=cpos[b];
+          if((pa.z+pb.z)/2<-0.05) return;
+          const prog=((t*0.38+i*0.17)%1);
+          const mx=(pa.x+pb.x)/2,my=(pa.y+pb.y)/2;
+          const d=Math.hypot(pb.x-pa.x,pb.y-pa.y);
+          const tt=prog;
+          const px=(1-tt)*(1-tt)*pa.x+2*(1-tt)*tt*mx+tt*tt*pb.x;
+          const py=(1-tt)*(1-tt)*pa.y+2*(1-tt)*tt*(my-d*0.2)+tt*tt*pb.y;
+          const alp=Math.max(0,Math.min(1,((pa.z+pb.z)/2+0.2)*1.8));
+          const g2=ctx.createRadialGradient(px,py,0,px,py,5);
+          g2.addColorStop(0,`rgba(0,212,255,${alp})`);
+          g2.addColorStop(1,'rgba(0,212,255,0)');
+          ctx.fillStyle=g2; ctx.beginPath(); ctx.arc(px,py,5,0,Math.PI*2); ctx.fill();
+        });
+
+        cpos.forEach(p=>{
+          if(p.z<0) return;
+          const alp=Math.min(1,(p.z+0.05)*1.5);
+          ctx.strokeStyle=`rgba(0,212,255,${alp*0.5})`; ctx.lineWidth=1;
+          ctx.beginPath(); ctx.arc(p.x,p.y,6,0,Math.PI*2); ctx.stroke();
+          ctx.fillStyle=`rgba(0,212,255,${alp})`;
+          ctx.beginPath(); ctx.arc(p.x,p.y,2.8,0,Math.PI*2); ctx.fill();
+        });
+
+        rot += 0.08;
+        raf=requestAnimationFrame(draw);
+      }
+
+      draw();
+      document.addEventListener('visibilitychange',()=>{ if(document.hidden) cancelAnimationFrame(raf); else draw(); });
+    })();
+  </script>
 
   <script>
     // Animate skill bars on scroll into view
