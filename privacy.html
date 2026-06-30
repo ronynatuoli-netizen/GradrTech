@@ -37,20 +37,21 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --dark: #0A1628;
-      --cyan: #00C8F0;
-      --muted: #8A9BB0;
+      --dark: #07111F;
+      --cyan: #00D4FF;
+      --muted: rgba(236,244,255,0.62);
       --white: #FFFFFF;
-      --bg: #F7F8FA;
-      --border: #E2E6EE;
+      --bg: #08131F;
+      --bg-soft: #0F1C31;
+      --border: rgba(255,255,255,0.12);
       --space: 'Space Grotesk', sans-serif;
       --inter: 'Inter', sans-serif;
     }
 
     body {
       font-family: var(--inter);
-      background: var(--bg);
-      color: var(--dark);
+      background: linear-gradient(180deg, var(--dark) 0%, var(--bg) 100%);
+      color: var(--white);
       line-height: 1.6;
     }
 
@@ -63,7 +64,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 64px;
-      background: rgba(255,255,255,0.97);
+      background: rgba(7,17,31,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
@@ -74,7 +75,7 @@
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: 0.12em;
-      color: var(--dark);
+      color: var(--white);
       text-decoration: none;
     }
     .logo .cyan { color: var(--cyan); }
@@ -90,7 +91,7 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-    .back-link:hover { color: var(--dark); }
+    .back-link:hover { color: var(--cyan); }
     .back-link svg {
       width: 14px; height: 14px;
       stroke: currentColor;
@@ -101,7 +102,7 @@
     /* HERO */
     .hero {
       padding: 140px 0 56px;
-      background: var(--white);
+      background: transparent;
       border-bottom: 1px solid var(--border);
     }
 
@@ -149,7 +150,7 @@
 
     /* BODY */
     .body {
-      background: var(--white);
+      background: transparent;
       padding: 64px 0 96px;
     }
 
@@ -220,7 +221,7 @@
     .list li strong { color: var(--dark); font-weight: 600; }
 
     .callout {
-      background: rgba(0,200,240,0.05);
+      background: rgba(0,212,255,0.08);
       border-left: 3px solid var(--cyan);
       border-radius: 0 8px 8px 0;
       padding: 1rem 1.25rem;
@@ -231,7 +232,7 @@
     }
 
     .contact-box {
-      background: var(--bg);
+      background: var(--bg-soft);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1.5rem;
@@ -258,7 +259,10 @@
 
     /* FOOTER */
     .footer {
-      background: var(--dark);
+      background: linear-gradient(180deg, rgba(7,17,31,0.96), rgba(7,17,31,0.96)), url("assets/images/partners/continents.png");
+      background-position: center top;
+      background-size: cover;
+      background-repeat: no-repeat;
       padding: 32px 0;
       text-align: center;
     }
