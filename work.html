@@ -4,16 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18263973942"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-18263973942');
-  </script>
-
+  
+  <!-- PRIMARY SEO -->
   <title>Our Work | Gradr Tech - Featured Projects & Case Studies</title>
   <meta name="description" content="See what Gradr Tech has built — featured projects including FinTech dashboards, mobile banking apps, cloud architecture, e-commerce platforms and more.">
   <meta name="keywords" content="portfolio, case studies, web development projects, mobile app development, software solutions, Gradr Tech UK">
@@ -23,6 +15,7 @@
   <link rel="canonical" href="https://gradrtech.co.uk/work.html">
   <link rel="alternate" hreflang="en-GB" href="https://gradrtech.co.uk/work.html">
 
+  <!-- OPEN GRAPH -->
   <meta property="og:title" content="Our Work | Gradr Tech">
   <meta property="og:description" content="A curated selection of products we've engineered — each one a testament to technical rigor and creative thinking.">
   <meta property="og:url" content="https://gradrtech.co.uk/work.html">
@@ -32,16 +25,13 @@
   <meta property="og:image:alt" content="Featured Gradr Tech projects and case studies">
   <meta property="og:site_name" content="Gradr Tech">
 
+  <!-- TWITTER CARD -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Our Work | Gradr Tech">
   <meta name="twitter:description" content="A curated selection of products we've engineered — each one a testament to technical rigor and creative thinking.">
   <meta name="twitter:image" content="https://gradrtech.co.uk/assets/images/og-image.jpg">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#0A1628">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%2300C8F0' font-weight='bold'>G</text></svg>">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,113 +40,417 @@
   <link rel="stylesheet" href="assets/css/style.css">
 
   <style>
-    :root{
-      --cyan:#00D4FF;--cyan-dim:rgba(0,212,255,0.12);--cyan-glow:rgba(0,212,255,0.35);
-      --bg:#0A1628;--bg2:#0D1E35;--card:#111F38;--border:rgba(0,212,255,0.14);
-      --muted:rgba(255,255,255,0.5);--text:#E8EDF5;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cyan: #00C8F0;
+      --cyan-light: #e0f7fc;
+      --dark: #0a1628;
+      --text-dark: #0d1f35;
+      --text-light: #718096;
+      --bg-white: #ffffff;
+      --bg-light: #f4f7fa;
+      --border: #e2e8f0;
+      --font: 'Inter', 'Space Grotesk', sans-serif;
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-    .container{max-width:1200px;margin:0 auto;padding:0 48px;}
 
-    /* NAVBAR */
-    nav{position:sticky;top:0;z-index:1000;background:rgba(10,22,40,0.92);backdrop-filter:blur(14px);display:flex;align-items:center;padding:0 48px;height:72px;border-bottom:1px solid var(--border);gap:40px;}
-    .logo{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.04em;text-decoration:none;color:#fff;white-space:nowrap;}
-    .logo .cyan{color:var(--cyan);}
-    .nav-links{list-style:none;display:flex;gap:4px;margin:0 auto;}
-    .nav-links li a{text-decoration:none;color:rgba(255,255,255,.75);font-size:.95rem;font-weight:500;padding:6px 16px;border-radius:8px;transition:background .2s,color .2s;}
-    .nav-links li a:hover{background:var(--cyan-dim);color:#fff;}
-    .nav-links li a.active{background:var(--cyan-dim);color:var(--cyan);}
-    .btn-primary{background:var(--cyan);color:#0A1628;border:none;padding:12px 24px;border-radius:50px;font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;transition:opacity .2s;}
-    .btn-primary:hover{opacity:.85;}
-    .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
-    .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;}
+    body {
+      font-family: var(--font);
+      background: var(--bg-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
 
-    /* HERO */
-    .work-hero{padding:140px 0 70px;background:var(--bg);position:relative;overflow:hidden;}
-    .work-hero::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 70% 60% at 75% 20%, rgba(0,212,255,0.10) 0%, transparent 60%);}
-    .micro-label{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);display:inline-block;margin-bottom:20px;border:1px solid var(--border);padding:.3rem .8rem;border-radius:3px;background:rgba(0,212,255,0.06);}
-    .work-hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,7vw,5.2rem);font-weight:700;line-height:1.0;color:#fff;margin-bottom:24px;}
-    .work-hero h1 .cyan{color:var(--cyan);}
-    .divider{width:60px;height:2px;background:var(--cyan);margin:20px 0 24px;}
-    .work-hero p{font-size:1.02rem;color:rgba(255,255,255,.68);max-width:540px;line-height:1.8;}
+    /* ===== NAVBAR ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      height: 72px;
+      border-bottom: 1px solid var(--border);
+      gap: 40px;
+    }
 
-    /* PROJECTS GRID */
-    .projects-section{padding:16px 0 90px;background:var(--bg);}
-    .projects-grid{display:flex;flex-direction:column;gap:18px;}
+    .logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: var(--text-dark);
+      white-space: nowrap;
+    }
+    .logo .cyan { color: var(--cyan); }
 
-    .proj-card{position:relative;border-radius:18px;overflow:hidden;cursor:pointer;display:block;text-decoration:none;border:1px solid var(--border);transition:border-color .3s;isolation:isolate;}
-    .proj-card:hover{border-color:var(--cyan);}
-    .proj-card-full .proj-bg{height:480px;}
-    .proj-card-half .proj-bg{height:360px;}
-    .proj-bg{width:100%;position:relative;transition:transform .6s ease;}
-    .proj-card:hover .proj-bg{transform:scale(1.03);}
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 4px;
+      margin: 0 auto;
+    }
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .nav-links li a:hover { background: var(--bg-light); }
+    .nav-links li a.active {
+      background: var(--cyan-light);
+      color: var(--text-dark);
+    }
 
-    /* Tech pattern backgrounds, one per project category */
-    .proj-bg.fintech{background:radial-gradient(circle at 75% 25%, rgba(0,212,255,0.22) 0, transparent 50%), repeating-linear-gradient(0deg, rgba(0,212,255,0.06) 0 1px, transparent 1px 36px), repeating-linear-gradient(90deg, rgba(0,212,255,0.06) 0 1px, transparent 1px 36px), #0c2240;}
-    .proj-bg.devops{background:radial-gradient(circle at 70% 75%, rgba(0,212,255,0.2) 0, transparent 50%), radial-gradient(circle at 30% 25%, rgba(0,212,255,0.14) 0, transparent 45%), #0a1f3a;}
-    .proj-bg.mobile{background:radial-gradient(circle at 25% 70%, rgba(0,212,255,0.2) 0, transparent 48%), radial-gradient(2.5px 2.5px at 20% 20%, rgba(0,212,255,0.45) 50%, transparent 51%) 0 0/44px 44px, #0b1f3a;}
-    .proj-bg.ecommerce{background:radial-gradient(circle at 60% 35%, rgba(0,212,255,0.2) 0, transparent 50%), repeating-linear-gradient(45deg, rgba(0,212,255,0.05) 0 2px, transparent 2px 50px), #0b1e3a;}
-    .proj-bg.backend{background:radial-gradient(circle at 40% 30%, rgba(0,212,255,0.22) 0, transparent 50%), repeating-linear-gradient(-30deg, rgba(0,212,255,0.05) 0 1px, transparent 1px 45px), #091c34;}
-    .proj-bg.saas{background:radial-gradient(circle at 50% 50%, rgba(0,212,255,0.18) 0, transparent 55%), repeating-radial-gradient(circle at 50% 50%, transparent 0 30px, rgba(0,212,255,0.04) 30px 32px), #0a1d34;}
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
 
-    .proj-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(5,12,26,0.95) 0%, rgba(5,12,26,0.55) 45%, rgba(5,12,26,0.10) 100%);}
-    .proj-info{position:absolute;bottom:0;left:0;right:0;padding:32px 36px;}
-    .proj-category{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:8px;}
-    .proj-title{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.2;}
-    .proj-desc{font-size:.9rem;color:rgba(255,255,255,.72);margin-bottom:16px;line-height:1.65;max-width:520px;}
-    .proj-tags{display:flex;flex-wrap:wrap;gap:8px;}
-    .proj-tag{padding:4px 14px;border-radius:6px;font-size:.78rem;font-weight:500;background:rgba(255,255,255,0.1);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,0.16);backdrop-filter:blur(4px);}
-    .proj-arrow{position:absolute;bottom:28px;right:28px;width:44px;height:44px;background:var(--cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0A1628;font-size:1rem;opacity:0;transform:scale(0.8);transition:opacity .25s,transform .25s;}
-    .proj-card:hover .proj-arrow{opacity:1;transform:scale(1);}
-    .proj-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-dark);
+      border-radius: 2px;
+    }
 
-    /* CTA */
-    .cta-section{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg) 100%);padding:100px 48px;text-align:center;position:relative;overflow:hidden;}
-    .cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.07) 0%,transparent 70%);}
-    .cta-section .micro-label{color:rgba(255,255,255,.5);background:transparent;border-color:rgba(255,255,255,.15);}
-    .cta-section h2{position:relative;font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:40px;}
-    .cta-section h2 .cyan{color:var(--cyan);}
-    .btn-cta{position:relative;display:inline-block;background:var(--cyan);color:#0A1628;font-size:1rem;font-weight:700;padding:16px 42px;border-radius:50px;text-decoration:none;transition:opacity .2s;}
-    .btn-cta:hover{opacity:.85;}
+    /* ===== HERO ===== */
+    .work-hero {
+      padding: 80px 0 56px;
+      background: var(--bg-white);
+    }
 
-    /* FOOTER */
-    footer{background:#060E1A;padding:64px 48px 0;border-top:1px solid var(--border);}
-    .footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;padding-bottom:48px;}
-    .footer-col h4{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:800;letter-spacing:.06em;color:#fff;margin-bottom:20px;line-height:1.4;}
-    .footer-col > p{font-size:.85rem;color:var(--muted);line-height:1.6;}
-    .footer-col ul{list-style:none;}
-    .footer-col ul li{margin-bottom:12px;}
-    .footer-col ul li a{font-size:.9rem;color:var(--muted);text-decoration:none;transition:color .2s;}
-    .footer-col ul li a:hover{color:var(--cyan);}
-    .nav-sub-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;display:block;}
-    .social-icons-footer{display:flex;gap:10px;margin-bottom:20px;}
-    .social-icon-footer{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;text-decoration:none;transition:border-color .2s,color .2s;}
-    .social-icon-footer:hover{border-color:var(--cyan);color:var(--cyan);}
-    .connect-email{font-size:.9rem;color:var(--muted);text-decoration:none;display:block;}
-    .connect-email:hover{color:var(--cyan);}
-    .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border);padding:20px 0;text-align:center;}
-    .footer-bottom p{font-size:.75rem;letter-spacing:.08em;color:var(--muted);}
-    .privacy-policy{max-width:1200px;margin:0 auto;padding:0 0 24px;font-size:.8rem;color:var(--muted);line-height:1.6;}
-    .privacy-policy a{color:var(--cyan);text-decoration:none;}
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
 
-    /* RESPONSIVE */
+    .micro-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .work-hero h1 {
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1.0;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+    .work-hero h1 .cyan { color: var(--cyan); }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--border);
+      margin: 20px 0 24px;
+    }
+
+    .work-hero p {
+      font-size: 1rem;
+      color: var(--text-light);
+      max-width: 520px;
+      line-height: 1.75;
+    }
+
+    /* ===== PROJECTS GRID ===== */
+    .projects-section {
+      padding: 16px 0 80px;
+      background: var(--bg-light);
+    }
+
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* --- Featured card (full width) --- */
+    .proj-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+    }
+
+    .proj-card img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .proj-card:hover img { transform: scale(1.03); }
+
+    .proj-card-full img { height: 480px; }
+    .proj-card-half img  { height: 360px; }
+
+    /* Dark gradient overlay */
+    .proj-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(5, 12, 26, 0.92) 0%,
+        rgba(5, 12, 26, 0.55) 45%,
+        rgba(5, 12, 26, 0.10) 100%
+      );
+    }
+
+    /* Content sits on top of overlay */
+    .proj-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 36px;
+    }
+
+    .proj-category {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .proj-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .proj-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 16px;
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .proj-tag {
+      padding: 4px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Arrow button bottom-right */
+    .proj-arrow {
+      position: absolute;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-size: 1rem;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .proj-card:hover .proj-arrow {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Two-column row */
+    .proj-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      background: var(--dark);
+      padding: 100px 48px;
+      text-align: center;
+    }
+
+    .cta-section .micro-label { color: rgba(255,255,255,0.4); }
+
+    .cta-section h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 40px;
+    }
+    .cta-section h2 .cyan { color: var(--cyan); }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--cyan);
+      color: var(--dark);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 16px 42px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-cta:hover { opacity: 0.85; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #fff;
+      padding: 64px 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .footer-col > p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 12px; }
+    .footer-col ul li a {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--cyan); }
+
+    .nav-sub-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .social-icons-footer {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .social-icon-footer {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-icon-footer:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    .connect-email {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      display: block;
+    }
+    .connect-email:hover { color: var(--cyan); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid var(--border);
+      padding: 20px 0;
+      text-align: center;
+    }
+    .footer-bottom p {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+    }
+
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .proj-row { grid-template-columns: 1fr; }
-      .proj-card-full .proj-bg { height: 340px; }
-      .proj-card-half .proj-bg { height: 280px; }
+      .proj-card-full img { height: 340px; }
+      .proj-card-half img { height: 280px; }
       .footer-content { grid-template-columns: 1fr; }
       .cta-section { padding: 72px 20px; }
     }
+
     @media (max-width: 640px) {
       nav { padding: 0 20px; gap: 12px; }
       .container { padding: 0 20px; }
-      .nav-links{display:none;position:fixed;top:72px;left:0;right:0;flex-direction:column;background:rgba(10,22,40,0.98);padding:0;border-bottom:1px solid var(--border);overflow:visible;z-index:999;}
-      .nav-links.open{display:flex;padding:1.5rem 20px;}
-      .nav-links li{width:100%;list-style:none;}
-      .nav-links li a{display:block;width:100%;padding:12px 0;font-size:1rem;}
+      .nav-links { display: none; }
       .hamburger { display: flex; }
-      .work-hero { padding: 100px 0 40px; }
+      .work-hero { padding: 48px 0 36px; }
       .proj-info { padding: 24px 20px; }
       .proj-title { font-size: 1.25rem; }
     }
@@ -166,16 +460,16 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav id="navbar">
+  <nav>
     <a href="index.html" class="logo"><span class="cyan">GRADR </span><span>TECH</span></a>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="work.html" class="active">Work</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <a href="contact.html" class="btn-primary">Get Quotation</a>
@@ -198,7 +492,7 @@
 
         <!-- 1. Full-width: FinTech Dashboard -->
         <a href="contact.html" class="proj-card proj-card-full">
-          <div class="proj-bg fintech"></div>
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80" alt="FinTech Dashboard">
           <div class="proj-overlay"></div>
           <div class="proj-info">
             <span class="proj-category">Web App</span>
@@ -216,7 +510,7 @@
         <!-- 2. Two-column row -->
         <div class="proj-row">
           <a href="contact.html" class="proj-card proj-card-half">
-            <div class="proj-bg devops"></div>
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="Cloud Architecture">
             <div class="proj-overlay"></div>
             <div class="proj-info">
               <span class="proj-category">DevOps</span>
@@ -232,7 +526,7 @@
           </a>
 
           <a href="contact.html" class="proj-card proj-card-half">
-            <div class="proj-bg mobile"></div>
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80" alt="Mobile Banking App">
             <div class="proj-overlay"></div>
             <div class="proj-info">
               <span class="proj-category">Mobile</span>
@@ -250,7 +544,7 @@
         <!-- 3. Two-column row -->
         <div class="proj-row">
           <a href="contact.html" class="proj-card proj-card-half">
-            <div class="proj-bg ecommerce"></div>
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="E-Commerce Platform">
             <div class="proj-overlay"></div>
             <div class="proj-info">
               <span class="proj-category">Full-Stack</span>
@@ -266,7 +560,7 @@
           </a>
 
           <a href="contact.html" class="proj-card proj-card-half">
-            <div class="proj-bg backend"></div>
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Data Pipeline">
             <div class="proj-overlay"></div>
             <div class="proj-info">
               <span class="proj-category">Backend</span>
@@ -284,7 +578,7 @@
 
         <!-- 4. Full-width: SaaS Platform -->
         <a href="contact.html" class="proj-card proj-card-full">
-          <div class="proj-bg saas"></div>
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80" alt="SaaS Platform">
           <div class="proj-overlay"></div>
           <div class="proj-info">
             <span class="proj-category">Product</span>
@@ -315,8 +609,8 @@
     <div class="footer-content">
 
       <div class="footer-col">
-        <h4><span class="cyan">GRADR </span><span>TECH</span></h4>
-        <p>Web Development · Mobile Apps · Cloud Solutions · Business Connectivity</p>
+        <h4><span style="color:var(--text-dark)">GRADR</span><span style="color:var(--cyan)"></span><br>TECH</h4>
+        <p>Web Development · Mobile Apps · Cloud Solutions</p>
       </div>
 
       <div class="footer-col">
@@ -324,7 +618,6 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -332,11 +625,11 @@
       <div class="footer-col">
         <span class="nav-sub-label">Connect</span>
         <div class="social-icons-footer">
-          <a href="https://www.linkedin.com/company/gradr-tech-ltd" class="social-icon-footer" title="LinkedIn">
+          <a href="https://linkedin.com/company/gradr-tech" class="social-icon-footer" title="LinkedIn">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          <a href="https://www.instagram.com/gradrtech/" class="social-icon-footer" title="Instagram">
-            <i class="fab fa-instagram"></i>
+          <a href="https://twitter.com/gradrtech" class="social-icon-footer" title="Twitter">
+            <i class="fab fa-twitter"></i>
           </a>
           <a href="https://github.com/gradrtech" class="social-icon-footer" title="GitHub">
             <i class="fab fa-github"></i>
@@ -349,25 +642,19 @@
       </div>
 
     </div>
+<div class="privacy-policy">
+  <p>
+    <a href="privacy.html">Terms and Conditions</a>. 
+ </p>
+</div>
 
-    <div class="privacy-policy">
-      <p><a href="privacy.html">Terms and Conditions</a></p>
     </div>
-
     <div class="footer-bottom">
-      <p>© 2026 GRADR TECH LTD. ALL RIGHTS RESERVED.</p>
+      <p>@ 2026 GRADR TECH LTD. ALL RIGHTS RESERVED.</p>
     </div>
   </footer>
 
   <script src="assets/js/main.js"></script>
-  <script>
-    (function(){
-      const btn = document.getElementById('hamburger');
-      const nav = document.getElementById('navLinks');
-      if(!btn || !nav) return;
-      btn.addEventListener('click', ()=> nav.classList.toggle('open'));
-    })();
-  </script>
 
 </body>
 </html>
