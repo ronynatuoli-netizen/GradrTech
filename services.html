@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18263973942"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,20 +13,18 @@
     gtag('js', new Date());
     gtag('config', 'AW-18263973942');
   </script>
-  
-  <!-- PRIMARY SEO -->
-  <title>Services | Gradr Tech - Web, Mobile, Cloud & API Development</title>
-  <meta name="description" content="Explore Gradr Tech’s services: full-stack web development, iOS & Android apps, cloud infrastructure, API development, security & QA, and MVP consulting.">
-  <meta name="keywords" content="web development, mobile apps, cloud solutions, API development, software services, Gradr Tech UK">
+
+  <title>Services | Gradr Tech - Web, Mobile, Cloud & Connectivity</title>
+  <meta name="description" content="Explore Gradr Tech's services: full-stack web development, iOS & Android apps, business broadband, leased lines, VoIP, cloud infrastructure, API development, security & QA, and MVP consulting.">
+  <meta name="keywords" content="web development, mobile apps, cloud solutions, API development, software services, business broadband, leased line, VoIP, Gradr Tech UK">
   <meta name="author" content="Gradr Tech">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="google-site-verification" content="google2b87cd13da651559">
   <link rel="canonical" href="https://gradrtech.co.uk/services.html">
   <link rel="alternate" hreflang="en-GB" href="https://gradrtech.co.uk/services.html">
 
-  <!-- OPEN GRAPH -->
   <meta property="og:title" content="Services | Gradr Tech">
-  <meta property="og:description" content="Full-stack engineering, mobile apps, cloud DevOps, API development and more — scoped precisely to your business needs.">
+  <meta property="og:description" content="Full-stack engineering, mobile apps, business connectivity, cloud DevOps, API development and more — scoped precisely to your business needs.">
   <meta property="og:url" content="https://gradrtech.co.uk/services.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_GB">
@@ -34,17 +32,16 @@
   <meta property="og:image:alt" content="Gradr Tech service offerings for modern businesses">
   <meta property="og:site_name" content="Gradr Tech">
 
-  <!-- TWITTER CARD -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Services | Gradr Tech">
-  <meta name="twitter:description" content="Full-stack engineering, mobile apps, cloud DevOps, API development and more — scoped precisely to your business needs.">
+  <meta name="twitter:description" content="Full-stack engineering, mobile apps, business connectivity, cloud DevOps, API development and more — scoped precisely to your business needs.">
   <meta name="twitter:image" content="https://gradrtech.co.uk/assets/images/og-image.jpg">
-  
-  <!-- FAVICON -->
+
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0A1628">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,475 +50,159 @@
   <link rel="stylesheet" href="assets/css/style.css">
 
   <style>
-    /* ===== RESET & BASE ===== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --cyan: #00C8F0;
-      --cyan-light: #e0f7fc;
-      --cyan-tag-bg: #dff4f9;
-      --dark: #0a1628;
-      --text-dark: #0d1f35;
-      --text-mid: #4a5568;
-      --text-light: #718096;
-      --bg-white: #ffffff;
-      --bg-light: #f4f7fa;
-      --border: #e2e8f0;
-      --font: 'Inter', 'Space Grotesk', sans-serif;
+    :root{
+      --cyan:#00D4FF;--cyan-dim:rgba(0,212,255,0.12);--cyan-glow:rgba(0,212,255,0.35);
+      --bg:#0A1628;--bg2:#0D1E35;--card:#111F38;--border:rgba(0,212,255,0.14);
+      --muted:rgba(255,255,255,0.5);--text:#E8EDF5;
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+    .container{max-width:1200px;margin:0 auto;padding:0 48px;}
 
-    body {
-      font-family: var(--font);
-      background: var(--bg-white);
-      color: var(--text-dark);
-      overflow-x: hidden;
+    /* NAVBAR */
+    nav{position:sticky;top:0;z-index:1000;background:rgba(10,22,40,0.92);backdrop-filter:blur(14px);display:flex;align-items:center;padding:0 48px;height:72px;border-bottom:1px solid var(--border);gap:40px;}
+    .logo{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.04em;text-decoration:none;color:#fff;white-space:nowrap;}
+    .logo .cyan{color:var(--cyan);}
+    .nav-links{list-style:none;display:flex;gap:4px;margin:0 auto;}
+    .nav-links li a{text-decoration:none;color:rgba(255,255,255,.75);font-size:.95rem;font-weight:500;padding:6px 16px;border-radius:8px;transition:background .2s,color .2s;}
+    .nav-links li a:hover{background:var(--cyan-dim);color:#fff;}
+    .nav-links li a.active{background:var(--cyan-dim);color:var(--cyan);}
+    .btn-primary{background:var(--cyan);color:#0A1628;border:none;padding:12px 24px;border-radius:50px;font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;transition:opacity .2s;}
+    .btn-primary:hover{opacity:.85;}
+    .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+    .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;}
+
+    /* HERO with shuffling tech backgrounds */
+    .services-hero{position:relative;padding:140px 0 90px;overflow:hidden;isolation:isolate;}
+    .hero-bg-shuffle{position:absolute;inset:0;z-index:-2;}
+    .hero-bg-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 2.2s ease-in-out;}
+    .hero-bg-slide.active{opacity:1;}
+    /* Slide 1 — circuit grid */
+    .hero-bg-slide.s1{background:
+      radial-gradient(circle at 20% 30%, rgba(0,212,255,0.18) 0, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(0,212,255,0.12) 0, transparent 50%),
+      repeating-linear-gradient(0deg, rgba(0,212,255,0.05) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(90deg, rgba(0,212,255,0.05) 0 1px, transparent 1px 48px),
+      #0a1c33;}
+    /* Slide 2 — diagonal data streams */
+    .hero-bg-slide.s2{background:
+      radial-gradient(circle at 70% 20%, rgba(0,212,255,0.16) 0, transparent 55%),
+      repeating-linear-gradient(45deg, rgba(0,212,255,0.06) 0 2px, transparent 2px 70px),
+      repeating-linear-gradient(-45deg, rgba(0,212,255,0.04) 0 2px, transparent 2px 70px),
+      #0b1f38;}
+    /* Slide 3 — node network dots */
+    .hero-bg-slide.s3{background:
+      radial-gradient(circle at 15% 80%, rgba(0,212,255,0.2) 0, transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(0,212,255,0.14) 0, transparent 50%),
+      radial-gradient(2px 2px at 10% 20%, rgba(0,212,255,0.5) 50%, transparent 51%) 0 0/60px 60px,
+      radial-gradient(2px 2px at 40% 60%, rgba(0,212,255,0.4) 50%, transparent 51%) 0 0/80px 80px,
+      #091a30;}
+    /* Slide 4 — hex grid feel */
+    .hero-bg-slide.s4{background:
+      radial-gradient(circle at 50% 50%, rgba(0,212,255,0.15) 0, transparent 60%),
+      repeating-linear-gradient(0deg, rgba(0,212,255,0.04) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(60deg, rgba(0,212,255,0.04) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(-60deg, rgba(0,212,255,0.04) 0 1px, transparent 1px 40px),
+      #0c2138;}
+    /* Slide 5 — pulse waves */
+    .hero-bg-slide.s5{background:
+      radial-gradient(circle at 30% 40%, rgba(0,212,255,0.18) 0, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(0,212,255,0.1) 0, transparent 55%),
+      repeating-radial-gradient(circle at 50% 50%, transparent 0 30px, rgba(0,212,255,0.03) 30px 32px),
+      #0a1d34;}
+    .hero-bg-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg, rgba(10,22,40,0.88) 0%, rgba(10,22,40,0.93) 55%, var(--bg) 100%), radial-gradient(ellipse 70% 60% at 70% 30%, rgba(0,212,255,0.10) 0%, transparent 60%);}
+    .micro-label{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);display:inline-block;margin-bottom:20px;border:1px solid var(--border);padding:.3rem .8rem;border-radius:3px;background:rgba(0,212,255,0.06);}
+    .services-hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,7vw,5.2rem);font-weight:700;line-height:1.0;color:#fff;margin-bottom:24px;}
+    .services-hero h1 .cyan{color:var(--cyan);}
+    .divider{width:60px;height:2px;background:var(--cyan);margin:20px 0 24px;}
+    .services-hero p{font-size:1.02rem;color:rgba(255,255,255,.68);max-width:560px;line-height:1.8;}
+
+    /* SERVICES LIST */
+    .services-list{padding:20px 0 90px;background:var(--bg);}
+    .services-list .container{display:flex;flex-direction:column;gap:22px;}
+    .svc-card{position:relative;border-radius:18px;overflow:hidden;padding:40px 44px;display:grid;grid-template-columns:260px 1fr auto;gap:40px;align-items:center;border:1px solid var(--border);isolation:isolate;transition:border-color .3s,transform .3s;}
+    .svc-card:hover{border-color:var(--cyan);transform:translateY(-3px);}
+    .svc-bg-img{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transform:scale(1.03);transition:transform .6s ease, filter .6s ease;}
+    .svc-card:hover .svc-bg-img{transform:scale(1.08);}
+    /* Web Development — code brackets grid */
+    .svc-bg-img.web{background:radial-gradient(circle at 75% 25%, rgba(0,212,255,0.22) 0, transparent 50%), repeating-linear-gradient(0deg, rgba(0,212,255,0.05) 0 1px, transparent 1px 36px), repeating-linear-gradient(90deg, rgba(0,212,255,0.05) 0 1px, transparent 1px 36px), #0c2240;}
+    /* Mobile Apps — vertical app-grid dots */
+    .svc-bg-img.mobile{background:radial-gradient(circle at 25% 70%, rgba(0,212,255,0.2) 0, transparent 48%), radial-gradient(2.5px 2.5px at 20% 20%, rgba(0,212,255,0.45) 50%, transparent 51%) 0 0/44px 44px, #0b1f3a;}
+    /* Business Broadband — radiating signal waves */
+    .svc-bg-img.broadband{background:radial-gradient(circle at 50% 50%, rgba(0,212,255,0.22) 0, transparent 30%), repeating-radial-gradient(circle at 50% 50%, transparent 0 24px, rgba(0,212,255,0.06) 24px 26px), #0a1c34;}
+    /* Leased Line — straight uncontended lines */
+    .svc-bg-img.leased{background:radial-gradient(circle at 80% 30%, rgba(0,212,255,0.2) 0, transparent 50%), repeating-linear-gradient(90deg, rgba(0,212,255,0.07) 0 3px, transparent 3px 90px), #0c2038;}
+    /* VoIP — sound wave pulses */
+    .svc-bg-img.voip{background:radial-gradient(circle at 30% 60%, rgba(0,212,255,0.2) 0, transparent 50%), repeating-linear-gradient(45deg, rgba(0,212,255,0.05) 0 2px, transparent 2px 50px), #0b1e3a;}
+    /* Cloud & DevOps — layered cloud nodes */
+    .svc-bg-img.cloud{background:radial-gradient(circle at 70% 75%, rgba(0,212,255,0.2) 0, transparent 50%), radial-gradient(circle at 30% 25%, rgba(0,212,255,0.14) 0, transparent 45%), #0a1f3a;}
+    /* API Development — connection nodes/links */
+    .svc-bg-img.api{background:radial-gradient(circle at 60% 35%, rgba(0,212,255,0.2) 0, transparent 50%), radial-gradient(2px 2px at 15% 70%, rgba(0,212,255,0.45) 50%, transparent 51%) 0 0/55px 55px, repeating-linear-gradient(-30deg, rgba(0,212,255,0.04) 0 1px, transparent 1px 45px), #0c2240;}
+    /* Security & QA — shield grid */
+    .svc-bg-img.security{background:radial-gradient(circle at 40% 30%, rgba(0,212,255,0.22) 0, transparent 50%), repeating-linear-gradient(0deg, rgba(0,212,255,0.05) 0 1px, transparent 1px 30px), repeating-linear-gradient(90deg, rgba(0,212,255,0.05) 0 1px, transparent 1px 30px), #091c34;}
+    /* MVP — rocket trajectory diagonal */
+    .svc-bg-img.mvp{background:radial-gradient(circle at 65% 70%, rgba(0,212,255,0.2) 0, transparent 50%), repeating-linear-gradient(35deg, rgba(0,212,255,0.06) 0 2px, transparent 2px 60px), #0b2038;}
+    .svc-bg-overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg, rgba(10,22,40,0.93) 0%, rgba(10,22,40,0.86) 38%, rgba(13,30,53,0.78) 100%);}
+    .svc-icon-wrap{width:56px;height:56px;background:var(--cyan-dim);border:1px solid var(--border);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--cyan);font-size:1.3rem;}
+    .svc-category{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;display:block;}
+    .svc-title{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:700;color:#fff;}
+    .svc-divider{width:36px;height:2.5px;background:var(--cyan);margin-bottom:18px;border-radius:2px;}
+    .svc-desc{font-size:.93rem;color:rgba(255,255,255,.72);line-height:1.78;}
+    .svc-right{display:flex;flex-direction:column;align-items:flex-end;gap:20px;min-width:220px;}
+    .svc-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;}
+    .svc-tag{padding:5px 14px;border-radius:50px;font-size:.8rem;font-weight:500;border:1px solid var(--border);color:rgba(255,255,255,.78);background:rgba(255,255,255,0.04);white-space:nowrap;}
+    .svc-inquire{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);text-decoration:none;transition:opacity .2s;white-space:nowrap;}
+    .svc-inquire:hover{opacity:.7;}
+
+    /* CTA */
+    .cta-section{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg) 100%);padding:100px 48px;text-align:center;position:relative;overflow:hidden;}
+    .cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,.07) 0%,transparent 70%);}
+    .cta-section .micro-label{color:rgba(255,255,255,.5);background:transparent;border-color:rgba(255,255,255,.15);}
+    .cta-section h2{position:relative;font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:20px;}
+    .cta-section h2 .cyan{color:var(--cyan);}
+    .cta-section p{position:relative;font-size:.97rem;color:rgba(255,255,255,.55);margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.75;}
+    .btn-cta{position:relative;display:inline-block;background:var(--cyan);color:#0A1628;font-size:1rem;font-weight:700;padding:16px 42px;border-radius:50px;text-decoration:none;transition:opacity .2s;}
+    .btn-cta:hover{opacity:.85;}
+
+    /* FOOTER */
+    footer{background:#060E1A;padding:64px 48px 0;border-top:1px solid var(--border);}
+    .footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;padding-bottom:48px;}
+    .footer-col h4{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:800;letter-spacing:.06em;color:#fff;margin-bottom:20px;line-height:1.4;}
+    .footer-col > p{font-size:.85rem;color:var(--muted);line-height:1.6;}
+    .footer-col ul{list-style:none;}
+    .footer-col ul li{margin-bottom:12px;}
+    .footer-col ul li a{font-size:.9rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+    .footer-col ul li a:hover{color:var(--cyan);}
+    .nav-sub-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;display:block;}
+    .social-icons-footer{display:flex;gap:10px;margin-bottom:20px;}
+    .social-icon-footer{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;text-decoration:none;transition:border-color .2s,color .2s;}
+    .social-icon-footer:hover{border-color:var(--cyan);color:var(--cyan);}
+    .connect-email{font-size:.9rem;color:var(--muted);text-decoration:none;display:block;}
+    .connect-email:hover{color:var(--cyan);}
+    .footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border);padding:20px 0;text-align:center;}
+    .footer-bottom p{font-size:.75rem;letter-spacing:.08em;color:var(--muted);}
+    .privacy-policy{max-width:1200px;margin:0 auto;padding:0 0 24px;font-size:.8rem;color:var(--muted);line-height:1.6;}
+    .privacy-policy a{color:var(--cyan);text-decoration:none;}
+
+    /* RESPONSIVE */
+    @media(max-width:960px){
+      .svc-card{grid-template-columns:1fr;gap:24px;}
+      .svc-right{align-items:flex-start;min-width:unset;}
+      .svc-tags{justify-content:flex-start;}
     }
-
-    /* ===== NAVBAR ===== */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      padding: 0 48px;
-      height: 72px;
-      border-bottom: 1px solid var(--border);
-      gap: 40px;
-    }
-
-    .logo {
-      font-family: var(--font);
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-      color: var(--text-dark);
-      white-space: nowrap;
-    }
-
-    .logo .cyan { color: var(--cyan); }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 4px;
-      margin: 0 auto;
-    }
-
-    .nav-links li a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-size: 0.95rem;
-      font-weight: 500;
-      padding: 6px 16px;
-      border-radius: 8px;
-      transition: background 0.2s;
-    }
-
-    .nav-links li a:hover { background: var(--bg-light); }
-
-    .nav-links li a.active {
-      background: var(--cyan-light);
-      color: var(--text-dark);
-    }
-
-    .btn-primary {
-      background: var(--dark);
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: opacity 0.2s;
-    }
-
-    .btn-primary:hover { opacity: 0.85; }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-dark);
-      border-radius: 2px;
-    }
-
-    /* ===== HERO ===== */
-    .services-hero {
-      padding: 80px 0 56px;
-      background: var(--bg-white);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
-    }
-
-    .micro-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      display: block;
-      margin-bottom: 20px;
-    }
-
-    .services-hero h1 {
-      font-size: clamp(3.5rem, 8vw, 6rem);
-      font-weight: 800;
-      line-height: 1.0;
-      color: var(--text-dark);
-      margin-bottom: 24px;
-    }
-
-    .services-hero h1 .cyan { color: var(--cyan); }
-
-    .divider {
-      width: 60px;
-      height: 3px;
-      background: var(--border);
-      margin: 20px 0 24px;
-    }
-
-    .services-hero p {
-      font-size: 1rem;
-      color: var(--text-light);
-      max-width: 540px;
-      line-height: 1.75;
-    }
-
-    /* ===== SERVICES LIST ===== */
-    .services-list {
-      padding: 20px 0 80px;
-      background: var(--bg-light);
-    }
-
-    .services-list .container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    /* Each service card — horizontal layout */
-    .svc-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 40px 44px;
-      display: grid;
-      grid-template-columns: 260px 1fr auto;
-      gap: 40px;
-      align-items: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-      transition: box-shadow 0.25s, transform 0.25s;
-    }
-
-    .svc-card:hover {
-      box-shadow: 0 8px 32px rgba(0,200,240,0.10);
-      transform: translateY(-2px);
-    }
-
-    /* Left column */
-    .svc-icon-wrap {
-      width: 56px;
-      height: 56px;
-      background: var(--cyan-light);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      color: var(--cyan);
-      font-size: 1.3rem;
-    }
-
-    .svc-category {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .svc-title {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--text-dark);
-    }
-
-    /* Middle column */
-    .svc-divider {
-      width: 36px;
-      height: 2.5px;
-      background: var(--cyan);
-      margin-bottom: 18px;
-      border-radius: 2px;
-    }
-
-    .svc-desc {
-      font-size: 0.93rem;
-      color: var(--text-light);
-      line-height: 1.75;
-    }
-
-    /* Right column */
-    .svc-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 20px;
-      min-width: 220px;
-    }
-
-    .svc-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: flex-end;
-    }
-
-    .svc-tag {
-      padding: 5px 14px;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      border: 1.5px solid var(--border);
-      color: var(--text-mid);
-      background: #fff;
-      white-space: nowrap;
-    }
-
-    .svc-inquire {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      text-decoration: none;
-      transition: opacity 0.2s;
-      white-space: nowrap;
-    }
-
-    .svc-inquire:hover { opacity: 0.7; }
-
-    /* ===== CTA ===== */
-    .cta-section {
-      background: var(--dark);
-      padding: 100px 48px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-section .micro-label {
-      color: rgba(255,255,255,0.4);
-    }
-
-    .cta-section h2 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-
-    .cta-section h2 .cyan { color: var(--cyan); }
-
-    .cta-section p {
-      font-size: 0.97rem;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 40px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.7;
-    }
-
-    .btn-cta {
-      display: inline-block;
-      background: var(--cyan);
-      color: var(--dark);
-      font-size: 1rem;
-      font-weight: 700;
-      padding: 16px 42px;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .btn-cta:hover { opacity: 0.85; }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: #fff;
-      padding: 64px 48px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr;
-      gap: 40px;
-      padding-bottom: 48px;
-    }
-
-    .footer-col h4 {
-      font-size: 0.85rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      color: var(--text-dark);
-      margin-bottom: 20px;
-      line-height: 1.4;
-    }
-
-    .footer-col > p {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      line-height: 1.6;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col ul li { margin-bottom: 12px; }
-
-    .footer-col ul li a {
-      font-size: 0.9rem;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-col ul li a:hover { color: var(--cyan); }
-
-    .nav-sub-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .social-icons-footer {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .social-icon-footer {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-light);
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .social-icon-footer:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
-
-    .connect-email {
-      font-size: 0.9rem;
-      color: var(--text-light);
-      text-decoration: none;
-      display: block;
-    }
-
-    .connect-email:hover { color: var(--cyan); }
-
-    .footer-bottom {
-      max-width: 1200px;
-      margin: 0 auto;
-      border-top: 1px solid var(--border);
-      padding: 20px 0;
-      text-align: center;
-    }
-
-    .footer-bottom p {
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--text-light);
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 960px) {
-      .svc-card {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-      .svc-right {
-        align-items: flex-start;
-        min-width: unset;
-      }
-      .svc-tags { justify-content: flex-start; }
-    }
-
-    @media (max-width: 640px) {
-      nav { padding: 0 20px; gap: 12px; }
-      .container { padding: 0 20px; }
-      .nav-links { 
-        display: none; 
-        position: fixed;
-        top: 72px; 
-        left: 0; 
-        right: 0;
-        flex-direction: column;
-        background: var(--bg-white);
-        padding: 0;
-        border-bottom: 1px solid var(--border);
-        overflow: visible;
-        z-index: 999;
-      }
-      .nav-links.open { 
-        display: flex;
-        padding: 1.5rem 20px;
-      }
-      .nav-links li {
-        width: 100%;
-        list-style: none;
-      }
-      .nav-links li a {
-        display: block;
-        width: 100%;
-        padding: 12px 0;
-        font-size: 1rem;
-      }
-      .hamburger { display: flex; }
-      .services-hero { padding: 48px 0 36px; }
-      .services-list { padding: 16px 0 56px; }
-      .svc-card { padding: 28px 24px; }
-      .footer-content { grid-template-columns: 1fr; }
-      .cta-section { padding: 72px 20px; }
+    @media(max-width:640px){
+      nav{padding:0 20px;gap:12px;}
+      .container{padding:0 20px;}
+      .nav-links{display:none;position:fixed;top:72px;left:0;right:0;flex-direction:column;background:rgba(10,22,40,0.98);padding:0;border-bottom:1px solid var(--border);overflow:visible;z-index:999;}
+      .nav-links.open{display:flex;padding:1.5rem 20px;}
+      .nav-links li{width:100%;list-style:none;}
+      .nav-links li a{display:block;width:100%;padding:12px 0;font-size:1rem;}
+      .hamburger{display:flex;}
+      .services-hero{padding:100px 0 56px;}
+      .services-list{padding:16px 0 56px;}
+      .svc-card{padding:28px 24px;}
+      .footer-content{grid-template-columns:1fr;}
+      .cta-section{padding:72px 20px;}
     }
   </style>
 </head>
@@ -544,13 +225,21 @@
     <a href="contact.html" class="btn-primary">Get Quotation</a>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO with shuffling tech background images -->
   <section class="services-hero">
+    <div class="hero-bg-shuffle" id="heroShuffle">
+      <div class="hero-bg-slide s1 active"></div>
+      <div class="hero-bg-slide s2"></div>
+      <div class="hero-bg-slide s3"></div>
+      <div class="hero-bg-slide s4"></div>
+      <div class="hero-bg-slide s5"></div>
+    </div>
+    <div class="hero-bg-overlay"></div>
     <div class="container">
       <span class="micro-label">What We Build</span>
       <h1>Our<br><span class="cyan">Services</span></h1>
       <div class="divider"></div>
-      <p>Every project is a focused partnership — scoped precisely to your technical needs and business outcomes. We build software that lasts.</p>
+      <p>Every project is a focused partnership — scoped precisely to your technical needs and business outcomes. We build software and connectivity that lasts.</p>
     </div>
   </section>
 
@@ -558,8 +247,9 @@
   <section class="services-list">
     <div class="container">
 
-      <!-- Web Development -->
       <div class="svc-card">
+        <div class="svc-bg-img web"></div>
+        <div class="svc-bg-overlay"></div>
         <div class="svc-left">
           <div class="svc-icon-wrap"><i class="fas fa-desktop"></i></div>
           <span class="svc-category">Full-Stack Engineering</span>
@@ -581,8 +271,9 @@
         </div>
       </div>
 
-      <!-- Mobile Apps -->
       <div class="svc-card">
+        <div class="svc-bg-img mobile"></div>
+        <div class="svc-bg-overlay"></div>
         <div class="svc-left">
           <div class="svc-icon-wrap"><i class="fas fa-mobile-alt"></i></div>
           <span class="svc-category">iOS &amp; Android</span>
@@ -603,8 +294,9 @@
         </div>
       </div>
 
-      <!-- Business Broadband (NEW) -->
       <div class="svc-card">
+        <div class="svc-bg-img broadband"></div>
+        <div class="svc-bg-overlay"></div>
         <div class="svc-left">
           <div class="svc-icon-wrap"><i class="fas fa-wifi"></i></div>
           <span class="svc-category">Connectivity Solutions</span>
@@ -625,55 +317,58 @@
           <a href="contact.html" class="svc-inquire">enquire →</a>
         </div>
       </div>
-<!-- Leased Line (FIXED) -->
-<div class="svc-card" style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:40px;">
-  <div class="svc-left" style="flex:0 0 200px;text-align:center;">
-    <div class="svc-icon-wrap"><i class="fas fa-network-wired"></i></div>
-    <span class="svc-category">Dedicated Connectivity</span>
-    <div class="svc-title">Leased Line</div>
-  </div>
-  <div class="svc-mid" style="flex:1;padding:0 20px;">
-    <div class="svc-divider"></div>
-    <p class="svc-desc">We provide dedicated leased line connections that give your business guaranteed, symmetrical speeds and a private, uncontended link — ensuring consistent performance for cloud services, VoIP, and mission-critical operations around the clock.</p>
-  </div>
-  <div class="svc-right" style="flex:0 0 250px;text-align:left;">
-    <div class="svc-tags" style="margin-bottom:10px;">
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">Symmetrical Speeds</span>
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">Uncontended</span>
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">SLA Guaranteed</span>
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">EFM</span>
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">Dark Fibre</span>
-    </div>
-    <a href="contact.html" class="svc-inquire">enquire →</a>
-  </div>
-</div>
 
-<!-- VoIP Solutions (FIXED) -->
-<div class="svc-card" style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:40px;">
-  <div class="svc-left" style="flex:0 0 200px;text-align:center;">
-    <div class="svc-icon-wrap"><i class="fas fa-phone-alt"></i></div>
-    <span class="svc-category">Cloud Communication</span>
-    <div class="svc-title">VoIP Solutions</div>
-  </div>
-  <div class="svc-mid" style="flex:1;padding:0 20px;">
-    <div class="svc-divider"></div>
-    <p class="svc-desc">We set up and manage fully hosted VoIP systems that replace traditional phone lines with crystal-clear, internet-based calling — cutting costs, enabling remote teams, and giving your business the flexibility to scale communication as you grow.</p>
-  </div>
-  <div class="svc-right" style="flex:0 0 250px;text-align:left;">
-    <div class="svc-tags" style="margin-bottom:10px;">
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">Hosted PBX</span>
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">SIP Trunking</span>
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">Call Recording</span>
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">Auto-Attendant</span>
-      <span class="svc-tag" style="display:inline-block;background:#f0f4ff;color:#004080;padding:6px 12px;margin:4px;border-radius:4px;font-size:14px;">MS Teams</span>
-    </div>
-    <a href="contact.html" class="svc-inquire">enquire →</a>
-  </div>
-</div>
-
-    
-      <!-- Cloud & DevOps -->
       <div class="svc-card">
+        <div class="svc-bg-img leased"></div>
+        <div class="svc-bg-overlay"></div>
+        <div class="svc-left">
+          <div class="svc-icon-wrap"><i class="fas fa-network-wired"></i></div>
+          <span class="svc-category">Dedicated Connectivity</span>
+          <div class="svc-title">Leased Line</div>
+        </div>
+        <div class="svc-mid">
+          <div class="svc-divider"></div>
+          <p class="svc-desc">We provide dedicated leased line connections that give your business guaranteed, symmetrical speeds and a private, uncontended link — ensuring consistent performance for cloud services, VoIP, and mission-critical operations around the clock.</p>
+        </div>
+        <div class="svc-right">
+          <div class="svc-tags">
+            <span class="svc-tag">Symmetrical Speeds</span>
+            <span class="svc-tag">Uncontended</span>
+            <span class="svc-tag">SLA Guaranteed</span>
+            <span class="svc-tag">EFM</span>
+            <span class="svc-tag">Dark Fibre</span>
+          </div>
+          <a href="contact.html" class="svc-inquire">enquire →</a>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-bg-img voip"></div>
+        <div class="svc-bg-overlay"></div>
+        <div class="svc-left">
+          <div class="svc-icon-wrap"><i class="fas fa-phone-alt"></i></div>
+          <span class="svc-category">Cloud Communication</span>
+          <div class="svc-title">VoIP Solutions</div>
+        </div>
+        <div class="svc-mid">
+          <div class="svc-divider"></div>
+          <p class="svc-desc">We set up and manage fully hosted VoIP systems that replace traditional phone lines with crystal-clear, internet-based calling — cutting costs, enabling remote teams, and giving your business the flexibility to scale communication as you grow.</p>
+        </div>
+        <div class="svc-right">
+          <div class="svc-tags">
+            <span class="svc-tag">Hosted PBX</span>
+            <span class="svc-tag">SIP Trunking</span>
+            <span class="svc-tag">Call Recording</span>
+            <span class="svc-tag">Auto-Attendant</span>
+            <span class="svc-tag">MS Teams</span>
+          </div>
+          <a href="contact.html" class="svc-inquire">enquire →</a>
+        </div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-bg-img cloud"></div>
+        <div class="svc-bg-overlay"></div>
         <div class="svc-left">
           <div class="svc-icon-wrap"><i class="fas fa-cloud"></i></div>
           <span class="svc-category">Infrastructure at Scale</span>
@@ -696,8 +391,9 @@
         </div>
       </div>
 
-      <!-- API Development -->
       <div class="svc-card">
+        <div class="svc-bg-img api"></div>
+        <div class="svc-bg-overlay"></div>
         <div class="svc-left">
           <div class="svc-icon-wrap"><i class="fas fa-code"></i></div>
           <span class="svc-category">Integrations &amp; Microservices</span>
@@ -719,8 +415,9 @@
         </div>
       </div>
 
-      <!-- Security & QA -->
       <div class="svc-card">
+        <div class="svc-bg-img security"></div>
+        <div class="svc-bg-overlay"></div>
         <div class="svc-left">
           <div class="svc-icon-wrap"><i class="fas fa-shield-alt"></i></div>
           <span class="svc-category">Reliability Engineering</span>
@@ -741,8 +438,9 @@
         </div>
       </div>
 
-      <!-- MVP & Consulting -->
       <div class="svc-card">
+        <div class="svc-bg-img mvp"></div>
+        <div class="svc-bg-overlay"></div>
         <div class="svc-left">
           <div class="svc-icon-wrap"><i class="fas fa-bolt"></i></div>
           <span class="svc-category">Strategy &amp; Execution</span>
@@ -777,12 +475,10 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-content">
-
       <div class="footer-col">
         <h4><span class="cyan">GRADR </span><span>TECH</span></h4>
-        <p>Web Development · Mobile Apps · Cloud Solutions</p>
+        <p>Web Development · Mobile Apps · Cloud Solutions · Business Connectivity</p>
       </div>
-
       <div class="footer-col">
         <span class="nav-sub-label">Navigation</span>
         <ul>
@@ -792,40 +488,47 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <span class="nav-sub-label">Connect</span>
         <div class="social-icons-footer">
-          <a href="https://www.linkedin.com/company/gradr-tech-ltd" class="social-icon-footer" title="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="https://www.instagram.com/gradrtech/" class="social-icon-footer" title="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://github.com/gradrtech" class="social-icon-footer" title="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="mailto:info@gradrtech.com" class="social-icon-footer" title="Email">
-            <i class="fas fa-envelope"></i>
-          </a>
+          <a href="https://www.linkedin.com/company/gradr-tech-ltd" class="social-icon-footer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/gradrtech/" class="social-icon-footer" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://github.com/gradrtech" class="social-icon-footer" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="mailto:info@gradrtech.com" class="social-icon-footer" title="Email"><i class="fas fa-envelope"></i></a>
         </div>
         <a href="mailto:info@gradrtech.com" class="connect-email">info@gradrtech.com</a>
       </div>
-
     </div>
 
-    <div class="privacy-policy" style="max-width:1200px; margin: 0 auto; padding: 0 0 24px; font-size: 0.8rem; color: var(--text-light); line-height: 1.6;">
-      <p>
-           <a href="privacy.html" style="color: var(--cyan); text-decoration: none;">Terms and Conditions</a>. 
-      </p>
+    <div class="privacy-policy">
+      <p><a href="privacy.html">Terms and Conditions</a></p>
     </div>
 
     <div class="footer-bottom">
-      <p>@ 2026 GRADR TECH LTD. ALL RIGHTS RESERVED.</p>
+      <p>© 2026 GRADR TECH LTD. ALL RIGHTS RESERVED.</p>
     </div>
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script>
+    (function(){
+      const slides = document.querySelectorAll('.hero-bg-slide');
+      if(!slides.length) return;
+      let idx = 0;
+      setInterval(()=>{
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+      }, 4500);
+    })();
+
+    (function(){
+      const btn = document.getElementById('hamburger');
+      const nav = document.getElementById('navLinks');
+      if(!btn || !nav) return;
+      btn.addEventListener('click', ()=> nav.classList.toggle('open'));
+    })();
+  </script>
 
 </body>
 </html>
