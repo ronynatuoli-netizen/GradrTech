@@ -5,14 +5,35 @@ const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ADMIN_USERNAME = 'gradrtech.co.uk';
-const ADMIN_PASSWORD = 'gradrtech@12';
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..')));
 
 const DATA_FILE = path.join(__dirname, 'leads.json');
+const USERS_FILE = path.join(__dirname, 'users.json');
+
+// Initialize users if not exists
+function initializeUsers() {
+  if (!fs.existsSync(USERS_FILE)) {
+    const defaultUsers = [
+      { id: 1, username: 'gradrtech.co.uk', password: 'gradrtech@12', created_at: new Date().toISOString() },
+      { id: 2, username: 'gradrtech12', password: 'gradrtech12', created_at: new Date().toISOString() }
+    ];
+    fs.writeFileSync(USERS_FILE, JSON.stringify(defaultUsers, null, 2), 'utf8');
+  }
+}
+
+function readUsers() {
+  try {
+    const raw = fs.readFileSync(USERS_FILE, 'utf8');
+    return JSON.parse(raw || '[]');
+  } catch (e) { return []; }
+}
+
+function writeUsers(users) {
+  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2), 'utf8');
+}
 
 function requireAdmin(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -26,7 +47,11 @@ function requireAdmin(req, res, next) {
   const decoded = Buffer.from(encoded, 'base64').toString('utf8');
   const [username, password] = decoded.split(':');
 
-  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+  const users = readUsers();
+  const user = users.find(u => u.username === username && u.password === password);
+
+  if (user) {
+    req.user = user;
     return next();
   }
 
@@ -78,7 +103,8 @@ app.post('/api/leads', (req, res) => {
   }
 });
 
-app.get(['/admin', '/admin.html'], requireAdmin, (req, res) => {
+// Serve admin.html without auth (client-side JS handles auth)
+app.get(['/admin', '/admin.html'], (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'admin.html'));
 });
 
@@ -178,4 +204,166 @@ app.get('/api/leads-export/csv', requireAdmin, (req, res) => {
   }
 });
 
+// Initialize users on startup
+initializeUsers();
+
+// User management endpoints
+app.get('/api/users', requireAdmin, (req, res) => {
+  try {
+    const users = readUsers();
+    res.json(users.map(u => ({
+      id: u.id,
+      username: u.username,
+      created_at: u.created_at
+    })));
+  } catch (err) {
+    console.error('Failed to get users:', err);
+    res.status(500).json({ error: 'failed to get users' });
+  }
+});
+
+app.get('/api/me', requireAdmin, (req, res) => {
+  try {
+    res.json({
+      id: req.user.id,
+      username: req.user.username,
+      created_at: req.user.created_at
+    });
+  } catch (err) {
+    console.error('Failed to get profile:', err);
+    res.status(500).json({ error: 'failed to get profile' });
+  }
+});
+
+app.post('/api/change-password', requireAdmin, (req, res) => {
+  try {
+    const { old_password, new_password } = req.body;
+    
+    if (!old_password || !new_password) {
+      return res.status(400).json({ error: 'Old and new password required' });
+    }
+    
+    if (req.user.password !== old_password) {
+      return res.status(401).json({ error: 'Current password is incorrect' });
+    }
+    
+    if (new_password.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters' });
+    }
+    
+    const users = readUsers();
+    const userIdx = users.findIndex(u => u.id === req.user.id);
+    
+    if (userIdx === -1) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    users[userIdx].password = new_password;
+    writeUsers(users);
+    
+    console.log(`Password changed for user: ${req.user.username}`);
+    res.json({ ok: true, message: 'Password changed successfully' });
+  } catch (err) {
+    console.error('Failed to change password:', err);
+    res.status(500).json({ error: 'failed to change password' });
+  }
+});
+
+app.post('/api/change-username', requireAdmin, (req, res) => {
+  try {
+    const { new_username, password } = req.body;
+    
+    if (!new_username || !password) {
+      return res.status(400).json({ error: 'Username and password required' });
+    }
+    
+    if (req.user.password !== password) {
+      return res.status(401).json({ error: 'Password is incorrect' });
+    }
+    
+    const users = readUsers();
+    const userExists = users.find(u => u.username === new_username);
+    
+    if (userExists && userExists.id !== req.user.id) {
+      return res.status(409).json({ error: 'Username already taken' });
+    }
+    
+    const userIdx = users.findIndex(u => u.id === req.user.id);
+    const oldUsername = users[userIdx].username;
+    users[userIdx].username = new_username;
+    writeUsers(users);
+    
+    console.log(`Username changed from ${oldUsername} to ${new_username}`);
+    res.json({ ok: true, message: 'Username changed successfully', new_username });
+  } catch (err) {
+    console.error('Failed to change username:', err);
+    res.status(500).json({ error: 'failed to change username' });
+  }
+});
+
+app.post('/api/add-user', requireAdmin, (req, res) => {
+  try {
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Username and password required' });
+    }
+    
+    if (password.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters' });
+    }
+    
+    const users = readUsers();
+    const userExists = users.find(u => u.username === username);
+    
+    if (userExists) {
+      return res.status(409).json({ error: 'Username already exists' });
+    }
+    
+    const newUser = {
+      id: Math.max(...users.map(u => u.id), 0) + 1,
+      username,
+      password,
+      created_at: new Date().toISOString()
+    };
+    
+    users.push(newUser);
+    writeUsers(users);
+    
+    console.log(`New user created: ${username}`);
+    res.status(201).json({ ok: true, user: { id: newUser.id, username, created_at: newUser.created_at } });
+  } catch (err) {
+    console.error('Failed to add user:', err);
+    res.status(500).json({ error: 'failed to add user' });
+  }
+});
+
+app.delete('/api/users/:id', requireAdmin, (req, res) => {
+  try {
+    const userId = parseInt(req.params.id, 10);
+    
+    if (userId === req.user.id) {
+      return res.status(400).json({ error: 'Cannot delete your own account' });
+    }
+    
+    const users = readUsers();
+    const userIdx = users.findIndex(u => u.id === userId);
+    
+    if (userIdx === -1) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    const deletedUsername = users[userIdx].username;
+    users.splice(userIdx, 1);
+    writeUsers(users);
+    
+    console.log(`User deleted: ${deletedUsername}`);
+    res.json({ ok: true, message: 'User deleted successfully' });
+  } catch (err) {
+    console.error('Failed to delete user:', err);
+    res.status(500).json({ error: 'failed to delete user' });
+  }
+});
+
 app.listen(PORT, () => console.log(`Leads server listening on http://localhost:${PORT}`));
+

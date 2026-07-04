@@ -12,6 +12,8 @@
       --muted: #8aa2bf;
       --cyan: #00D4FF;
       --border: rgba(255,255,255,0.12);
+      --error: #ff7b7b;
+      --success: #00d980;
     }
     * { box-sizing: border-box; }
     body {
@@ -21,132 +23,530 @@
       color: var(--text);
       min-height: 100vh;
     }
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 20px 60px; }
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 32px 20px 60px; }
     .topbar {
       display: flex; justify-content: space-between; align-items: center; gap: 16px;
       padding: 20px 24px; background: rgba(19,35,61,0.95); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 24px;
     }
     .topbar h1 { margin: 0; font-size: 1.2rem; }
     .topbar p { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; }
-    .card .label { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
-    .card .value { font-size: 1.6rem; font-weight: 700; margin-top: 8px; }
-    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
-    .toolbar input { flex: 1; min-width: 240px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: #0d1b2f; color: var(--text); }
-    .btn { background: var(--cyan); color: #04111d; border: none; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 700; text-decoration: none; }
-    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 12px; }
-    th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
-    th { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .topbar-right { display: flex; gap: 12px; align-items: center; }
+    .user-info { font-size: 0.9rem; color: var(--muted); }
+    .sidebar {
+      display: grid; grid-template-columns: 200px 1fr; gap: 24px; min-height: 600px;
+    }
+    .nav {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px;
+      height: fit-content;
+    }
+    .nav a, .nav button {
+      display: block; width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px;
+      background: none; border: none; color: var(--text); cursor: pointer; border-radius: 8px;
+      font-size: 0.95rem; transition: 0.2s;
+    }
+    .nav a:hover, .nav button:hover { background: rgba(0,212,255,0.1); color: var(--cyan); }
+    .nav a.active, .nav button.active { background: rgba(0,212,255,0.2); color: var(--cyan); }
+    .content { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .stat-card { background: rgba(0,212,255,0.1); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .stat-card .label { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .stat-card .value { font-size: 2rem; font-weight: 700; margin-top: 8px; }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .toolbar input, .toolbar select { flex: 1; min-width: 240px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: #0d1b2f; color: var(--text); }
+    .btn { background: var(--cyan); color: #04111d; border: none; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .btn:hover { background: #00b8d4; }
+    .btn-secondary { background: transparent; color: var(--cyan); border: 1px solid var(--cyan); }
+    .btn-secondary:hover { background: rgba(0,212,255,0.1); }
+    .btn-danger { background: var(--error); }
+    .btn-danger:hover { background: #ff5f5f; }
+    .table-container { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; }
+    th { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
     tbody tr:hover { background: rgba(255,255,255,0.04); }
     .muted { color: var(--muted); font-size: 0.9rem; }
     .login-box { max-width: 420px; margin: 80px auto; background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
     .login-box h2 { margin-top: 0; }
     .login-box input { width: 100%; margin-top: 10px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: #0d1b2f; color: var(--text); }
+    .password-wrapper { margin-top: 10px; }
+    .password-wrapper input[type="password"],
+    .password-wrapper input[type="text"] { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: #0d1b2f; color: var(--text); margin-bottom: 10px; }
+    .password-checkbox { display: flex; align-items: center; gap: 8px; }
+    .password-checkbox input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+    .password-checkbox label { cursor: pointer; font-size: 0.9rem; color: var(--muted); }
     .login-box button { width: 100%; margin-top: 16px; padding: 12px; }
-    .error { color: #ff7b7b; margin-top: 12px; font-size: 0.95rem; }
-    @media (max-width: 700px) { table { display: block; overflow-x: auto; } }
+    .error { color: var(--error); margin-top: 12px; font-size: 0.95rem; }
+    .success { color: var(--success); margin-top: 12px; font-size: 0.95rem; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 0.9rem; }
+    .form-group input { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background: #0d1b2f; color: var(--text); }
+    .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; }
+    .modal.active { display: flex; }
+    .modal-content { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .modal-header h3 { margin: 0; }
+    .modal-close { background: none; border: none; color: var(--text); cursor: pointer; font-size: 1.5rem; }
+    .section { display: none; }
+    .section.active { display: block; }
+    h2 { margin-top: 0; margin-bottom: 20px; }
+    h3, h4 { margin-top: 0; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+    @media (max-width: 900px) { .sidebar { grid-template-columns: 1fr; } .nav { height: auto; } }
   </style>
 </head>
 <body>
   <div id="app"></div>
+
   <script>
     const app = document.getElementById('app');
-    const username = 'gradrtech.co.uk';
-    const password = 'gradrtech@12';
+    let currentUser = null;
+    let authToken = null;
+
+    function setAuth(username, password) {
+      authToken = btoa(`${username}:${password}`);
+      sessionStorage.setItem('gradrtechAuth', authToken);
+    }
+
+    function getAuth() {
+      return sessionStorage.getItem('gradrtechAuth');
+    }
 
     function renderLogin() {
       app.innerHTML = `
         <div class="login-box">
           <h2>GradrTech Admin</h2>
-          <p class="muted">Sign in to view and export leads.</p>
-          <input id="user" type="text" placeholder="Username" value="${username}" />
-          <input id="pass" type="password" placeholder="Password" />
+          <p class="muted">Sign in to view and manage leads.</p>
+          <input id="user" type="text" placeholder="Username" />
+          <div class="password-wrapper">
+            <input id="pass" type="password" placeholder="Password" onkeypress="if(event.key==='Enter') login()" />
+            <div class="password-checkbox">
+              <input type="checkbox" id="viewPass" onchange="togglePassword()" />
+              <label for="viewPass">View password</label>
+            </div>
+          </div>
           <button class="btn" onclick="login()">Login</button>
           <div id="error" class="error"></div>
         </div>`;
     }
 
-    function login() {
-      const user = document.getElementById('user').value;
-      const pass = document.getElementById('pass').value;
-      if (user === username && pass === password) {
-        sessionStorage.setItem('gradrtechAdminAuth', '1');
-        loadDashboard();
+    function togglePassword() {
+      const passInput = document.getElementById('pass');
+      const checkbox = document.getElementById('viewPass');
+      if (checkbox.checked) {
+        passInput.type = 'text';
       } else {
-        document.getElementById('error').textContent = 'Invalid username or password.';
+        passInput.type = 'password';
       }
     }
 
+    function login() {
+      const user = document.getElementById('user').value;
+      const pass = document.getElementById('pass').value;
+      const errorDiv = document.getElementById('error');
+      
+      errorDiv.textContent = '';
+      
+      if (!user || !pass) {
+        errorDiv.textContent = 'Please enter both username and password.';
+        return;
+      }
+      
+      setAuth(user, pass);
+      loadDashboard();
+    }
+
     function loadDashboard() {
-      fetch('/api/stats', {
-        headers: { Authorization: 'Basic ' + btoa(`${username}:${password}`) }
+      fetch('/api/me', {
+        headers: { Authorization: 'Basic ' + getAuth() }
       })
         .then(res => {
           if (!res.ok) throw new Error('Unauthorized');
           return res.json();
         })
-        .then(stats => {
-          app.innerHTML = `
-            <div class="wrap">
-              <div class="topbar">
-                <div>
-                  <h1>Lead Dashboard</h1>
-                  <p>Secure access for GradrTech clients</p>
-                </div>
-                <a class="btn" href="/api/leads-export/csv" target="_blank">Export CSV</a>
-              </div>
-              <div class="stats">
-                <div class="card"><div class="label">Total Leads</div><div class="value">${stats.total_leads}</div></div>
-                <div class="card"><div class="label">With Phone</div><div class="value">${stats.leads_with_phone}</div></div>
-                <div class="card"><div class="label">With Company</div><div class="value">${stats.leads_with_company}</div></div>
-              </div>
-              <div class="toolbar">
-                <input id="search" placeholder="Search by name, email, company or message" oninput="renderLeads()" />
-              </div>
-              <div class="card">
-                <table>
-                  <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Industry</th><th>Received</th></tr></thead>
-                  <tbody id="leadRows"></tbody>
-                </table>
-              </div>
-            </div>`;
-          renderLeads();
+        .then(user => {
+          currentUser = user;
+          renderDashboard();
         })
-        .catch(() => {
-          sessionStorage.removeItem('gradrtechAdminAuth');
+        .catch(err => {
+          sessionStorage.removeItem('gradrtechAuth');
           renderLogin();
         });
     }
 
+    function renderDashboard() {
+      app.innerHTML = `
+        <div class="wrap">
+          <div class="topbar">
+            <div>
+              <h1>GradrTech Admin</h1>
+              <p>Lead Management & User Control</p>
+            </div>
+            <div class="topbar-right">
+              <div class="user-info">Logged in as <strong>${currentUser.username}</strong></div>
+              <button class="btn btn-secondary" onclick="showSettings()">Settings</button>
+              <button class="btn btn-danger" onclick="logout()">Logout</button>
+            </div>
+          </div>
+
+          <div class="sidebar">
+            <div class="nav">
+              <button class="nav-btn active" onclick="showSection('dashboard')">Dashboard</button>
+              <button class="nav-btn" onclick="showSection('leads')">Leads</button>
+              <button class="nav-btn" onclick="showSection('users')">Users</button>
+              <button class="nav-btn" onclick="showSettings()">Settings</button>
+            </div>
+
+            <div class="content">
+              <div id="dashboard" class="section active">
+                <h2>Dashboard</h2>
+                <div class="stats" id="stats-container"></div>
+                <h3>Recent Leads</h3>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr><th>Name</th><th>Email</th><th>Company</th><th>Received</th></tr>
+                    </thead>
+                    <tbody id="recent-leads"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div id="leads" class="section">
+                <h2>All Leads</h2>
+                <div class="toolbar">
+                  <input id="search" placeholder="Search by name, email, or company" oninput="renderLeads()" />
+                  <a class="btn" href="/api/leads-export/csv" target="_blank">Export CSV</a>
+                </div>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Industry</th><th>Received</th></tr>
+                    </thead>
+                    <tbody id="leads-table"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div id="users" class="section">
+                <h2>User Management</h2>
+                <div style="margin-bottom: 16px;">
+                  <button class="btn" onclick="showAddUserModal()">+ Add New User</button>
+                </div>
+                <div class="table-container">
+                  <table>
+                    <thead>
+                      <tr><th>Username</th><th>Created</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody id="users-table"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="addUserModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Add New User</h3>
+              <button class="modal-close" onclick="closeModal('addUserModal')">×</button>
+            </div>
+            <div class="form-group">
+              <label>Username</label>
+              <input id="newUserUsername" type="text" placeholder="Enter username" />
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input id="newUserPassword" type="password" placeholder="Enter password" />
+            </div>
+            <div id="addUserError" class="error"></div>
+            <div id="addUserSuccess" class="success"></div>
+            <button class="btn" style="width: 100%;" onclick="addUser()">Create User</button>
+          </div>
+        </div>
+
+        <div id="settingsModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Account Settings</h3>
+              <button class="modal-close" onclick="closeModal('settingsModal')">×</button>
+            </div>
+            <h4>Change Username</h4>
+            <div class="form-group">
+              <label>New Username</label>
+              <input id="changeUsernameInput" type="text" placeholder="Enter new username" />
+            </div>
+            <div class="form-group">
+              <label>Current Password</label>
+              <input id="changeUsernamePassword" type="password" placeholder="Enter your password" />
+            </div>
+            <button class="btn" style="width: 100%; margin-bottom: 16px;" onclick="changeUsername()">Update Username</button>
+            <div id="changeUsernameError" class="error"></div>
+            <div id="changeUsernameSuccess" class="success"></div>
+
+            <hr>
+
+            <h4>Change Password</h4>
+            <div class="form-group">
+              <label>Current Password</label>
+              <input id="currentPassword" type="password" placeholder="Enter current password" />
+            </div>
+            <div class="form-group">
+              <label>New Password</label>
+              <input id="newPassword" type="password" placeholder="Enter new password" />
+            </div>
+            <div class="form-group">
+              <label>Confirm Password</label>
+              <input id="confirmPassword" type="password" placeholder="Confirm new password" />
+            </div>
+            <button class="btn" style="width: 100%;" onclick="changePassword()">Update Password</button>
+            <div id="changePasswordError" class="error"></div>
+            <div id="changePasswordSuccess" class="success"></div>
+          </div>
+        </div>
+      `;
+      
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+        });
+      });
+
+      loadStats();
+      renderUsers();
+    }
+
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      
+      if (sectionId === 'leads') renderLeads();
+      if (sectionId === 'users') renderUsers();
+    }
+
+    function showSettings() {
+      document.getElementById('settingsModal').classList.add('active');
+      document.querySelectorAll('.error, .success').forEach(el => el.textContent = '');
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+      document.querySelectorAll('.error, .success').forEach(el => el.textContent = '');
+    }
+
+    function loadStats() {
+      fetch('/api/stats', {
+        headers: { Authorization: 'Basic ' + getAuth() }
+      })
+        .then(res => res.json())
+        .then(stats => {
+          const statsHtml = `
+            <div class="stat-card"><div class="label">Total Leads</div><div class="value">${stats.total_leads}</div></div>
+            <div class="stat-card"><div class="label">With Phone</div><div class="value">${stats.leads_with_phone}</div></div>
+            <div class="stat-card"><div class="label">With Company</div><div class="value">${stats.leads_with_company}</div></div>
+          `;
+          document.getElementById('stats-container').innerHTML = statsHtml;
+
+          const recentHtml = stats.recent_leads.map(lead => `
+            <tr>
+              <td>${lead.name || '-'}</td>
+              <td>${lead.email || '-'}</td>
+              <td>${lead.company || '-'}</td>
+              <td class="muted">${new Date(lead.received_at).toLocaleString()}</td>
+            </tr>`).join('');
+          document.getElementById('recent-leads').innerHTML = recentHtml || '<tr><td colspan="4" class="muted">No leads yet</td></tr>';
+        });
+    }
+
     function renderLeads() {
-      const search = document.getElementById('search')?.value.toLowerCase() || '';
+      const search = (document.getElementById('search')?.value || '').toLowerCase();
       fetch('/api/leads', {
-        headers: { Authorization: 'Basic ' + btoa(`${username}:${password}`) }
+        headers: { Authorization: 'Basic ' + getAuth() }
       })
         .then(res => res.json())
         .then(leads => {
-          const rows = leads.filter(lead => {
-            const hay = `${lead.name || ''} ${lead.email || ''} ${lead.company || ''} ${lead.message || ''}`.toLowerCase();
+          const filtered = leads.filter(lead => {
+            const hay = `${lead.name || ''} ${lead.email || ''} ${lead.company || ''}`.toLowerCase();
             return hay.includes(search);
           });
 
-          const tbody = document.getElementById('leadRows');
-          if (!tbody) return;
-
-          tbody.innerHTML = rows.length ? rows.map(lead => `
+          const tbody = document.getElementById('leads-table');
+          const rows = filtered.map(lead => `
             <tr>
               <td>${lead.name || '-'}</td>
               <td>${lead.email || '-'}</td>
               <td>${lead.phone || '-'}</td>
               <td>${lead.company || '-'}</td>
               <td>${lead.industry || '-'}</td>
-              <td class="muted">${lead.received_at ? new Date(lead.received_at).toLocaleString() : '-'}</td>
-            </tr>`).join('') : '<tr><td colspan="6" class="muted">No leads found.</td></tr>';
+              <td class="muted">${new Date(lead.received_at).toLocaleString()}</td>
+            </tr>`).join('');
+          tbody.innerHTML = rows || '<tr><td colspan="6" class="muted">No leads found</td></tr>';
         });
     }
 
-    if (sessionStorage.getItem('gradrtechAdminAuth') === '1') {
+    function renderUsers() {
+      fetch('/api/users', {
+        headers: { Authorization: 'Basic ' + getAuth() }
+      })
+        .then(res => res.json())
+        .then(users => {
+          const tbody = document.getElementById('users-table');
+          const rows = users.map(user => `
+            <tr>
+              <td><strong>${user.username}</strong> ${user.id === currentUser.id ? '<span class="muted">(You)</span>' : ''}</td>
+              <td class="muted">${new Date(user.created_at).toLocaleDateString()}</td>
+              <td>
+                ${user.id === currentUser.id ? '-' : `<button class="btn btn-danger" onclick="deleteUser(${user.id})">Delete</button>`}
+              </td>
+            </tr>`).join('');
+          tbody.innerHTML = rows;
+        });
+    }
+
+    function showAddUserModal() {
+      document.getElementById('addUserModal').classList.add('active');
+      document.querySelectorAll('.error, .success').forEach(el => el.textContent = '');
+    }
+
+    function addUser() {
+      const username = document.getElementById('newUserUsername').value;
+      const password = document.getElementById('newUserPassword').value;
+      const errorDiv = document.getElementById('addUserError');
+      const successDiv = document.getElementById('addUserSuccess');
+      
+      errorDiv.textContent = '';
+      successDiv.textContent = '';
+
+      if (!username || !password) {
+        errorDiv.textContent = 'Username and password are required';
+        return;
+      }
+
+      fetch('/api/add-user', {
+        method: 'POST',
+        headers: { 
+          'Authorization': 'Basic ' + getAuth(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) throw new Error(data.error);
+          successDiv.textContent = 'User created successfully!';
+          document.getElementById('newUserUsername').value = '';
+          document.getElementById('newUserPassword').value = '';
+          setTimeout(() => {
+            closeModal('addUserModal');
+            renderUsers();
+          }, 1000);
+        })
+        .catch(err => {
+          errorDiv.textContent = err.message;
+        });
+    }
+
+    function deleteUser(userId) {
+      if (!confirm('Are you sure you want to delete this user?')) return;
+
+      fetch(`/api/users/${userId}`, {
+        method: 'DELETE',
+        headers: { Authorization: 'Basic ' + getAuth() }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) throw new Error(data.error);
+          renderUsers();
+        })
+        .catch(err => alert('Error: ' + err.message));
+    }
+
+    function changePassword() {
+      const current = document.getElementById('currentPassword').value;
+      const newPass = document.getElementById('newPassword').value;
+      const confirm = document.getElementById('confirmPassword').value;
+      const errorDiv = document.getElementById('changePasswordError');
+      const successDiv = document.getElementById('changePasswordSuccess');
+
+      errorDiv.textContent = '';
+      successDiv.textContent = '';
+
+      if (!current || !newPass || !confirm) {
+        errorDiv.textContent = 'All fields are required';
+        return;
+      }
+
+      if (newPass !== confirm) {
+        errorDiv.textContent = 'Passwords do not match';
+        return;
+      }
+
+      fetch('/api/change-password', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Basic ' + getAuth(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ old_password: current, new_password: newPass })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) throw new Error(data.error);
+          successDiv.textContent = 'Password changed successfully!';
+          document.getElementById('currentPassword').value = '';
+          document.getElementById('newPassword').value = '';
+          document.getElementById('confirmPassword').value = '';
+        })
+        .catch(err => {
+          errorDiv.textContent = err.message;
+        });
+    }
+
+    function changeUsername() {
+      const newUsername = document.getElementById('changeUsernameInput').value;
+      const password = document.getElementById('changeUsernamePassword').value;
+      const errorDiv = document.getElementById('changeUsernameError');
+      const successDiv = document.getElementById('changeUsernameSuccess');
+
+      errorDiv.textContent = '';
+      successDiv.textContent = '';
+
+      if (!newUsername || !password) {
+        errorDiv.textContent = 'Username and password are required';
+        return;
+      }
+
+      fetch('/api/change-username', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Basic ' + getAuth(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ new_username: newUsername, password })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) throw new Error(data.error);
+          successDiv.textContent = 'Username updated successfully! Logging out...';
+          document.getElementById('changeUsernameInput').value = '';
+          document.getElementById('changeUsernamePassword').value = '';
+          setTimeout(() => {
+            sessionStorage.removeItem('gradrtechAuth');
+            renderLogin();
+          }, 1500);
+        })
+        .catch(err => {
+          errorDiv.textContent = err.message;
+        });
+    }
+
+    function logout() {
+      sessionStorage.removeItem('gradrtechAuth');
+      renderLogin();
+    }
+
+    if (getAuth()) {
       loadDashboard();
     } else {
       renderLogin();

@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "username": "gradrtech.co.uk",
+    "password": "gradrtech@12",
+    "created_at": "2026-07-04T06:54:06.823Z"
+  },
+  {
+    "id": 2,
+    "username": "gradrtech12",
+    "password": "gradrtech12",
+    "created_at": "2026-07-04T06:54:06.828Z"
+  }
+]
