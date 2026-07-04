@@ -291,6 +291,127 @@
       font-size: 0.85rem;
     }
 
+    .country-code-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+    }
+
+    .country-code-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .country-code-input {
+      width: 100%;
+      padding: 10px 32px 10px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .country-code-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(0,212,255,0.14);
+    }
+
+    .country-code-input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .country-code-input-wrapper::after {
+      content: '▼';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--cyan);
+      pointer-events: none;
+      font-size: 0.7rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .country-code-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      max-height: 250px;
+      overflow-y: auto;
+      z-index: 1000;
+      margin-top: 4px;
+      display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+    }
+
+    .country-code-dropdown.active {
+      display: block;
+    }
+
+    .country-code-option {
+      padding: 12px 14px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .country-code-option:last-child {
+      border-bottom: none;
+    }
+
+    .country-code-option:hover,
+    .country-code-option.highlighted {
+      background: rgba(0,212,255,0.1);
+      color: var(--cyan);
+    }
+
+    .email-validation {
+      font-size: 0.75rem;
+      margin-top: 4px;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .email-validation.show {
+      display: flex;
+    }
+
+    .email-validation.valid {
+      color: #34d399;
+    }
+
+    .email-validation.valid::before {
+      content: '✓';
+      font-weight: bold;
+    }
+
+    .email-validation.invalid {
+      color: #fc8181;
+    }
+
+    .email-validation.invalid::before {
+      content: '✗';
+      font-weight: bold;
+    }
+
     .btn-send {
       display: inline-flex;
       align-items: center;
@@ -703,13 +824,27 @@
               <div class="form-group">
                 <label for="email">Email Address <span class="req">*</span></label>
                 <input type="email" id="email" name="from_email" placeholder="" required>
+                <div id="emailValidation" class="email-validation"></div>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="">
+                <div style="display:flex;gap:8px;align-items:flex-start;">
+                  <div class="country-code-wrapper" style="width:140px;">
+                    <span class="country-code-label">Country Code</span>
+                    <div class="country-code-input-wrapper">
+                      <input type="text" id="phone_cc_input" class="country-code-input" placeholder="Search..." value="GB +44">
+                    </div>
+                    <input type="hidden" id="phone_cc" name="phone_cc" value="+44">
+                    <div id="countryCodeDropdown" class="country-code-dropdown"></div>
+                  </div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+                    <span class="country-code-label">Phone</span>
+                    <input type="tel" id="phone" name="phone" placeholder="e.g. 07123 456789" style="width:100%;">
+                  </div>
+                </div>
+                <input type="hidden" id="phone_e164" name="phone_e164" value="">
               </div>
               <div class="form-group">
                 <label for="company">Company Name</label>
@@ -745,6 +880,12 @@
               <span id="btnText">Send Message →</span>
               <span class="sending-spinner" id="spinner"></span>
             </button>
+            <div style="margin-top:12px;font-size:0.9rem;color:var(--text-soft);">
+              <label style="display:flex;align-items:center;gap:10px;">
+                <input type="checkbox" id="consent" name="consent" required>
+                <span>I consent to Gradr Tech storing my submitted information in accordance with the <a href="privacy.html" style="color:var(--cyan)">privacy policy</a>.</span>
+              </label>
+            </div>
           </form>
 
           <div id="successMsg" class="success-msg">
@@ -865,63 +1006,7 @@
   <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-  <script>
-    // Initialize EmailJS
-    emailjs.init('_oX1oSnKu6syW--Uq');
-
-    const form       = document.getElementById('contactForm');
-    const submitBtn  = document.getElementById('submitBtn');
-    const btnText    = document.getElementById('btnText');
-    const spinner    = document.getElementById('spinner');
-    const successMsg = document.getElementById('successMsg');
-    const errorMsg   = document.getElementById('errorMsg');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      // Basic validation
-      const name    = document.getElementById('name').value.trim();
-      const email   = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-
-      if (!name || !email || !message) {
-        alert('Please fill in your name, email and message.');
-        return;
-      }
-
-      // Show loading state
-      btnText.textContent = 'Sending...';
-      spinner.style.display = 'inline-block';
-      submitBtn.disabled = true;
-      errorMsg.classList.remove('show');
-
-      // Send via EmailJS
-      emailjs.sendForm('service_ojsencg', 'template_4nrpw0d', form)
-        .then(function() {
-          // Success
-          form.style.display = 'none';
-          successMsg.classList.add('show');
-        })
-        .catch(function(error) {
-          // Error
-          console.error('EmailJS error:', error);
-          errorMsg.classList.add('show');
-          btnText.textContent = 'Send Message →';
-          spinner.style.display = 'none';
-          submitBtn.disabled = false;
-        });
-    });
-
-    // Hamburger menu
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks  = document.querySelector('.nav-links');
-    if (hamburger) {
-      hamburger.addEventListener('click', () => {
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-      });
-    }
-  </script>
-
+  <!-- main script (handles contact form including EmailJS and /api/leads POST) -->
   <script src="assets/js/main.js"></script>
 </body>
 </html>

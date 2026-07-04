@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Abdullah Bala",
+    "company": "Abba & Saidu Contribution",
+    "phone": "+2348145267777",
+    "email": "asgarku@example.com",
+    "consent": true,
+    "message": "This is a test message to verify the lead capture system is working correctly",
+    "industry": "other",
+    "id": 1783144523898,
+    "received_at": "2026-07-04T05:55:23.898Z"
+  },
+  {
+    "name": "Test User",
+    "company": "Test Company",
+    "phone": "+441234567890",
+    "email": "testuser@example.com",
+    "consent": true,
+    "message": "This is a test message to verify the lead capture system is working correctly",
+    "industry": "saas",
+    "id": 1783144544066,
+    "received_at": "2026-07-04T05:55:44.066Z"
+  },
+  {
+    "name": "Abdullah Bala",
+    "email": "asgarku@example.com",
+    "phone": "+2348145267777",
+    "company": "Abba & Saidu Contribution",
+    "industry": "other",
+    "message": "This is a test message to verify the lead capture system is working correctly",
+    "consent": true,
+    "id": 1783144600021,
+    "received_at": "2026-07-04T05:56:40.021Z"
+  },
+  {
+    "name": "Abdullah Bala",
+    "email": "asgarku@example.com",
+    "phone": "+2348145267777",
+    "company": "Abba & Saidu Contribution",
+    "industry": "other",
+    "message": "This is a test message to verify the lead capture system is working correctly",
+    "consent": true,
+    "id": 1783144601347,
+    "received_at": "2026-07-04T05:56:41.347Z"
+  },
+  {
+    "name": "Abdullah Bala",
+    "email": "asgarku@example.com",
+    "phone": "+2348145267777",
+    "company": "Abba & Saidu Contribution",
+    "industry": "other",
+    "message": "This is a test message to verify the lead capture system is working correctly",
+    "consent": true,
+    "id": 1783145047745,
+    "received_at": "2026-07-04T06:04:07.745Z"
+  }
+]
