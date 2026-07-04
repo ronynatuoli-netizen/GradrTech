@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GradrTech Admin</title>
+  <style>
+    :root {
+      --bg: #07111F;
+      --card: #13233D;
+      --text: #ECF4FF;
+      --muted: #8aa2bf;
+      --cyan: #00D4FF;
+      --border: rgba(255,255,255,0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, #0b1628 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 20px 60px; }
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 20px 24px; background: rgba(19,35,61,0.95); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 24px;
+    }
+    .topbar h1 { margin: 0; font-size: 1.2rem; }
+    .topbar p { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; }
+    .card .label { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .card .value { font-size: 1.6rem; font-weight: 700; margin-top: 8px; }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .toolbar input { flex: 1; min-width: 240px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: #0d1b2f; color: var(--text); }
+    .btn { background: var(--cyan); color: #04111d; border: none; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-weight: 700; text-decoration: none; }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    tbody tr:hover { background: rgba(255,255,255,0.04); }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    .login-box { max-width: 420px; margin: 80px auto; background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
+    .login-box h2 { margin-top: 0; }
+    .login-box input { width: 100%; margin-top: 10px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: #0d1b2f; color: var(--text); }
+    .login-box button { width: 100%; margin-top: 16px; padding: 12px; }
+    .error { color: #ff7b7b; margin-top: 12px; font-size: 0.95rem; }
+    @media (max-width: 700px) { table { display: block; overflow-x: auto; } }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    const app = document.getElementById('app');
+    const username = 'gradrtech.co.uk';
+    const password = 'gradrtech@12';
+
+    function renderLogin() {
+      app.innerHTML = `
+        <div class="login-box">
+          <h2>GradrTech Admin</h2>
+          <p class="muted">Sign in to view and export leads.</p>
+          <input id="user" type="text" placeholder="Username" value="${username}" />
+          <input id="pass" type="password" placeholder="Password" />
+          <button class="btn" onclick="login()">Login</button>
+          <div id="error" class="error"></div>
+        </div>`;
+    }
+
+    function login() {
+      const user = document.getElementById('user').value;
+      const pass = document.getElementById('pass').value;
+      if (user === username && pass === password) {
+        sessionStorage.setItem('gradrtechAdminAuth', '1');
+        loadDashboard();
+      } else {
+        document.getElementById('error').textContent = 'Invalid username or password.';
+      }
+    }
+
+    function loadDashboard() {
+      fetch('/api/stats', {
+        headers: { Authorization: 'Basic ' + btoa(`${username}:${password}`) }
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('Unauthorized');
+          return res.json();
+        })
+        .then(stats => {
+          app.innerHTML = `
+            <div class="wrap">
+              <div class="topbar">
+                <div>
+                  <h1>Lead Dashboard</h1>
+                  <p>Secure access for GradrTech clients</p>
+                </div>
+                <a class="btn" href="/api/leads-export/csv" target="_blank">Export CSV</a>
+              </div>
+              <div class="stats">
+                <div class="card"><div class="label">Total Leads</div><div class="value">${stats.total_leads}</div></div>
+                <div class="card"><div class="label">With Phone</div><div class="value">${stats.leads_with_phone}</div></div>
+                <div class="card"><div class="label">With Company</div><div class="value">${stats.leads_with_company}</div></div>
+              </div>
+              <div class="toolbar">
+                <input id="search" placeholder="Search by name, email, company or message" oninput="renderLeads()" />
+              </div>
+              <div class="card">
+                <table>
+                  <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Industry</th><th>Received</th></tr></thead>
+                  <tbody id="leadRows"></tbody>
+                </table>
+              </div>
+            </div>`;
+          renderLeads();
+        })
+        .catch(() => {
+          sessionStorage.removeItem('gradrtechAdminAuth');
+          renderLogin();
+        });
+    }
+
+    function renderLeads() {
+      const search = document.getElementById('search')?.value.toLowerCase() || '';
+      fetch('/api/leads', {
+        headers: { Authorization: 'Basic ' + btoa(`${username}:${password}`) }
+      })
+        .then(res => res.json())
+        .then(leads => {
+          const rows = leads.filter(lead => {
+            const hay = `${lead.name || ''} ${lead.email || ''} ${lead.company || ''} ${lead.message || ''}`.toLowerCase();
+            return hay.includes(search);
+          });
+
+          const tbody = document.getElementById('leadRows');
+          if (!tbody) return;
+
+          tbody.innerHTML = rows.length ? rows.map(lead => `
+            <tr>
+              <td>${lead.name || '-'}</td>
+              <td>${lead.email || '-'}</td>
+              <td>${lead.phone || '-'}</td>
+              <td>${lead.company || '-'}</td>
+              <td>${lead.industry || '-'}</td>
+              <td class="muted">${lead.received_at ? new Date(lead.received_at).toLocaleString() : '-'}</td>
+            </tr>`).join('') : '<tr><td colspan="6" class="muted">No leads found.</td></tr>';
+        });
+    }
+
+    if (sessionStorage.getItem('gradrtechAdminAuth') === '1') {
+      loadDashboard();
+    } else {
+      renderLogin();
+    }
+  </script>
+</body>
+</html>

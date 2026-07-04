@@ -5,11 +5,34 @@ const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const ADMIN_USERNAME = 'gradrtech.co.uk';
+const ADMIN_PASSWORD = 'gradrtech@12';
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '..')));
 
 const DATA_FILE = path.join(__dirname, 'leads.json');
+
+function requireAdmin(req, res, next) {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith('Basic ')) {
+    res.set('WWW-Authenticate', 'Basic realm="GradrTech Admin"');
+    return res.status(401).send('Authentication required');
+  }
+
+  const encoded = authHeader.split(' ')[1];
+  const decoded = Buffer.from(encoded, 'base64').toString('utf8');
+  const [username, password] = decoded.split(':');
+
+  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    return next();
+  }
+
+  res.set('WWW-Authenticate', 'Basic realm="GradrTech Admin"');
+  return res.status(401).send('Invalid credentials');
+}
 
 function readLeads() {
   try {
@@ -55,7 +78,11 @@ app.post('/api/leads', (req, res) => {
   }
 });
 
-app.get('/api/stats', (req, res) => {
+app.get(['/admin', '/admin.html'], requireAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'admin.html'));
+});
+
+app.get('/api/stats', requireAdmin, (req, res) => {
   try {
     const leads = readLeads();
     const stats = {
@@ -86,7 +113,7 @@ app.get('/api/stats', (req, res) => {
   }
 });
 
-app.get('/api/leads/:id', (req, res) => {
+app.get('/api/leads/:id', requireAdmin, (req, res) => {
   try {
     const leads = readLeads();
     const leadId = parseInt(req.params.id, 10);
@@ -103,7 +130,7 @@ app.get('/api/leads/:id', (req, res) => {
   }
 });
 
-app.get('/api/leads', (req, res) => {
+app.get('/api/leads', requireAdmin, (req, res) => {
   try {
     const leads = readLeads();
     // Return full lead data including names and requirements
@@ -114,7 +141,7 @@ app.get('/api/leads', (req, res) => {
   }
 });
 
-app.get('/api/leads-export/csv', (req, res) => {
+app.get('/api/leads-export/csv', requireAdmin, (req, res) => {
   try {
     const leads = readLeads();
     
