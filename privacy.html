@@ -37,13 +37,13 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --dark: #07111F;
+      --dark: #FFFFFF;
       --cyan: #00D4FF;
-      --muted: rgba(236,244,255,0.62);
-      --white: #FFFFFF;
-      --bg: #08131F;
-      --bg-soft: #0F1C31;
-      --border: rgba(255,255,255,0.12);
+      --muted: rgba(10,22,40,0.62);
+      --white: #0A1628;
+      --bg: #FFFFFF;
+      --bg-soft: #F7F8FA;
+      --border: #E2E6EE;
       --space: 'Space Grotesk', sans-serif;
       --inter: 'Inter', sans-serif;
     }
@@ -64,7 +64,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 64px;
-      background: rgba(7,17,31,0.92);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
@@ -278,6 +278,9 @@
       .container { padding: 0 20px; }
       .hero { padding: 100px 0 40px; }
     }
+    /* Light page surface */
+    nav .logo,nav .nav-links a,body > :not(footer) :is(h1,h2,h3,h4,p,li){color:#0A1628;}
+    nav .nav-links a:hover,nav .nav-links a.active{color:var(--cyan);}
   </style>
 </head>
 <body>

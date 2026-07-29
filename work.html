@@ -45,14 +45,14 @@
     :root {
       --cyan: #00D4FF;
       --cyan-light: rgba(0,212,255,0.16);
-      --dark: #07111F;
-      --bg: #08131F;
-      --bg2: #0F1C31;
-      --surface: #13233D;
-      --border: rgba(255,255,255,0.12);
-      --text: #ECF4FF;
-      --text-soft: rgba(236,244,255,0.74);
-      --text-muted: rgba(236,244,255,0.58);
+      --dark: #FFFFFF;
+      --bg: #FFFFFF;
+      --bg2: #FFFFFF;
+      --surface: #F7F8FA;
+      --border: #E2E6EE;
+      --text: #0A1628;
+      --text-soft: rgba(10,22,40,0.74);
+      --text-muted: rgba(10,22,40,0.58);
       --font: 'Inter', 'Space Grotesk', sans-serif;
     }
 
@@ -68,7 +68,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(7,17,31,0.92);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(14px);
       display: flex;
       align-items: center;
@@ -78,7 +78,7 @@
       gap: 40px;
     }
     nav.scrolled {
-      background: rgba(7,17,31,0.98);
+      background: rgba(255,255,255,0.98);
       box-shadow: 0 8px 24px rgba(0,0,0,0.28);
     }
 
@@ -464,6 +464,9 @@
       .proj-info { padding: 24px 20px; }
       .proj-title { font-size: 1.25rem; }
     }
+    /* Light page surface */
+    nav .logo,nav .nav-links li a,body > :not(footer) :is(h1,h2,h3,h4,p,li,.project-meta,.filter-btn){color:#0A1628;}
+    nav .nav-links li a:hover,nav .nav-links li a.active{color:var(--cyan);}
   </style>
 </head>
 
